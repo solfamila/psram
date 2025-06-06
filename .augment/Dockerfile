@@ -40,5 +40,39 @@ COPY . .
 # Set environment variables for the project
 ENV SDK_ROOT="/workspace/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__"
 
+# Create SDK validation script
+RUN echo '#!/bin/bash\n\
+echo "=== NXP MIMXRT700 SDK Validation ==="\n\
+if [ ! -d "$SDK_ROOT" ]; then\n\
+    echo "ERROR: SDK directory not found at $SDK_ROOT"\n\
+    exit 1\n\
+fi\n\
+\n\
+# Check essential SDK components\n\
+for dir in CMSIS devices boards components; do\n\
+    if [ ! -d "$SDK_ROOT/$dir" ]; then\n\
+        echo "ERROR: Required SDK directory missing: $SDK_ROOT/$dir"\n\
+        exit 1\n\
+    fi\n\
+done\n\
+\n\
+# Check SDK version\n\
+if [ -f "$SDK_ROOT/MIMXRT700-EVK_manifest_v3_15.xml" ]; then\n\
+    SDK_VERSION=$(grep -o '\''version="[^"]*"'\'' "$SDK_ROOT/MIMXRT700-EVK_manifest_v3_15.xml" | head -n1 | cut -d'\''"'\'' -f2)\n\
+    echo "Found NXP SDK version: $SDK_VERSION"\n\
+else\n\
+    echo "WARNING: SDK manifest not found"\n\
+fi\n\
+\n\
+echo "SDK validation completed successfully"\n\
+' > /usr/local/bin/validate-sdk && chmod +x /usr/local/bin/validate-sdk
+
+# Validate toolchain versions
+RUN echo "=== Toolchain Validation ===" && \
+    arm-none-eabi-gcc --version && \
+    cmake --version && \
+    ninja --version && \
+    echo "All tools installed successfully"
+
 # Default command
 CMD ["/bin/bash"]

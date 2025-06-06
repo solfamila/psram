@@ -26,10 +26,78 @@ env:
   UNITY_VERSION: "v2.5.2"
 
 jobs:
+  # SDK validation job (runs first to catch SDK issues early)
+  sdk-validation:
+    name: SDK Validation
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    - name: Validate NXP MIMXRT700 SDK
+      run: |
+        echo "=== NXP MIMXRT700 SDK Validation ==="
+        SDK_ROOT="${{ github.workspace }}/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__"
+
+        # Check if SDK directory exists
+        if [ ! -d "$SDK_ROOT" ]; then
+          echo "❌ ERROR: SDK directory not found at $SDK_ROOT"
+          echo "This indicates the repository may be incomplete or corrupted."
+          exit 1
+        fi
+        echo "✅ SDK directory found at: $SDK_ROOT"
+
+        # Check essential SDK components
+        echo "Checking essential SDK components..."
+        MISSING_COMPONENTS=()
+        for dir in CMSIS devices boards components middleware; do
+          if [ ! -d "$SDK_ROOT/$dir" ]; then
+            MISSING_COMPONENTS+=("$dir")
+            echo "❌ Missing: $dir"
+          else
+            echo "✅ Found: $dir"
+          fi
+        done
+
+        if [ ${#MISSING_COMPONENTS[@]} -ne 0 ]; then
+          echo "❌ ERROR: Missing SDK components: ${MISSING_COMPONENTS[*]}"
+          exit 1
+        fi
+
+        # Check SDK version and manifest
+        MANIFEST_FILE="$SDK_ROOT/MIMXRT700-EVK_manifest_v3_15.xml"
+        if [ -f "$MANIFEST_FILE" ]; then
+          SDK_VERSION=$(grep -o 'version="[^"]*"' "$MANIFEST_FILE" | head -n1 | cut -d'"' -f2)
+          echo "✅ NXP SDK version: $SDK_VERSION"
+
+          # Validate minimum version (25.03.00)
+          if [ "$SDK_VERSION" \< "25.03.00" ]; then
+            echo "⚠️  WARNING: SDK version $SDK_VERSION may be incompatible. Recommended: 25.03.00+"
+          fi
+        else
+          echo "⚠️  WARNING: SDK manifest file not found at $MANIFEST_FILE"
+        fi
+
+        # Check license
+        if [ -f "$SDK_ROOT/COPYING-BSD-3" ]; then
+          echo "✅ SDK license: BSD-3-Clause (redistribution allowed)"
+        fi
+
+        # Display SDK size and structure
+        echo "SDK structure summary:"
+        du -sh "$SDK_ROOT" 2>/dev/null || echo "Could not determine SDK size"
+        ls -la "$SDK_ROOT" | head -10
+
+        echo "🎉 SDK validation completed successfully!"
+
   # Build job for different configurations
   build:
     name: Build (${{ matrix.build_type }})
     runs-on: ubuntu-latest
+    needs: sdk-validation
     
     strategy:
       matrix:
@@ -66,6 +134,34 @@ jobs:
         echo "/opt/gcc-arm-none-eabi/bin" >> $GITHUB_PATH
         echo "ARMGCC_DIR=/opt/gcc-arm-none-eabi" >> $GITHUB_ENV
         echo "SDK_ROOT=${{ github.workspace }}/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__" >> $GITHUB_ENV
+
+    - name: Validate SDK installation
+      run: |
+        echo "=== SDK Validation ==="
+        if [ ! -d "$SDK_ROOT" ]; then
+          echo "ERROR: SDK directory not found at $SDK_ROOT"
+          exit 1
+        fi
+
+        # Check essential SDK components
+        for dir in CMSIS devices boards components; do
+          if [ ! -d "$SDK_ROOT/$dir" ]; then
+            echo "ERROR: Required SDK directory missing: $SDK_ROOT/$dir"
+            exit 1
+          else
+            echo "✓ Found SDK component: $dir"
+          fi
+        done
+
+        # Check SDK version
+        if [ -f "$SDK_ROOT/MIMXRT700-EVK_manifest_v3_15.xml" ]; then
+          SDK_VERSION=$(grep -o 'version="[^"]*"' "$SDK_ROOT/MIMXRT700-EVK_manifest_v3_15.xml" | head -n1 | cut -d'"' -f2)
+          echo "✓ NXP SDK version: $SDK_VERSION"
+        else
+          echo "WARNING: SDK manifest not found"
+        fi
+
+        echo "✅ SDK validation completed successfully"
     
     - name: Verify toolchain
       run: |

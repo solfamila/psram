@@ -5,10 +5,36 @@ This guide helps you set up your development environment for the MIMXRT700 XSPI 
 ## Overview
 
 This project requires:
-- Cross-compilation toolchain for ARM Cortex-M33
-- Build system tools (CMake, Ninja)
+- **NXP MIMXRT700 SDK** (version 25.03.00 or later) - **INCLUDED IN REPOSITORY**
+- Cross-compilation toolchain for ARM Cortex-M33 (GCC ARM Embedded 10.3-2021.10 or later)
+- Build system tools (CMake 3.10+, Ninja)
 - Hardware debugging tools (optional for local development)
 - Container runtime (for remote agent simulation)
+
+## ⚠️ IMPORTANT: SDK Information
+
+### SDK Status: ✅ **INCLUDED AND READY**
+The NXP MIMXRT700 SDK is **already included** in this repository under:
+```
+mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/
+```
+
+### SDK Details:
+- **Version**: 25.03.00 (MCUXpresso SDK)
+- **License**: BSD-3-Clause (allows redistribution)
+- **Size**: ~500MB (complete SDK with all components)
+- **Components**: CMSIS, device drivers, board support, middleware
+
+### SDK Validation:
+The build system automatically validates the SDK installation. You can manually verify by checking:
+```bash
+# Check SDK structure
+ls mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/
+# Should show: CMSIS, devices, boards, components, etc.
+
+# Check SDK version
+grep 'version=' mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/MIMXRT700-EVK_manifest_v3_15.xml
+```
 
 ## Local Development Setup
 
@@ -260,53 +286,218 @@ mkdir -p ex/tests/integration
 
 ## Troubleshooting
 
-### Common Issues
+### Common Issues and Solutions
 
-#### Permission Denied
+#### 1. SDK-Related Issues
+
+**Problem**: "SDK directory not found" or "Required SDK directory missing"
+```bash
+# Solution 1: Verify repository completeness
+git status
+git submodule update --init --recursive
+
+# Solution 2: Check SDK structure
+ls -la mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/
+# Should show: CMSIS, devices, boards, components, etc.
+
+# Solution 3: Set SDK_ROOT manually
+export SDK_ROOT="$(pwd)/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__"
+```
+
+**Problem**: "SDK version may be incompatible"
+```bash
+# Check current SDK version
+grep 'version=' mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/MIMXRT700-EVK_manifest_v3_15.xml
+
+# Expected: version="25.03.00" or later
+# If older version found, update the repository or download latest SDK
+```
+
+#### 2. Toolchain Issues
+
+**Problem**: "ARM GCC toolchain not found"
+```bash
+# Solution 1: Install ARM GCC
+# Ubuntu/Debian:
+sudo apt-get install gcc-arm-none-eabi
+
+# Or download from ARM:
+wget https://developer.arm.com/-/media/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
+sudo tar -xjf gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2 -C /opt/
+export ARMGCC_DIR="/opt/gcc-arm-none-eabi-10.3-2021.10"
+export PATH="$ARMGCC_DIR/bin:$PATH"
+
+# Solution 2: Verify installation
+which arm-none-eabi-gcc
+arm-none-eabi-gcc --version
+```
+
+**Problem**: "arm-none-eabi-gcc not found in PATH"
+```bash
+# Add to PATH
+export PATH="/opt/gcc-arm-none-eabi/bin:$PATH"
+
+# Make permanent (add to ~/.bashrc or ~/.zshrc)
+echo 'export PATH="/opt/gcc-arm-none-eabi/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+#### 3. Build System Issues
+
+**Problem**: Permission denied on build scripts
 ```bash
 # Make scripts executable
 chmod +x mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/*.sh
+chmod +x build.sh
 ```
 
-#### Toolchain Not Found
-```bash
-# Verify PATH
-echo $PATH | grep arm-none-eabi
-
-# Check installation
-which arm-none-eabi-gcc
-```
-
-#### CMake Configuration Failed
+**Problem**: CMake configuration failed
 ```bash
 # Clear CMake cache
-rm -rf CMakeCache.txt CMakeFiles/
+cd mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc
+rm -rf CMakeCache.txt CMakeFiles/ debug/ release/
+
+# Verify environment
+export ARMGCC_DIR="/opt/gcc-arm-none-eabi"  # or your toolchain path
+export SDK_ROOT="$(pwd)/../__repo__"
 
 # Reconfigure
-cmake .. -G Ninja
+cmake . -G Ninja
+```
+
+**Problem**: "No rule to make target" or missing files
+```bash
+# Verify SDK completeness
+ls -la ../__repo__/devices/MIMXRT798S/
+ls -la ../__repo__/boards/mimxrt700evk/
+
+# If files missing, re-clone repository
+git clone --recursive https://github.com/solfamila/psram.git
+```
+
+#### 4. Container/Docker Issues
+
+**Problem**: Docker build fails
+```bash
+# Check Docker installation
+docker --version
+
+# Build with verbose output
+docker build -f .augment/Dockerfile -t mimxrt700-dev . --progress=plain
+
+# Check for disk space
+df -h
+```
+
+**Problem**: Container build succeeds but runtime fails
+```bash
+# Run container interactively for debugging
+docker run -it --rm -v $(pwd):/workspace mimxrt700-dev /bin/bash
+
+# Inside container, validate environment
+validate-sdk
+arm-none-eabi-gcc --version
+```
+
+#### 5. Environment-Specific Issues
+
+**Problem**: macOS build issues
+```bash
+# Install Xcode command line tools
+xcode-select --install
+
+# Use Homebrew for dependencies
+brew install cmake ninja
+brew install --cask gcc-arm-embedded
+```
+
+**Problem**: Windows/WSL issues
+```bash
+# Ensure WSL2 is used
+wsl --set-version Ubuntu 2
+
+# Install dependencies in WSL
+sudo apt-get update
+sudo apt-get install build-essential cmake ninja-build
+```
+
+#### 6. Testing Issues
+
+**Problem**: Unity tests fail to build
+```bash
+# Install Unity framework
+git clone https://github.com/ThrowTheSwitch/Unity.git ~/unity
+export UNITY_ROOT="$HOME/unity"
+
+# Or use system package
+sudo apt-get install libunity-dev
+```
+
+**Problem**: Tests compile but fail to run
+```bash
+# Check test executable
+ls -la tests/build/run_tests
+file tests/build/run_tests
+
+# Run with verbose output
+cd tests/build
+./run_tests -v
+```
+
+### Getting Help
+
+If you encounter issues not covered here:
+
+1. **Check the build log**: Run with `-v` flag for verbose output
+2. **Validate environment**: Use the validation script above
+3. **Check GitHub Issues**: https://github.com/solfamila/psram/issues
+4. **Container debugging**: Use the Docker container for a clean environment
+
+### Environment Reset
+
+If all else fails, reset your environment:
+```bash
+# Clean all build artifacts
+./build.sh -c
+
+# Reset environment variables
+unset ARMGCC_DIR SDK_ROOT UNITY_ROOT
+
+# Re-run setup
+./build.sh --help  # This validates and sets up environment
 ```
 
 ### Environment Validation Script
 
-Create a validation script:
+The project includes a comprehensive validation script in `build.sh`. You can also create a standalone validation script:
 
 ```bash
 #!/bin/bash
 # validate_environment.sh
 
-echo "Validating development environment..."
+echo "=== MIMXRT700 Development Environment Validation ==="
 
 # Check ARM GCC
 if command -v arm-none-eabi-gcc &> /dev/null; then
-    echo "✓ ARM GCC found: $(arm-none-eabi-gcc --version | head -n1)"
+    GCC_VERSION=$(arm-none-eabi-gcc --version | head -n1 | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+' | head -n1)
+    echo "✓ ARM GCC found: $GCC_VERSION"
+    if [[ "$GCC_VERSION" < "10.3.0" ]]; then
+        echo "⚠️  Warning: ARM GCC version may be incompatible. Recommended: 10.3.0+"
+    fi
 else
     echo "✗ ARM GCC not found"
+    echo "  Install from: https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm"
     exit 1
 fi
 
 # Check CMake
 if command -v cmake &> /dev/null; then
-    echo "✓ CMake found: $(cmake --version | head -n1)"
+    CMAKE_VERSION=$(cmake --version | head -n1 | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+')
+    echo "✓ CMake found: $CMAKE_VERSION"
+    if [[ "$CMAKE_VERSION" < "3.10.0" ]]; then
+        echo "✗ CMake version too old. Required: 3.10.0+"
+        exit 1
+    fi
 else
     echo "✗ CMake not found"
     exit 1
@@ -320,7 +511,39 @@ else
     exit 1
 fi
 
-echo "Environment validation complete!"
+# Check SDK
+SDK_ROOT="${SDK_ROOT:-$(pwd)/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__}"
+if [[ -d "$SDK_ROOT" ]]; then
+    echo "✓ NXP SDK found at: $SDK_ROOT"
+
+    # Check essential SDK components
+    for dir in CMSIS devices boards components; do
+        if [[ -d "$SDK_ROOT/$dir" ]]; then
+            echo "  ✓ $dir directory found"
+        else
+            echo "  ✗ $dir directory missing"
+            exit 1
+        fi
+    done
+
+    # Check SDK version
+    if [[ -f "$SDK_ROOT/MIMXRT700-EVK_manifest_v3_15.xml" ]]; then
+        SDK_VERSION=$(grep -o 'version="[^"]*"' "$SDK_ROOT/MIMXRT700-EVK_manifest_v3_15.xml" | head -n1 | cut -d'"' -f2)
+        echo "  ✓ SDK Version: $SDK_VERSION"
+    fi
+else
+    echo "✗ NXP SDK not found at: $SDK_ROOT"
+    echo "  Please ensure the repository is complete or set SDK_ROOT environment variable"
+    exit 1
+fi
+
+echo "✅ Environment validation complete! Ready to build."
+```
+
+### Quick Validation
+Run the built-in validation:
+```bash
+./build.sh --help  # This will validate the environment
 ```
 
 ## Next Steps

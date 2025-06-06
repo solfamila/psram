@@ -6,11 +6,20 @@ This document provides detailed build instructions for the MIMXRT700 XSPI PSRAM 
 
 ### Local Development Environment
 
-#### Required Tools
-- **ARM GCC Toolchain**: Version 10.3 or later
-- **CMake**: Version 3.10 or later  
+#### Required Components
+- **NXP MIMXRT700 SDK**: Version 25.03.00 (✅ **INCLUDED IN REPOSITORY**)
+- **ARM GCC Toolchain**: Version 10.3-2021.10 or later
+- **CMake**: Version 3.10 or later
 - **Ninja Build System**: For faster builds
 - **Git**: For version control
+
+#### SDK Information
+The NXP MIMXRT700 SDK is **already included** in this repository:
+- **Location**: `mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/`
+- **Version**: 25.03.00 (MCUXpresso SDK)
+- **License**: BSD-3-Clause (allows redistribution)
+- **Size**: ~500MB (complete SDK)
+- **Auto-Detection**: Build system automatically detects and validates SDK
 
 #### Installing ARM GCC Toolchain
 
@@ -55,12 +64,37 @@ choco install cmake ninja git
 
 ## Build Process
 
-### 1. Environment Setup
+### 1. Environment Setup and Validation
 
-Set required environment variables:
+The build system automatically detects and validates your environment. For manual setup:
+
 ```bash
-export ARMGCC_DIR="/opt/gcc-arm-none-eabi-10.3-2021.10"
+# Set ARM GCC toolchain (auto-detected if installed in standard locations)
+export ARMGCC_DIR="/opt/gcc-arm-none-eabi-10.3-2021.10"  # or your installation path
+
+# Set SDK root (auto-detected from repository)
 export SDK_ROOT="$(pwd)/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__"
+
+# Validate environment (recommended)
+./build.sh --help  # This validates toolchain and SDK
+```
+
+#### Environment Validation
+The build system performs comprehensive validation:
+- ✅ **ARM GCC Toolchain**: Version compatibility check
+- ✅ **NXP SDK**: Structure and version validation
+- ✅ **Build Tools**: CMake and Ninja availability
+- ✅ **Permissions**: Script executability
+
+#### SDK Validation Details
+```bash
+# Manual SDK validation
+ls mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/
+# Expected directories: CMSIS, devices, boards, components, middleware
+
+# Check SDK version
+grep 'version=' mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/MIMXRT700-EVK_manifest_v3_15.xml
+# Expected: version="25.03.00"
 ```
 
 ### 2. Navigate to Build Directory

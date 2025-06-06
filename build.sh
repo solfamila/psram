@@ -117,30 +117,112 @@ case $BUILD_TYPE in
         ;;
 esac
 
+# SDK validation function
+validate_sdk() {
+    log_info "Validating NXP MIMXRT700 SDK..."
+
+    # Check if SDK_ROOT is set and exists
+    if [[ -z "$SDK_ROOT" ]]; then
+        log_error "SDK_ROOT environment variable not set"
+        return 1
+    fi
+
+    if [[ ! -d "$SDK_ROOT" ]]; then
+        log_error "SDK directory not found: $SDK_ROOT"
+        return 1
+    fi
+
+    # Check for essential SDK components
+    local required_dirs=(
+        "CMSIS"
+        "devices"
+        "boards"
+        "components"
+    )
+
+    for dir in "${required_dirs[@]}"; do
+        if [[ ! -d "$SDK_ROOT/$dir" ]]; then
+            log_error "Required SDK directory missing: $SDK_ROOT/$dir"
+            return 1
+        fi
+    done
+
+    # Check for SDK manifest and version
+    local manifest_file="$SDK_ROOT/MIMXRT700-EVK_manifest_v3_15.xml"
+    if [[ -f "$manifest_file" ]]; then
+        local sdk_version=$(grep -o 'version="[^"]*"' "$manifest_file" | head -n1 | cut -d'"' -f2)
+        log_info "Found NXP SDK version: $sdk_version"
+
+        # Validate minimum required version (25.03.00)
+        if [[ "$sdk_version" < "25.03.00" ]]; then
+            log_warning "SDK version $sdk_version may be incompatible. Recommended: 25.03.00 or later"
+        fi
+    else
+        log_warning "SDK manifest file not found. Cannot verify SDK version."
+    fi
+
+    # Check for license file
+    if [[ -f "$SDK_ROOT/COPYING-BSD-3" ]]; then
+        log_info "SDK license: BSD-3-Clause (redistribution allowed)"
+    fi
+
+    log_success "SDK validation completed successfully"
+    return 0
+}
+
 # Environment setup
 setup_environment() {
     log_info "Setting up build environment..."
-    
+
     # Set default ARM GCC path if not specified
     if [[ -z "$ARMGCC_DIR" ]]; then
         if [[ -d "/opt/gcc-arm-none-eabi-10.3-2021.10" ]]; then
             export ARMGCC_DIR="/opt/gcc-arm-none-eabi-10.3-2021.10"
         elif [[ -d "/opt/gcc-arm-none-eabi" ]]; then
             export ARMGCC_DIR="/opt/gcc-arm-none-eabi"
+        elif [[ -d "/usr" ]] && command -v arm-none-eabi-gcc &> /dev/null; then
+            export ARMGCC_DIR="/usr"
         else
             log_error "ARM GCC toolchain not found. Please set ARMGCC_DIR environment variable."
+            log_info "Install ARM GCC toolchain from: https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm"
             exit 1
         fi
     fi
-    
-    # Set SDK root
+
+    # Set SDK root with auto-detection
     if [[ -z "$SDK_ROOT" ]]; then
-        export SDK_ROOT="$PROJECT_ROOT/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__"
+        # Try to auto-detect SDK location
+        local possible_sdk_paths=(
+            "$PROJECT_ROOT/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__"
+            "$PROJECT_ROOT/sdk"
+            "$PROJECT_ROOT/../sdk"
+            "/opt/nxp/sdk"
+        )
+
+        for sdk_path in "${possible_sdk_paths[@]}"; do
+            if [[ -d "$sdk_path" && -d "$sdk_path/CMSIS" ]]; then
+                export SDK_ROOT="$sdk_path"
+                log_info "Auto-detected SDK at: $SDK_ROOT"
+                break
+            fi
+        done
+
+        if [[ -z "$SDK_ROOT" ]]; then
+            log_error "NXP SDK not found. Please set SDK_ROOT environment variable."
+            log_info "Expected SDK structure with CMSIS, devices, boards, and components directories."
+            exit 1
+        fi
     fi
-    
+
+    # Validate SDK
+    if ! validate_sdk; then
+        log_error "SDK validation failed. Please check your SDK installation."
+        exit 1
+    fi
+
     # Add ARM GCC to PATH
     export PATH="$ARMGCC_DIR/bin:$PATH"
-    
+
     # Verify toolchain
     if ! command -v arm-none-eabi-gcc &> /dev/null; then
         log_error "arm-none-eabi-gcc not found in PATH"
@@ -148,12 +230,23 @@ setup_environment() {
         log_info "PATH: $PATH"
         exit 1
     fi
-    
+
+    # Verify toolchain version compatibility
+    local gcc_version=$(arm-none-eabi-gcc --version | head -n1 | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+' | head -n1)
+    log_info "ARM GCC Version: $gcc_version"
+
+    # Check for minimum required version (10.3.0)
+    if [[ "$gcc_version" < "10.3.0" ]]; then
+        log_warning "ARM GCC version $gcc_version may be incompatible. Recommended: 10.3.0 or later"
+    fi
+
     log_success "Environment setup complete"
     if [[ "$VERBOSE" == "true" ]]; then
         log_info "ARMGCC_DIR: $ARMGCC_DIR"
         log_info "SDK_ROOT: $SDK_ROOT"
-        log_info "ARM GCC Version: $(arm-none-eabi-gcc --version | head -n1)"
+        log_info "ARM GCC Version: $gcc_version"
+        log_info "SDK Components:"
+        ls -la "$SDK_ROOT" | head -10
     fi
 }
 
