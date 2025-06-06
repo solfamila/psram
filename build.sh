@@ -150,12 +150,17 @@ validate_sdk() {
     # Check for SDK manifest and version
     local manifest_file="$SDK_ROOT/MIMXRT700-EVK_manifest_v3_15.xml"
     if [[ -f "$manifest_file" ]]; then
-        local sdk_version=$(grep -o 'version="[^"]*"' "$manifest_file" | head -n1 | cut -d'"' -f2)
-        log_info "Found NXP SDK version: $sdk_version"
+        # Look for the ksdk version attribute which contains the actual SDK version
+        local sdk_version=$(grep -o '<ksdk[^>]*version="[^"]*"' "$manifest_file" | grep -o 'version="[^"]*"' | cut -d'"' -f2)
+        if [[ -n "$sdk_version" ]]; then
+            log_info "Found NXP SDK version: $sdk_version"
 
-        # Validate minimum required version (25.03.00)
-        if [[ "$sdk_version" < "25.03.00" ]]; then
-            log_warning "SDK version $sdk_version may be incompatible. Recommended: 25.03.00 or later"
+            # Validate minimum required version (25.03.00)
+            if [[ "$sdk_version" < "25.03.00" ]]; then
+                log_warning "SDK version $sdk_version may be incompatible. Recommended: 25.03.00 or later"
+            fi
+        else
+            log_warning "Could not parse SDK version from manifest file."
         fi
     else
         log_warning "SDK manifest file not found. Cannot verify SDK version."
