@@ -1,0 +1,161 @@
+# CI/CD Pipeline for MIMXRT700 XSPI PSRAM Example
+# Automated build and test workflow for Augment remote agent compatibility
+
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      build_type:
+        description: 'Build type'
+        required: true
+        default: 'debug'
+        type: choice
+        options:
+        - debug
+        - release
+        - flash_debug
+        - flash_release
+
+env:
+  ARMGCC_VERSION: "10.3-2021.10"
+  UNITY_VERSION: "v2.5.2"
+
+jobs:
+  # Build job for different configurations
+  build:
+    name: Build (${{ matrix.build_type }})
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        build_type: [debug, release, flash_debug, flash_release]
+      fail-fast: false
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    
+    - name: Cache ARM GCC toolchain
+      id: cache-toolchain
+      uses: actions/cache@v3
+      with:
+        path: /opt/gcc-arm-none-eabi
+        key: arm-gcc-${{ env.ARMGCC_VERSION }}
+    
+    - name: Install ARM GCC toolchain
+      if: steps.cache-toolchain.outputs.cache-hit != 'true'
+      run: |
+        wget -q https://developer.arm.com/-/media/Files/downloads/gnu-rm/${{ env.ARMGCC_VERSION }}/gcc-arm-none-eabi-${{ env.ARMGCC_VERSION }}-x86_64-linux.tar.bz2
+        sudo tar -xjf gcc-arm-none-eabi-${{ env.ARMGCC_VERSION }}-x86_64-linux.tar.bz2 -C /opt/
+        sudo ln -s /opt/gcc-arm-none-eabi-${{ env.ARMGCC_VERSION }} /opt/gcc-arm-none-eabi
+    
+    - name: Install build dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cmake ninja-build
+    
+    - name: Set up environment
+      run: |
+        echo "/opt/gcc-arm-none-eabi/bin" >> $GITHUB_PATH
+        echo "ARMGCC_DIR=/opt/gcc-arm-none-eabi" >> $GITHUB_ENV
+        echo "SDK_ROOT=${{ github.workspace }}/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__" >> $GITHUB_ENV
+    
+    - name: Verify toolchain
+      run: |
+        arm-none-eabi-gcc --version
+        cmake --version
+        ninja --version
+    
+    - name: Build project
+      run: |
+        ./build.sh -t ${{ matrix.build_type }} -v
+    
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: build-artifacts-${{ matrix.build_type }}
+        path: |
+          mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/${{ matrix.build_type }}/*.elf
+          mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/${{ matrix.build_type }}/*.bin
+          mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/${{ matrix.build_type }}/*.map
+        retention-days: 30
+
+  # Test job
+  test:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    needs: build
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Cache Unity framework
+      id: cache-unity
+      uses: actions/cache@v3
+      with:
+        path: /opt/unity
+        key: unity-${{ env.UNITY_VERSION }}
+    
+    - name: Install Unity testing framework
+      if: steps.cache-unity.outputs.cache-hit != 'true'
+      run: |
+        git clone --branch ${{ env.UNITY_VERSION }} https://github.com/ThrowTheSwitch/Unity.git /tmp/unity
+        sudo mv /tmp/unity /opt/unity
+    
+    - name: Install test dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cmake ninja-build build-essential
+    
+    - name: Set up test environment
+      run: |
+        echo "UNITY_ROOT=/opt/unity" >> $GITHUB_ENV
+    
+    - name: Build and run tests
+      run: |
+        cd tests
+        mkdir -p build
+        cd build
+        cmake ..
+        make
+        ./run_tests
+    
+    - name: Upload test results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: test-results
+        path: |
+          tests/build/test_results.txt
+        retention-days: 30
+
+  # Container build job (simulates remote agent)
+  container-build:
+    name: Container Build (Remote Agent Simulation)
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+    
+    - name: Build container image
+      run: |
+        docker build -f .augment/Dockerfile -t mimxrt700-dev .
+    
+    - name: Test container build
+      run: |
+        docker run --rm -v ${{ github.workspace }}:/workspace mimxrt700-dev \
+          /workspace/build.sh -t debug -v
