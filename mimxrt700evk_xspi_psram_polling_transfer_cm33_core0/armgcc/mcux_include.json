@@ -1,0 +1,57 @@
+{
+  "version": 7,
+  "cmakeMinimumRequired": {
+    "major": 3
+  },
+  "configurePresets": [
+    {
+      "name": "debug-env",
+      "displayName": "debug-env",
+      "hidden": true,
+      "environment": {
+        "ARMGCC_DIR": "/usr/local/mcuxpressoide/ide/tools",
+        "SdkRootDirPath": "/home/smw016108/Downloads/sdk/SDK_25_03_00_MIMXRT700-EVK",
+        "POSTPROCESS_UTILITY": "/home/smw016108/.mcuxpressotools/mcux-fixelf/mcux-fixelf",
+        "MCUX_VENV_PATH": "/home/smw016108/.mcuxpressotools/.venv/bin",
+        "PATH": "$env{MCUX_VENV_PATH}:$penv{PATH}"
+      }
+    },
+    {
+      "name": "flash_debug-env",
+      "displayName": "flash_debug-env",
+      "hidden": true,
+      "environment": {
+        "ARMGCC_DIR": "/usr/local/mcuxpressoide/ide/tools",
+        "SdkRootDirPath": "/home/smw016108/Downloads/sdk/SDK_25_03_00_MIMXRT700-EVK",
+        "POSTPROCESS_UTILITY": "/home/smw016108/.mcuxpressotools/mcux-fixelf/mcux-fixelf",
+        "MCUX_VENV_PATH": "/home/smw016108/.mcuxpressotools/.venv/bin",
+        "PATH": "$env{MCUX_VENV_PATH}:$penv{PATH}"
+      }
+    },
+    {
+      "name": "release-env",
+      "displayName": "release-env",
+      "hidden": true,
+      "environment": {
+        "ARMGCC_DIR": "/usr/local/mcuxpressoide/ide/tools",
+        "SdkRootDirPath": "/home/smw016108/Downloads/sdk/SDK_25_03_00_MIMXRT700-EVK",
+        "POSTPROCESS_UTILITY": "/home/smw016108/.mcuxpressotools/mcux-fixelf/mcux-fixelf",
+        "MCUX_VENV_PATH": "/home/smw016108/.mcuxpressotools/.venv/bin",
+        "PATH": "$env{MCUX_VENV_PATH}:$penv{PATH}"
+      }
+    },
+    {
+      "name": "flash_release-env",
+      "displayName": "flash_release-env",
+      "hidden": true,
+      "environment": {
+        "ARMGCC_DIR": "/usr/local/mcuxpressoide/ide/tools",
+        "SdkRootDirPath": "/home/smw016108/Downloads/sdk/SDK_25_03_00_MIMXRT700-EVK",
+        "POSTPROCESS_UTILITY": "/home/smw016108/.mcuxpressotools/mcux-fixelf/mcux-fixelf",
+        "MCUX_VENV_PATH": "/home/smw016108/.mcuxpressotools/.venv/bin",
+        "PATH": "$env{MCUX_VENV_PATH}:$penv{PATH}"
+      }
+    }
+  ],
+  "buildPresets": []
+}

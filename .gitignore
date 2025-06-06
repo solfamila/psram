@@ -1,0 +1,44 @@
+# Build artifacts
+build/
+debug/
+release/
+flash_debug/
+flash_release/
+*.elf
+*.bin
+*.map
+*.hex
+
+# IDE files
+.vscode/
+*.code-workspace
+.idea/
+
+# Toolchain artifacts
+*.o
+*.a
+*.so
+*.d
+*.lst
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+build.ninja
+.ninja_deps
+.ninja_log
+
+# Temporary files
+*.tmp
+*.temp
+*~
+.DS_Store
+
+# Logs
+*.log
+
+# Remote agent artifacts
+.augment/cache/
+.augment/logs/
+.augment/temp/

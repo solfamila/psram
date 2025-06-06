@@ -1,0 +1,84 @@
+# Augment Remote Agent Configuration
+# Configuration for embedded C project targeting NXP MIMXRT700
+
+project:
+  name: "mimxrt700-xspi-psram-example"
+  type: "embedded-c"
+  description: "XSPI PSRAM polling transfer example for MIMXRT700-EVK"
+  
+environment:
+  # Required for cross-compilation
+  toolchain: "arm-none-eabi-gcc"
+  cmake_version: ">=3.10.0"
+  
+  # Environment variables needed for build
+  variables:
+    ARMGCC_DIR: "/opt/gcc-arm-none-eabi"
+    SDK_ROOT: "${PROJECT_ROOT}/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__"
+    
+build:
+  # Primary build directory
+  directory: "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc"
+  
+  # Build configurations available
+  configurations:
+    - debug
+    - release
+    - flash_debug
+    - flash_release
+    
+  # Default build configuration
+  default_config: "debug"
+  
+  # Build commands
+  commands:
+    clean: "./clean.sh"
+    debug: "./build_debug.sh"
+    release: "./build_release.sh"
+    flash_debug: "./build_flash_debug.sh"
+    flash_release: "./build_flash_release.sh"
+    
+  # Build artifacts
+  artifacts:
+    - "debug/xspi_psram_polling_transfer_cm33_core0.elf"
+    - "debug/xspi_psram_polling_transfer.bin"
+    - "debug/output.map"
+
+testing:
+  # Unit testing framework (to be implemented)
+  framework: "unity"
+  test_directory: "tests"
+  
+  # Test commands
+  commands:
+    unit_tests: "make test"
+    
+dependencies:
+  system:
+    - "cmake"
+    - "make"
+    - "gcc-arm-none-eabi"
+    - "ninja-build"
+    
+  # SDK dependencies are included in the project
+  embedded_sdk: "included"
+
+remote_execution:
+  # Container configuration for consistent builds
+  container:
+    base_image: "ubuntu:22.04"
+    dockerfile: ".augment/Dockerfile"
+    
+  # Resource requirements
+  resources:
+    cpu: "2"
+    memory: "4Gi"
+    storage: "10Gi"
+    
+  # Execution timeout
+  timeout: "30m"
+
+documentation:
+  readme: "README.md"
+  setup_guide: "SETUP.md"
+  build_instructions: "BUILD.md"

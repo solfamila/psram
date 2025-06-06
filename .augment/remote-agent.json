@@ -1,0 +1,222 @@
+{
+  "version": "1.0",
+  "project": {
+    "name": "mimxrt700-xspi-psram-example",
+    "type": "embedded-c",
+    "description": "XSPI PSRAM polling transfer example for NXP MIMXRT700-EVK",
+    "language": "c",
+    "framework": "nxp-sdk",
+    "target_platform": "arm-cortex-m33"
+  },
+  
+  "environment": {
+    "container": {
+      "image": "ubuntu:22.04",
+      "dockerfile": ".augment/Dockerfile",
+      "build_context": ".",
+      "working_directory": "/workspace"
+    },
+    
+    "system_requirements": {
+      "cpu_cores": 2,
+      "memory_gb": 4,
+      "storage_gb": 10,
+      "timeout_minutes": 30
+    },
+    
+    "environment_variables": {
+      "ARMGCC_DIR": "/opt/gcc-arm-none-eabi-10.3-2021.10",
+      "SDK_ROOT": "/workspace/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__",
+      "UNITY_ROOT": "/opt/unity",
+      "PATH": "/opt/gcc-arm-none-eabi-10.3-2021.10/bin:$PATH"
+    }
+  },
+  
+  "dependencies": {
+    "system_packages": [
+      "build-essential",
+      "cmake",
+      "ninja-build",
+      "git",
+      "wget",
+      "curl",
+      "unzip",
+      "python3",
+      "python3-pip"
+    ],
+    
+    "toolchain": {
+      "name": "gcc-arm-none-eabi",
+      "version": "10.3-2021.10",
+      "url": "https://developer.arm.com/-/media/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2",
+      "install_path": "/opt/gcc-arm-none-eabi-10.3-2021.10"
+    },
+    
+    "testing_framework": {
+      "name": "Unity",
+      "repository": "https://github.com/ThrowTheSwitch/Unity.git",
+      "install_path": "/opt/unity"
+    }
+  },
+  
+  "build": {
+    "primary_script": "./build.sh",
+    "build_directory": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc",
+    
+    "configurations": [
+      {
+        "name": "debug",
+        "description": "Debug build with symbols",
+        "command": "./build.sh -t debug",
+        "artifacts": [
+          "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/debug/xspi_psram_polling_transfer_cm33_core0.elf",
+          "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/debug/xspi_psram_polling_transfer.bin",
+          "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/debug/output.map"
+        ]
+      },
+      {
+        "name": "release",
+        "description": "Optimized release build",
+        "command": "./build.sh -t release",
+        "artifacts": [
+          "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/release/xspi_psram_polling_transfer_cm33_core0.elf",
+          "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/release/xspi_psram_polling_transfer.bin",
+          "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/release/output.map"
+        ]
+      },
+      {
+        "name": "flash_debug",
+        "description": "Debug build for flash execution",
+        "command": "./build.sh -t flash_debug",
+        "artifacts": [
+          "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/flash_debug/xspi_psram_polling_transfer_cm33_core0.elf",
+          "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/flash_debug/xspi_psram_polling_transfer.bin"
+        ]
+      },
+      {
+        "name": "flash_release",
+        "description": "Release build for flash execution",
+        "command": "./build.sh -t flash_release",
+        "artifacts": [
+          "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/flash_release/xspi_psram_polling_transfer_cm33_core0.elf",
+          "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/flash_release/xspi_psram_polling_transfer.bin"
+        ]
+      }
+    ],
+    
+    "default_configuration": "debug",
+    
+    "clean_command": "./build.sh -c",
+    
+    "parallel_builds": true,
+    "incremental_builds": true
+  },
+  
+  "testing": {
+    "enabled": true,
+    "framework": "Unity",
+    "test_directory": "tests",
+    "test_command": "./build.sh -T",
+    
+    "test_suites": [
+      {
+        "name": "unit_tests",
+        "description": "Unit tests for XSPI PSRAM operations",
+        "command": "cd tests && mkdir -p build && cd build && cmake .. && make && ./run_tests",
+        "timeout_minutes": 10
+      }
+    ],
+    
+    "coverage": {
+      "enabled": false,
+      "tool": "gcov",
+      "threshold": 80
+    }
+  },
+  
+  "quality": {
+    "static_analysis": {
+      "enabled": true,
+      "tools": ["cppcheck"],
+      "command": "cppcheck --enable=all mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/*.c"
+    },
+    
+    "code_formatting": {
+      "enabled": true,
+      "tool": "clang-format",
+      "command": "find . -name '*.c' -o -name '*.h' | xargs clang-format --dry-run --Werror"
+    }
+  },
+  
+  "deployment": {
+    "artifacts": {
+      "binary_files": [
+        "*.elf",
+        "*.bin",
+        "*.map"
+      ],
+      "documentation": [
+        "README.md",
+        "BUILD.md",
+        "SETUP.md"
+      ],
+      "configuration": [
+        ".augment/config.yaml",
+        ".augment/remote-agent.json"
+      ]
+    },
+    
+    "packaging": {
+      "format": "tar.gz",
+      "include_source": false,
+      "include_tests": false
+    }
+  },
+  
+  "monitoring": {
+    "build_metrics": {
+      "track_build_time": true,
+      "track_artifact_size": true,
+      "track_memory_usage": true
+    },
+    
+    "notifications": {
+      "on_success": false,
+      "on_failure": true,
+      "on_timeout": true
+    }
+  },
+  
+  "security": {
+    "scan_dependencies": true,
+    "scan_code": true,
+    "allowed_network_access": [
+      "developer.arm.com",
+      "github.com"
+    ]
+  },
+  
+  "documentation": {
+    "readme": "README.md",
+    "setup_guide": "SETUP.md",
+    "build_instructions": "BUILD.md",
+    "api_documentation": null,
+    "changelog": null
+  },
+  
+  "metadata": {
+    "created": "2024-01-01",
+    "version": "1.0.0",
+    "maintainer": "Augment Agent",
+    "license": "BSD-3-Clause",
+    "repository": null,
+    "tags": [
+      "embedded",
+      "nxp",
+      "mimxrt700",
+      "xspi",
+      "psram",
+      "arm-cortex-m33"
+    ]
+  }
+}
