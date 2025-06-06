@@ -32,8 +32,29 @@ The project is configured to run in Augment's remote agent environment with:
 
 ## Quick Start
 
+### Repository Information
+- **GitHub Repository**: https://github.com/solfamila/psram
+- **CI/CD Pipeline**: https://github.com/solfamila/psram/actions
+- **Remote Agent Status**: ✅ **FULLY DEPLOYED AND ACTIVE**
+
 ### Building the Project
 
+#### Using the Unified Build Script (Recommended)
+```bash
+# Build debug version
+./build.sh -t debug
+
+# Build release version
+./build.sh -t release
+
+# Build with tests
+./build.sh -t debug -T
+
+# Container build (simulates remote agent)
+./build.sh -C
+```
+
+#### Traditional Method
 1. **Navigate to build directory:**
    ```bash
    cd mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc
@@ -65,24 +86,37 @@ After successful build, you'll find:
 
 ## Remote Agent Features
 
-This project includes Augment remote agent compatibility:
+This project is **fully deployed** with Augment remote agent compatibility:
+
+### 🚀 Deployment Status
+- ✅ **Repository**: https://github.com/solfamila/psram
+- ✅ **CI/CD Pipeline**: Active and running
+- ✅ **Container Builds**: Working and tested
+- ✅ **Remote Agent Config**: Fully integrated
+- ✅ **Testing Framework**: Unity tests operational
 
 ### Configuration Files
-- `.augment/config.yaml` - Remote agent configuration
-- `.augment/Dockerfile` - Container environment specification
-- `.gitignore` - Proper artifact exclusion
+- `.augment/config.yaml` - Remote agent configuration ✅
+- `.augment/Dockerfile` - Container environment specification ✅
+- `.augment/remote-agent.json` - Comprehensive project metadata ✅
+- `.github/workflows/ci.yml` - CI/CD pipeline ✅
+- `.gitignore` - Proper artifact exclusion ✅
 
 ### Automated Build Environment
-The remote agent will automatically:
-- Set up ARM GCC cross-compilation toolchain
-- Configure CMake and Ninja build systems
-- Install required dependencies
-- Execute builds in isolated containers
+The remote agent automatically:
+- ✅ Sets up ARM GCC cross-compilation toolchain (v10.3-2021.10)
+- ✅ Configures CMake and Ninja build systems
+- ✅ Installs required dependencies in Ubuntu 22.04 container
+- ✅ Executes builds in isolated containers
+- ✅ Collects and validates build artifacts
+- ✅ Runs comprehensive test suites
 
 ### Testing Support
-- Unit testing framework integration (Unity)
-- Automated test execution capabilities
-- Build verification and artifact validation
+- ✅ Unit testing framework integration (Unity v2.5.2)
+- ✅ Automated test execution capabilities
+- ✅ Mock framework for hardware abstraction
+- ✅ Build verification and artifact validation
+- ✅ CI/CD integration with GitHub Actions
 
 ## Project Structure
 
