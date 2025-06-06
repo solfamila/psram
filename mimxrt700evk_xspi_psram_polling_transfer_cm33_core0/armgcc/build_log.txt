@@ -1,37 +1,38 @@
-[  7%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/home/smw016108/Downloads/ex/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/board.c.obj
-[  7%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/home/smw016108/Downloads/ex/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/pin_mux.c.obj
-[ 10%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/home/smw016108/Downloads/ex/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/components/uart/fsl_adapter_lpuart.c.obj
-[ 14%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/home/smw016108/Downloads/ex/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/system_MIMXRT798S_cm33_core0.c.obj
-[ 17%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/home/smw016108/Downloads/ex/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/xspi_psram_ops.c.obj
-[ 21%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/home/smw016108/Downloads/ex/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/drivers/fsl_cache.c.obj
-[ 25%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/home/smw016108/Downloads/ex/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/clock_config.c.obj
-[ 28%] Building ASM object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/home/smw016108/Downloads/ex/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/gcc/startup_MIMXRT798S_cm33_core0.S.obj
-[ 32%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/home/smw016108/Downloads/ex/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/hardware_init.c.obj
-[ 35%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/home/smw016108/Downloads/ex/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/drivers/fsl_glikey.c.obj
-[ 39%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/home/smw016108/Downloads/ex/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/flash_config/flash_config.c.obj
-[ 46%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/home/smw016108/Downloads/ex/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/drivers/fsl_lpflexcomm.c.obj
-[ 42%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/home/smw016108/Downloads/ex/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/drivers/fsl_clock.c.obj
-[ 50%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/home/smw016108/Downloads/ex/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/drivers/fsl_power.c.obj
-[ 53%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/home/smw016108/Downloads/ex/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/xspi_psram_polling_transfer.c.obj
-[ 57%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/home/smw016108/Downloads/ex/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/drivers/fsl_gpio.c.obj
-[ 60%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/home/smw016108/Downloads/ex/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/utilities/fsl_syscall_stub.c.obj
-[ 64%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/home/smw016108/Downloads/ex/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/drivers/fsl_common_arm.c.obj
-[ 67%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/home/smw016108/Downloads/ex/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/drivers/fsl_reset.c.obj
-[ 75%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/home/smw016108/Downloads/ex/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/utilities/fsl_sbrk.c.obj
-[ 75%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/home/smw016108/Downloads/ex/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/drivers/fsl_common.c.obj
-[ 78%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/home/smw016108/Downloads/ex/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/drivers/fsl_lpuart.c.obj
-[ 82%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/home/smw016108/Downloads/ex/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/drivers/fsl_xspi.c.obj
-[ 85%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/home/smw016108/Downloads/ex/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/utilities/str/fsl_str.c.obj
-[ 89%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/home/smw016108/Downloads/ex/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/utilities/debug_console_lite/fsl_debug_console.c.obj
-[ 96%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/home/smw016108/Downloads/ex/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/utilities/debug_console_lite/fsl_assert.c.obj
-[ 92%] Building ASM object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/home/smw016108/Downloads/ex/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/utilities/fsl_memcpy.S.obj
-[100%] Linking C executable release/xspi_psram_polling_transfer_cm33_core0.elf
+Scanning dependencies of target xspi_psram_polling_transfer_cm33_core0.elf
+[  7%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/workspace/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/drivers/fsl_cache.c.obj
+[  7%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/workspace/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/hardware_init.c.obj
+[ 10%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/workspace/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/clock_config.c.obj
+[ 17%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/workspace/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/components/uart/fsl_adapter_lpuart.c.obj
+[ 14%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/workspace/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/pin_mux.c.obj
+[ 21%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/workspace/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/xspi_psram_ops.c.obj
+[ 28%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/workspace/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/drivers/fsl_common_arm.c.obj
+[ 28%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/workspace/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/board.c.obj
+[ 32%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/workspace/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/system_MIMXRT798S_cm33_core0.c.obj
+[ 35%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/workspace/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/xspi_psram_polling_transfer.c.obj
+[ 39%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/workspace/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/drivers/fsl_common.c.obj
+[ 42%] Building ASM object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/workspace/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/gcc/startup_MIMXRT798S_cm33_core0.S.obj
+[ 46%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/workspace/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/drivers/fsl_clock.c.obj
+[ 50%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/workspace/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/drivers/fsl_power.c.obj
+[ 53%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/workspace/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/drivers/fsl_lpuart.c.obj
+[ 60%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/workspace/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/drivers/fsl_gpio.c.obj
+[ 60%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/workspace/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/flash_config/flash_config.c.obj
+[ 64%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/workspace/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/drivers/fsl_reset.c.obj
+[ 67%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/workspace/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/drivers/fsl_glikey.c.obj
+[ 71%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/workspace/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/drivers/fsl_xspi.c.obj
+[ 75%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/workspace/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/utilities/fsl_sbrk.c.obj
+[ 78%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/workspace/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/utilities/fsl_syscall_stub.c.obj
+[ 82%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/workspace/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/drivers/fsl_lpflexcomm.c.obj
+[ 89%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/workspace/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/utilities/debug_console_lite/fsl_debug_console.c.obj
+[ 89%] Building ASM object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/workspace/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/utilities/fsl_memcpy.S.obj
+[ 92%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/workspace/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/utilities/debug_console_lite/fsl_assert.c.obj
+[ 96%] Building C object CMakeFiles/xspi_psram_polling_transfer_cm33_core0.elf.dir/workspace/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/utilities/str/fsl_str.c.obj
+[100%] Linking C executable debug/xspi_psram_polling_transfer_cm33_core0.elf
 Memory region         Used Size  Region Size  %age Used
-         m_flash:       35808 B         2 MB      1.71%
+         m_flash:       52720 B         2 MB      2.51%
     m_interrupts:         768 B        768 B    100.00%
-          m_text:       18656 B    1047808 B      1.78%
-          m_data:        3312 B       511 KB      0.63%
-        m_ncache:           0 B         2 MB      0.00%
+          m_text:       35568 B    1047808 B      3.39%
+          m_data:        3240 B       511 KB      0.62%
+        m_ncache:          0 GB         2 MB      0.00%
           m_heap:          1 KB         1 KB    100.00%
-    rpmsg_sh_mem:           0 B          0 B
+    rpmsg_sh_mem:          0 GB         0 GB
 [100%] Built target xspi_psram_polling_transfer_cm33_core0.elf

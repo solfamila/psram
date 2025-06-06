@@ -365,8 +365,15 @@ build_project() {
     if [[ "$VERBOSE" == "true" ]]; then
         log_info "Build artifacts:"
         ls -la "$ARTIFACT_DIR"
-        log_info "ELF file info:"
-        file "$ELF_FILE"
+
+        # Display ELF file info if 'file' command is available
+        if command -v file &> /dev/null; then
+            log_info "ELF file info:"
+            file "$ELF_FILE"
+        else
+            log_info "ELF file info: (file command not available)"
+            log_info "ELF file size: $(stat -c%s "$ELF_FILE" 2>/dev/null || echo "unknown") bytes"
+        fi
     fi
 }
 

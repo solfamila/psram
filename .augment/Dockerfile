@@ -17,6 +17,7 @@ RUN apt-get update && apt-get install -y \
     unzip \
     python3 \
     python3-pip \
+    file \
     && rm -rf /var/lib/apt/lists/*
 
 # Install ARM GCC toolchain
