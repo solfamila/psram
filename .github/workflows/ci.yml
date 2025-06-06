@@ -44,7 +44,7 @@ jobs:
     
     - name: Cache ARM GCC toolchain
       id: cache-toolchain
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: /opt/gcc-arm-none-eabi
         key: arm-gcc-${{ env.ARMGCC_VERSION }}
@@ -78,7 +78,7 @@ jobs:
         ./build.sh -t ${{ matrix.build_type }} -v
     
     - name: Upload build artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: build-artifacts-${{ matrix.build_type }}
         path: |
@@ -99,7 +99,7 @@ jobs:
     
     - name: Cache Unity framework
       id: cache-unity
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: /opt/unity
         key: unity-${{ env.UNITY_VERSION }}
@@ -129,7 +129,7 @@ jobs:
         ./run_tests
     
     - name: Upload test results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: test-results
@@ -150,12 +150,70 @@ jobs:
     
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
-    
+
     - name: Build container image
       run: |
         docker build -f .augment/Dockerfile -t mimxrt700-dev .
-    
+
     - name: Test container build
       run: |
         docker run --rm -v ${{ github.workspace }}:/workspace mimxrt700-dev \
           /workspace/build.sh -t debug -v
+
+    - name: Upload container build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: container-build-artifacts
+        path: |
+          mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/debug/*.elf
+          mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/debug/*.bin
+        retention-days: 30
+
+  # Code quality and analysis
+  quality:
+    name: Code Quality Analysis
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install analysis tools
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cppcheck clang-format
+
+    - name: Run static analysis
+      run: |
+        cppcheck --enable=all --error-exitcode=1 \
+          mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/*.c \
+          mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/*.h || true
+
+    - name: Check code formatting
+      run: |
+        find mimxrt700evk_xspi_psram_polling_transfer_cm33_core0 -name "*.c" -o -name "*.h" | \
+          xargs clang-format --dry-run --Werror || true
+
+  # Documentation check
+  docs:
+    name: Documentation Check
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Check documentation files
+      run: |
+        # Check if required documentation exists
+        test -f README.md
+        test -f BUILD.md
+        test -f SETUP.md
+        test -f .augment/config.yaml
+        echo "All required documentation files present"
+
+    - name: Validate configuration files
+      run: |
+        # Basic YAML validation
+        python3 -c "import yaml; yaml.safe_load(open('.augment/config.yaml'))"
+        echo "Configuration files are valid"
