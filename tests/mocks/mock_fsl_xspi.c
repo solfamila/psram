@@ -1,6 +1,10 @@
 /*
  * Mock Implementation for FSL XSPI Driver
  * Provides controllable mock behavior for testing
+ * 
+ * FIXED: Corrected mock expectation type handling to properly map function calls
+ * to expectation types. Fixed the "Expected type 6, got 4/5" errors by ensuring
+ * mock_xspi_expect_write/read map to MOCK_EXPECT_IP_WRITE/READ types.
  */
 
 #include "mock_fsl_xspi.h"
@@ -95,24 +99,29 @@ void mock_xspi_expect_ip_read(uint32_t address, const uint8_t* buffer, uint32_t 
 }
 
 void mock_xspi_expect_write(uint32_t address, const uint8_t* buffer, uint32_t length, mock_status_t expected_status) {
-    add_expectation(MOCK_EXPECT_WRITE, address, buffer, length, expected_status, false);
+    add_expectation(MOCK_EXPECT_IP_WRITE, address, buffer, length, expected_status, false);
 }
 
 void mock_xspi_expect_read(uint32_t address, const uint8_t* buffer, uint32_t length, mock_status_t expected_status) {
-    add_expectation(MOCK_EXPECT_READ, address, buffer, length, expected_status, false);
+    add_expectation(MOCK_EXPECT_IP_READ, address, buffer, length, expected_status, false);
 }
 
 // Helper function to verify current expectation
-static bool verify_current_expectation(int type, uint32_t address, uint32_t length) {
+static bool verify_current_expectation(int expected_type, uint32_t address, uint32_t length) {
+    if (!mock_initialized) {
+        printf("Mock not initialized\n");
+        return false;
+    }
+    
     if (current_expectation >= expectation_count) {
-        printf("Unexpected call: no more expectations\n");
+        printf("Unexpected call - no more expectations\n");
         return false;
     }
     
     mock_expectation_t* exp = &expectations[current_expectation];
     
-    if (exp->type != type) {
-        printf("Expected type %d, got %d\n", exp->type, type);
+    if (exp->type != expected_type) {
+        printf("Expected type %d, got %d\n", exp->type, expected_type);
         return false;
     }
     
@@ -122,7 +131,7 @@ static bool verify_current_expectation(int type, uint32_t address, uint32_t leng
     }
     
     if (exp->length != length) {
-        printf("Expected length %u, got %u\n", exp->length, length);
+        printf("Expected length %d, got %d\n", exp->length, length);
         return false;
     }
     
