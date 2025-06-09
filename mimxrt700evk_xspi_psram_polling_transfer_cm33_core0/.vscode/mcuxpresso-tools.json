@@ -1,0 +1,15 @@
+{
+  "version": "25.3",
+  "toolchainPath": "/usr/local/mcuxpressoide/ide/tools",
+  "linkedProjects": [],
+  "trustZoneType": "none",
+  "multicoreType": "none",
+  "projectType": "sdk-freestanding",
+  "sdk": {
+    "version": "25.03.00",
+    "path": "/home/smw016108/Downloads/sdk/SDK_25_03_00_MIMXRT700-EVK",
+    "boardId": "mimxrt700evk",
+    "deviceId": "MIMXRT798S",
+    "coreId": "cm33_core0_MIMXRT798S"
+  }
+}

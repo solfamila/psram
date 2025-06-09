@@ -1,0 +1,60 @@
+{
+  "configurations": [
+    {
+      "type": "mcuxpresso-debug",
+      "name": "Debug (GCC)",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+
+      "executable": "",
+      "stopAtSymbol": "main",
+      "probeSerialNumber": "1065679149",
+      "isAttach": false,
+      "probeType": "",
+      "skipBuildBeforeDebug": false,
+      "skipPreFlashActions": true,
+
+      "gdbInitCommands": [
+        "set remotetimeout 600",
+        "set debug-file-directory",
+        "set non-stop off"
+      ],
+
+      "gdbServerConfigs": {
+        "linkserver": {},
+    		"segger": {},
+    		"pemicro": {}
+      },
+
+      "showDevDebugOutput": "none"
+    },
+    {
+      "type": "mcuxpresso-debug",
+      "name": "Debug (Clang)",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/armgcc/build_clang_debug/debug",
+
+      "executable": "xspi_psram_polling_transfer_cm33_core0.elf",
+      "stopAtSymbol": "main",
+      "probeSerialNumber": "1065679149",
+      "isAttach": false,
+      "probeType": "",
+      "skipBuildBeforeDebug": false,
+      "skipPreFlashActions": true,
+
+      "gdbInitCommands": [
+        "set remotetimeout 600",
+        "set debug-file-directory",
+        "set non-stop off"
+      ],
+
+      "gdbServerConfigs": {
+        "linkserver": {},
+    		"segger": {},
+    		"pemicro": {}
+      },
+
+      "showDevDebugOutput": "none"
+    }
+  ]
+}

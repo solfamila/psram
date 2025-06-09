@@ -10,7 +10,6 @@ flash_release/
 *.hex
 
 # IDE files
-.vscode/
 *.code-workspace
 .idea/
 
