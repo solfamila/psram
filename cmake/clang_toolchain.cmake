@@ -6,7 +6,7 @@ set(CMAKE_SYSTEM_PROCESSOR arm)
 
 # Set ARM GCC sysroot for embedded libraries
 # Using system-installed ARM GCC
-set(ARM_GCC_SYSROOT "/usr/lib/arm-none-eabi")
+set(ARM_GCC_SYSROOT "/opt/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi")
 
 # Configure Clang/LLVM toolchain for compilation, ARM GCC for linking
 # Auto-detect LLVM installation or use environment variable
@@ -45,8 +45,8 @@ set(COMMON_FLAGS "${COMMON_FLAGS} --sysroot=${ARM_GCC_SYSROOT}")
 set(COMMON_FLAGS "${COMMON_FLAGS} -I${ARM_GCC_SYSROOT}/include")
 
 # Library paths for ARM Cortex-M33 with hard float
-set(ARM_LIB_PATH "${ARM_GCC_SYSROOT}/newlib/thumb/v8-m.main+fp/hard")
-set(GCC_LIB_PATH "/usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/hard")
+set(ARM_LIB_PATH "${ARM_GCC_SYSROOT}/lib/thumb/v8-m.main+fp/hard")
+set(GCC_LIB_PATH "/opt/gcc-arm-none-eabi-10.3-2021.10/lib/gcc/arm-none-eabi/10.3.1/thumb/v8-m.main+fp/hard")
 
 # Set initial compiler flags to help CMake's compiler tests pass
 set(CMAKE_C_FLAGS_INIT "${COMMON_FLAGS}")
