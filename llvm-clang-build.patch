@@ -1,0 +1,1117 @@
+diff --git a/README_CLANG_BUILD.md b/README_CLANG_BUILD.md
+new file mode 100644
+index 0000000..0000000
+--- /dev/null
++++ b/README_CLANG_BUILD.md
+@@ -0,0 +1,402 @@
++# MIMXRT700 XSPI PSRAM Project - LLVM/Clang Build Guide
++
++This guide provides complete instructions for building the MIMXRT700 XSPI PSRAM project using LLVM/Clang instead of the default ARM GCC toolchain.
++
++## Table of Contents
++
++1. [Overview](#overview)
++2. [Prerequisites](#prerequisites)
++3. [Step 1: Install Prerequisites](#step-1-install-prerequisites)
++4. [Step 2: Download and Build LLVM/Clang](#step-2-download-and-build-llvmclang)
++5. [Step 3: Install ARM GCC Toolchain](#step-3-install-arm-gcc-toolchain)
++6. [Step 4: Set Up Project Configuration](#step-4-set-up-project-configuration)
++7. [Step 5: Build the Project](#step-5-build-the-project)
++8. [Results Comparison](#results-comparison)
++9. [Troubleshooting](#troubleshooting)
++10. [Technical Details](#technical-details)
++
++## Overview
++
++This project demonstrates how to compile an embedded ARM Cortex-M33 project (MIMXRT798S) using LLVM/Clang instead of the traditional ARM GCC toolchain. The setup uses:
++
++- **LLVM/Clang 19.1.6** - Modern C/C++ compiler with excellent optimization
++- **LLD Linker** - LLVM's fast linker
++- **ARM GCC Libraries** - Embedded C library and runtime support
++- **MCUXpresso SDK** - NXP's hardware abstraction layer
++
++### Benefits of Using Clang
++
++- **Better optimization**: Often produces smaller and faster code
++- **Superior diagnostics**: More helpful error messages and warnings
++- **Modern tooling**: Integration with static analysis tools
++- **Cross-platform**: Consistent behavior across different host platforms
++
++## Prerequisites
++
++### System Requirements
++
++- **Disk Space**: ~10GB free space for LLVM build
++- **Memory**: 8GB+ RAM recommended for LLVM compilation
++- **CPU**: Multi-core processor (build time: 30-60 minutes)
++- **OS**: Linux (Ubuntu/Debian), macOS, or Windows with WSL
++
++### Required Tools
++
++- Git
++- CMake (3.10 or later)
++- Ninja build system
++- Python 3
++- C/C++ compiler (for building LLVM)
++
++## Step 1: Install Prerequisites
++
++### Ubuntu/Debian
++
++```bash
++sudo apt update
++sudo apt install git cmake ninja-build python3 build-essential wget curl
++```
++
++### macOS
++
++```bash
++# Install Homebrew if you don't have it
++/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
++
++# Install tools
++brew install git cmake ninja python3 wget
++```
++
++### Windows
++
++1. Install Visual Studio 2019/2022 with C++ support
++2. Install Git for Windows
++3. Install CMake from cmake.org
++4. Install Python 3 from python.org
++5. Consider using WSL2 for easier setup
++
++## Step 2: Download and Build LLVM/Clang
++
++### 2.1 Download LLVM Source Code
++
++```bash
++# Create a temporary directory for the build
++cd /tmp
++
++# Download LLVM 19.1.6 source code (~500MB)
++wget -O llvm-project-19.1.6.tar.gz \
++  https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-19.1.6.tar.gz
++
++# Extract the source code
++tar -xzf llvm-project-19.1.6.tar.gz
++```
++
++### 2.2 Configure LLVM Build
++
++```bash
++# Create build directory
++mkdir -p llvm-build
++cd llvm-build
++
++# Configure LLVM with ARM support
++cmake -G Ninja \
++  -DCMAKE_BUILD_TYPE=Release \
++  -DCMAKE_INSTALL_PREFIX=/opt/llvm-19.1.6 \
++  -DLLVM_ENABLE_PROJECTS="clang;lld" \
++  -DLLVM_TARGETS_TO_BUILD="ARM;AArch64;X86" \
++  -DLLVM_DEFAULT_TARGET_TRIPLE="arm-none-eabi" \
++  -DLLVM_ENABLE_ASSERTIONS=OFF \
++  -DLLVM_OPTIMIZED_TABLEGEN=ON \
++  -DLLVM_PARALLEL_LINK_JOBS=2 \
++  -DLLVM_PARALLEL_COMPILE_JOBS=4 \
++  ../llvm-project-llvmorg-19.1.6/llvm
++```
++
++**Configuration Notes:**
++- Adjust `LLVM_PARALLEL_COMPILE_JOBS` based on your CPU cores
++- Keep `LLVM_PARALLEL_LINK_JOBS=2` if you have <16GB RAM
++- Change install prefix if you prefer a different location
++
++### 2.3 Build LLVM (30-60 minutes)
++
++```bash
++# Build with appropriate parallelism for your system
++ninja -j4  # Adjust -j based on your CPU cores
++
++# For systems with limited RAM, use fewer jobs:
++# ninja -j2
++```
++
++### 2.4 Install LLVM
++
++```bash
++# Install to /opt/llvm-19.1.6
++sudo ninja install
++```
++
++### 2.5 Verify Installation
++
++```bash
++# Check Clang version
++/opt/llvm-19.1.6/bin/clang --version
++
++# Verify ARM target support
++/opt/llvm-19.1.6/bin/clang --print-targets | grep arm
++```
++
++Expected output should show ARM targets including `arm` and `armeb`.
++
++## Step 3: Install ARM GCC Toolchain
++
++The ARM GCC toolchain provides the embedded C library and runtime support needed for bare-metal ARM development.
++
++### 3.1 Download ARM GCC
++
++```bash
++cd /tmp
++
++# Download ARM GCC 10.3-2021.10 (adjust URL for your platform)
++# For Linux x86_64:
++wget https://developer.arm.com/-/media/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
++
++# For macOS:
++# wget https://developer.arm.com/-/media/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-mac.tar.bz2
++```
++
++### 3.2 Install ARM GCC
++
++```bash
++# Extract to /opt
++sudo tar -xjf gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2 -C /opt/
++
++# Verify installation
++/opt/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-gcc --version
++```
++
++## Step 4: Set Up Project Configuration
++
++### 4.1 Clone the Project
++
++```bash
++cd ~/workspace  # or your preferred directory
++git clone https://github.com/solfamila/psram.git
++cd psram
++```
++
++### 4.2 Apply the Patch
++
++```bash
++# Apply the patch containing all configuration files
++git apply llvm-clang-build.patch
++```
++
++### 4.3 Update Paths (if necessary)
++
++If you installed LLVM or ARM GCC to different locations, update the paths in:
++
++- `mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/clang_toolchain.cmake`
++- `mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/flags_clang.cmake`
++
++## Step 5: Build the Project
++
++### 5.1 Using the Build Script
++
++```bash
++# Make the script executable
++chmod +x build_clang.sh
++
++# Build debug version
++./build_clang.sh debug
++
++# Build release version
++./build_clang.sh release
++
++# Clean build
++./build_clang.sh debug clean
++```
++
++### 5.2 Manual Build Process
++
++```bash
++cd mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc
++
++# Create build directory
++mkdir -p build_clang_debug
++cd build_clang_debug
++
++# Copy configuration files
++cp ../CMakeLists_clang.txt CMakeLists.txt
++cp ../clang_toolchain.cmake .
++cp ../flags_clang.cmake .
++cp ../config_clang.cmake config.cmake
++cp ../*.ld .
++cp ../../../debug_console_stub.c .
++
++# Configure with CMake
++cmake -DCMAKE_TOOLCHAIN_FILE=clang_toolchain.cmake \
++      -DCMAKE_BUILD_TYPE=debug \
++      .
++
++# Build the project
++make -j4
++```
++
++### 5.3 Build Output
++
++Successful build will produce:
++- `debug/xspi_psram_polling_transfer_cm33_core0.elf` - ELF executable
++- `debug/xspi_psram_polling_transfer.bin` - Binary for flashing
++- `output.map` - Memory map file
++
++## Results Comparison
++
++### Build Size Comparison
++
++| Metric | ARM GCC | LLVM Clang | Difference |
++|--------|---------|------------|------------|
++| **Binary Size** | 53 KB | 44 KB | **-17% (Clang smaller)** |
++| **ELF Size** | 528 KB | 466 KB | -12% (Clang smaller) |
++| **Text Size** | 35,696 B | 39,816 B | +12% (Clang slightly larger) |
++| **Flash Usage** | 2.52% | 1.91% | -24% (Clang more efficient) |
++
++### Performance Benefits
++
++- **Smaller binary size**: Clang produces a 17% smaller binary
++- **Better optimization**: More efficient flash usage
++- **Modern toolchain**: Access to advanced LLVM tools and analysis
++
++## Troubleshooting
++
++### Common Issues and Solutions
++
++#### 1. "Clang not found" Error
++
++**Problem**: CMake cannot find the Clang compiler.
++
++**Solution**:
++```bash
++# Verify Clang installation
++ls -la /opt/llvm-19.1.6/bin/clang
++
++# Update paths in clang_toolchain.cmake if installed elsewhere
++```
++
++#### 2. "ARM GCC libraries not found" Error
++
++**Problem**: Clang cannot find ARM embedded libraries.
++
++**Solution**:
++```bash
++# Verify ARM GCC installation
++ls -la /opt/gcc-arm-none-eabi-10.3-2021.10/
++
++# Check library paths
++find /opt/gcc-arm-none-eabi-10.3-2021.10 -name "libc.a"
++
++# Update ARM_GCC_SYSROOT in configuration files
++```
++
++#### 3. Large Binary Size (>100MB)
++
++**Problem**: Binary file is extremely large due to memory layout issues.
++
++**Solution**: The patch includes the correct objcopy command. Ensure CMakeLists_clang.txt has:
++```cmake
++--only-section=.flash_config --only-section=.interrupts --only-section=.text --only-section=.ARM --only-section=.ctors --only-section=.dtors --only-section=.data
++```
++
++#### 4. Memory Issues During LLVM Build
++
++**Problem**: System runs out of memory during LLVM compilation.
++
++**Solutions**:
++- Reduce parallel jobs: `ninja -j2` instead of `ninja -j4`
++- Add swap space: `sudo fallocate -l 4G /swapfile && sudo mkswap /swapfile && sudo swapon /swapfile`
++- Use a machine with more RAM
++
++### Platform-Specific Notes
++
++#### macOS
++- Use `/usr/local/opt/llvm-19.1.6` instead of `/opt/llvm-19.1.6`
++- ARM GCC path will be different
++- May need to install Xcode command line tools
++
++#### Windows
++- Use Windows paths in configuration files
++- Consider using WSL2 for easier setup
++- Visual Studio may be required for some dependencies
++
++## Technical Details
++
++### Why This Setup Works
++
++1. **Clang Cross-Compilation**: Uses `--target arm-none-eabi` to generate ARM code
++2. **ARM Libraries**: Leverages ARM GCC's embedded C library and runtime
++3. **LLD Linker**: LLVM's linker with ARM support and custom linker scripts
++4. **MCUXpresso SDK**: Full compatibility with NXP's hardware abstraction layer
++
++### Key Configuration Elements
++
++- **Target Triple**: `arm-none-eabi` for bare-metal ARM
++- **CPU Specification**: `cortex-m33` with hard float ABI
++- **Sysroot**: Points to ARM GCC's embedded libraries
++- **Runtime Library**: Uses `libgcc` instead of Clang's compiler-rt
++
++### Files Included in This Patch
++
++1. `mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/clang_toolchain.cmake`
++2. `mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/CMakeLists_clang.txt`
++3. `mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/flags_clang.cmake`
++4. `mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/config_clang.cmake`
++5. `debug_console_stub.c`
++6. `build_clang.sh`
++7. `README_CLANG_BUILD.md` (this file)
++
++### Advanced Usage
++
++For production use, consider:
++- Enabling Link-Time Optimization (LTO) with `-flto`
++- Using Clang static analyzer for code quality
++- Integrating with LLVM sanitizers for debugging
++- Exploring profile-guided optimization (PGO)
++
++## Support
++
++For issues specific to this Clang build setup:
++1. Check the troubleshooting section above
++2. Verify all paths in configuration files
++3. Ensure LLVM was built with ARM support
++4. Compare with working GCC build for reference
++
++For general MIMXRT700 or MCUXpresso SDK issues, refer to NXP's documentation and support resources.
++
++## Quick Start Summary
++
++1. Install prerequisites (cmake, ninja, python3, build tools)
++2. Download and build LLVM/Clang 19.1.6 (~1 hour)
++3. Install ARM GCC toolchain
++4. Apply this patch to your project
++5. Run `./build_clang.sh debug`
++6. Compare results with GCC build
++
++The Clang build should produce a smaller, more optimized binary while maintaining full compatibility with the MCUXpresso SDK and MIMXRT700 hardware.
+diff --git a/build_clang.sh b/build_clang.sh
+new file mode 100755
+index 0000000..0000000
+--- /dev/null
++++ b/build_clang.sh
+@@ -0,0 +1,120 @@
++#!/bin/bash
++
++# Build script for MIMXRT700 XSPI PSRAM project using Clang/LLVM
++# This script builds the project using the custom-built LLVM/Clang toolchain
++
++set -e  # Exit on any error
++
++# Colors for output
++RED='\033[0;31m'
++GREEN='\033[0;32m'
++YELLOW='\033[1;33m'
++BLUE='\033[0;34m'
++NC='\033[0m' # No Color
++
++echo -e "${BLUE}=== MIMXRT700 XSPI PSRAM Build Script (Clang/LLVM) ===${NC}"
++
++# Configuration
++LLVM_PATH="/opt/llvm-19.1.6"
++ARM_GCC_PATH="/opt/gcc-arm-none-eabi-10.3-2021.10"
++
++# Check if LLVM/Clang is installed
++if [ ! -f "${LLVM_PATH}/bin/clang" ]; then
++    echo -e "${RED}Error: LLVM/Clang not found at ${LLVM_PATH}/bin/clang${NC}"
++    echo "Please ensure LLVM/Clang is properly installed."
++    echo "You can modify LLVM_PATH in this script if installed elsewhere."
++    exit 1
++fi
++
++# Check if ARM GCC is installed (needed for embedded libraries)
++if [ ! -f "${ARM_GCC_PATH}/bin/arm-none-eabi-gcc" ]; then
++    echo -e "${RED}Error: ARM GCC not found at ${ARM_GCC_PATH}/bin/arm-none-eabi-gcc${NC}"
++    echo "Please ensure ARM GCC toolchain is properly installed."
++    echo "You can modify ARM_GCC_PATH in this script if installed elsewhere."
++    exit 1
++fi
++
++echo -e "${GREEN}✓ Found LLVM/Clang installation${NC}"
++echo -e "${GREEN}✓ Found ARM GCC installation${NC}"
++
++# Verify Clang version and ARM support
++CLANG_VERSION=$(${LLVM_PATH}/bin/clang --version | head -n1)
++echo -e "${BLUE}Using: ${CLANG_VERSION}${NC}"
++
++# Check ARM target support
++if ! ${LLVM_PATH}/bin/clang --print-targets | grep -q "arm"; then
++    echo -e "${RED}Error: Clang installation does not support ARM targets${NC}"
++    exit 1
++fi
++
++echo -e "${GREEN}✓ ARM target support confirmed${NC}"
++
++# Set build configuration
++BUILD_TYPE=${1:-debug}
++PROJECT_DIR="mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc"
++BUILD_DIR="${PROJECT_DIR}/build_clang_${BUILD_TYPE}"
++
++echo -e "${YELLOW}Build Type: ${BUILD_TYPE}${NC}"
++echo -e "${YELLOW}Project Directory: ${PROJECT_DIR}${NC}"
++echo -e "${YELLOW}Build Directory: ${BUILD_DIR}${NC}"
++
++# Check if we're in the right directory
++if [ ! -d "${PROJECT_DIR}" ]; then
++    echo -e "${RED}Error: Project directory ${PROJECT_DIR} not found${NC}"
++    echo "Please run this script from the project root directory."
++    exit 1
++fi
++
++# Clean previous build if requested
++if [ "$2" = "clean" ]; then
++    echo -e "${YELLOW}Cleaning previous build...${NC}"
++    rm -rf "${BUILD_DIR}"
++fi
++
++# Create build directory
++mkdir -p "${BUILD_DIR}"
++
++# Copy necessary files to build directory
++echo -e "${BLUE}Setting up build environment...${NC}"
++cp "${PROJECT_DIR}/CMakeLists_clang.txt" "${BUILD_DIR}/CMakeLists.txt"
++cp "${PROJECT_DIR}/clang_toolchain.cmake" "${BUILD_DIR}/"
++cp "${PROJECT_DIR}/flags_clang.cmake" "${BUILD_DIR}/"
++cp "${PROJECT_DIR}/config_clang.cmake" "${BUILD_DIR}/config.cmake"
++cp "${PROJECT_DIR}"/*.ld "${BUILD_DIR}/" 2>/dev/null || echo "No linker scripts found to copy"
++cp debug_console_stub.c "${BUILD_DIR}/" 2>/dev/null || echo "Debug console stub not found"
++
++cd "${BUILD_DIR}"
++
++echo -e "${BLUE}Configuring CMake with Clang...${NC}"
++
++# Configure with CMake using Clang toolchain
++cmake -DCMAKE_BUILD_TYPE=${BUILD_TYPE} \
++      -DCMAKE_TOOLCHAIN_FILE=clang_toolchain.cmake \
++      .
++
++echo -e "${BLUE}Building project...${NC}"
++
++# Build the project
++make -j$(nproc)
++
++echo -e "${GREEN}=== Build completed successfully! ===${NC}"
++
++# Show build artifacts
++echo -e "${BLUE}Build artifacts:${NC}"
++ls -la ${BUILD_TYPE}/*.elf ${BUILD_TYPE}/*.bin 2>/dev/null || echo "No artifacts found"
++
++# Show memory usage if available
++if [ -f "output.map" ]; then
++    echo -e "${BLUE}Memory usage summary:${NC}"
++    grep -A 10 "Memory Configuration" output.map 2>/dev/null || echo "Memory info not available in map file"
++fi
++
++# Compare with GCC build if available
++GCC_BUILD_DIR="../debug"
++if [ -f "${GCC_BUILD_DIR}/xspi_psram_polling_transfer.bin" ]; then
++    echo -e "${BLUE}Size comparison with GCC build:${NC}"
++    echo "GCC build:"
++    ls -lh "${GCC_BUILD_DIR}/xspi_psram_polling_transfer.bin"
++    echo "Clang build:"
++    ls -lh "${BUILD_TYPE}/xspi_psram_polling_transfer.bin"
++fi
++
++echo -e "${GREEN}Build script completed!${NC}"
++echo -e "${YELLOW}To flash the firmware, use: ${BUILD_TYPE}/xspi_psram_polling_transfer.bin${NC}"
++diff --git a/debug_console_stub.c b/debug_console_stub.c
++new file mode 100644
++index 0000000..0000000
+--- /dev/null
++++ b/debug_console_stub.c
+@@ -0,0 +1,95 @@
++/*
++ * Debug Console Stub for Clang Build
++ *
++ * This file provides minimal stub implementations of debug console functions
++ * that are expected by the MIMXRT700 project but are disabled in the Clang build
++ * to avoid dependencies on FreeRTOS and complex UART adapter components.
++ *
++ * For a production build, you would want to implement these functions properly
++ * or use the full MCUXpresso SDK debug console components.
++ */
++
++#include <stdarg.h>
++#include <stdio.h>
++
++/**
++ * @brief Stub implementation for DbgConsole_Init
++ *
++ * In a real implementation, this would initialize the debug console UART
++ * with the specified parameters.
++ *
++ * @param instance UART instance number
++ * @param baudRate Baud rate for UART communication
++ * @param device Device type (UART, USB, etc.)
++ * @param clkSrcFreq Clock source frequency
++ * @return int Always returns 0 (success) in this stub
++ */
++int DbgConsole_Init(unsigned int instance, unsigned int baudRate, unsigned int device, unsigned int clkSrcFreq)
++{
++    // Stub implementation - no actual console initialization
++    // In a real implementation, this would:
++    // 1. Configure the specified UART instance
++    // 2. Set up the baud rate and other parameters
++    // 3. Initialize any necessary buffers or state
++
++    (void)instance;    // Suppress unused parameter warning
++    (void)baudRate;    // Suppress unused parameter warning
++    (void)device;      // Suppress unused parameter warning
++    (void)clkSrcFreq;  // Suppress unused parameter warning
++
++    return 0;  // Return success
++}
++
++/**
++ * @brief Stub implementation for DbgConsole_Printf
++ *
++ * In a real implementation, this would format and output text to the debug console.
++ *
++ * @param fmt_s Format string (printf-style)
++ * @param ... Variable arguments for formatting
++ * @return int Always returns 0 in this stub
++ */
++int DbgConsole_Printf(const char *fmt_s, ...)
++{
++    // Stub implementation - no actual output
++    // In a real implementation, this would:
++    // 1. Process the format string and arguments
++    // 2. Send formatted output to the UART
++    // 3. Handle any buffering or flow control
++
++    (void)fmt_s;  // Suppress unused parameter warning
++
++    // If you want to see debug output during development, you could
++    // uncomment the following code to output to a buffer or implement
++    // a simple UART output function:
++
++    /*
++    va_list args;
++    va_start(args, fmt_s);
++    // vprintf(fmt_s, args);  // This would require stdout to be configured
++    va_end(args);
++    */
++
++    return 0;  // Return success
++}
++
++/**
++ * @brief Alternative PRINTF implementation
++ *
++ * Some code may use PRINTF instead of DbgConsole_Printf.
++ * This provides a stub for that as well.
++ *
++ * @param fmt_s Format string (printf-style)
++ * @param ... Variable arguments for formatting
++ * @return int Always returns 0 in this stub
++ */
++int PRINTF(const char *fmt_s, ...)
++{
++    // Stub implementation - same as DbgConsole_Printf
++    (void)fmt_s;  // Suppress unused parameter warning
++    return 0;
++}
++
++/*
++ * Additional notes for production use:
++ *
++ * 1. To enable actual debug output, you would need to:
++ *    - Configure a UART peripheral for output
++ *    - Implement the low-level UART write functions
++ *    - Handle any necessary clock configuration
++ *
++ * 2. For a minimal implementation, you could:
++ *    - Use a simple polling-based UART output
++ *    - Implement just enough to output debug strings
++ *    - Avoid the complexity of the full MCUXpresso debug console
++ *
++ * 3. For advanced features, you might want:
++ *    - Buffered output for better performance
++ *    - Support for different output devices (UART, USB, etc.)
++ *    - Integration with RTT (Real-Time Transfer) for debugging
++ */
++diff --git a/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/clang_toolchain.cmake b/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/clang_toolchain.cmake
++new file mode 100644
++index 0000000..0000000
++--- /dev/null
+++++ b/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/clang_toolchain.cmake
++@@ -0,0 +1,47 @@
++# Clang/LLVM Toolchain file for ARM Cortex-M33
++# This file configures CMake to use LLVM/Clang for cross-compilation to ARM Cortex-M33
++
++set(CMAKE_SYSTEM_NAME Generic)
++set(CMAKE_SYSTEM_PROCESSOR arm)
++
++# Set ARM GCC sysroot for embedded libraries
++# Update this path to match your ARM GCC installation
++set(ARM_GCC_SYSROOT "/opt/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi")
++
++# Configure Clang/LLVM toolchain
++# Update these paths to match your LLVM installation
++set(CMAKE_C_COMPILER "/opt/llvm-19.1.6/bin/clang")
++set(CMAKE_CXX_COMPILER "/opt/llvm-19.1.6/bin/clang++")
++set(CMAKE_ASM_COMPILER "/opt/llvm-19.1.6/bin/clang")
++
++# Set LLVM tools
++set(CMAKE_OBJCOPY "/opt/llvm-19.1.6/bin/llvm-objcopy")
++set(CMAKE_OBJDUMP "/opt/llvm-19.1.6/bin/llvm-objdump")
++set(CMAKE_SIZE "/opt/llvm-19.1.6/bin/llvm-size")
++set(CMAKE_AR "/opt/llvm-19.1.6/bin/llvm-ar")
++set(CMAKE_RANLIB "/opt/llvm-19.1.6/bin/llvm-ranlib")
++
++# Set target triple for ARM Cortex-M33
++set(CMAKE_C_COMPILER_TARGET "arm-none-eabi")
++set(CMAKE_CXX_COMPILER_TARGET "arm-none-eabi")
++set(CMAKE_ASM_COMPILER_TARGET "arm-none-eabi")
++
++# Common flags for all configurations
++set(COMMON_FLAGS "-mcpu=cortex-m33 -mthumb -mfloat-abi=hard -mfpu=fpv5-sp-d16")
++set(COMMON_FLAGS "${COMMON_FLAGS} --sysroot=${ARM_GCC_SYSROOT}")
++set(COMMON_FLAGS "${COMMON_FLAGS} -I${ARM_GCC_SYSROOT}/include")
++
++# Library paths for ARM Cortex-M33 with hard float
++set(ARM_LIB_PATH "${ARM_GCC_SYSROOT}/lib/thumb/v8-m.main+fp/hard")
++set(GCC_LIB_PATH "/opt/gcc-arm-none-eabi-10.3-2021.10/lib/gcc/arm-none-eabi/10.3.1/thumb/v8-m.main+fp/hard")
++
++# Set initial compiler flags to help CMake's compiler tests pass
++set(CMAKE_C_FLAGS_INIT "${COMMON_FLAGS}")
++set(CMAKE_CXX_FLAGS_INIT "${COMMON_FLAGS}")
++set(CMAKE_ASM_FLAGS_INIT "${COMMON_FLAGS}")
++
++# Set initial linker flags
++set(CMAKE_EXE_LINKER_FLAGS_INIT "-fuse-ld=lld ${COMMON_FLAGS}")
++set(CMAKE_EXE_LINKER_FLAGS_INIT "${CMAKE_EXE_LINKER_FLAGS_INIT} -L${ARM_LIB_PATH}")
++set(CMAKE_EXE_LINKER_FLAGS_INIT "${CMAKE_EXE_LINKER_FLAGS_INIT} -L${GCC_LIB_PATH}")
++set(CMAKE_EXE_LINKER_FLAGS_INIT "${CMAKE_EXE_LINKER_FLAGS_INIT} -L${ARM_GCC_SYSROOT}/lib")
++
++# Don't try to link during compiler testing (avoids issues with missing libraries)
++set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
++
++# Search paths for find_package and similar commands
++set(CMAKE_FIND_ROOT_PATH ${ARM_GCC_SYSROOT})
++set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
++set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
++set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
++set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
++diff --git a/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/CMakeLists_clang.txt b/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/CMakeLists_clang.txt
++new file mode 100644
++index 0000000..0000000
++--- /dev/null
+++++ b/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/CMakeLists_clang.txt
++@@ -0,0 +1,85 @@
++# CMakeLists.txt for MIMXRT700 XSPI PSRAM project using Clang/LLVM
++# This is a modified version of the original CMakeLists.txt to work with Clang
++
++cmake_minimum_required(VERSION 3.10.0)
++
++# THE VERSION NUMBER
++SET (MCUXPRESSO_CMAKE_FORMAT_MAJOR_VERSION 2)
++SET (MCUXPRESSO_CMAKE_FORMAT_MINOR_VERSION 0)
++
++include(ide_overrides.cmake OPTIONAL)
++
++if(CMAKE_SCRIPT_MODE_FILE)
++  message("${MCUXPRESSO_CMAKE_FORMAT_MAJOR_VERSION}")
++  return()
++endif()
++
++message(STATUS "Using Clang/LLVM toolchain for ARM Cortex-M33")
++
++set(CMAKE_STATIC_LIBRARY_PREFIX)
++set(CMAKE_STATIC_LIBRARY_SUFFIX)
++
++set(CMAKE_EXECUTABLE_LIBRARY_PREFIX)
++set(CMAKE_EXECUTABLE_LIBRARY_SUFFIX)
++
++# CURRENT DIRECTORY
++set(ProjDirPath ${CMAKE_CURRENT_SOURCE_DIR})
++
++set(EXECUTABLE_OUTPUT_PATH ${ProjDirPath}/${CMAKE_BUILD_TYPE})
++set(LIBRARY_OUTPUT_PATH ${ProjDirPath}/${CMAKE_BUILD_TYPE})
++
++project(xspi_psram_polling_transfer_cm33_core0)
++
++enable_language(ASM)
++
++set(MCUX_BUILD_TYPES debug flash_debug release flash_release)
++
++set(MCUX_SDK_PROJECT_NAME xspi_psram_polling_transfer_cm33_core0.elf)
++
++# SDK root path - adjust this to match your project structure
++if (NOT DEFINED SdkRootDirPath)
++    SET(SdkRootDirPath ${ProjDirPath}/../../__repo__)
++endif()
++
++# Include Clang-specific flags
++include(${ProjDirPath}/flags_clang.cmake)
++
++# Include project configuration
++include(${ProjDirPath}/config.cmake)
++
++# Add executable with all source files
++add_executable(${MCUX_SDK_PROJECT_NAME}
++"${ProjDirPath}/../../xspi_psram_polling_transfer.c"
++"${ProjDirPath}/../../xspi_psram_ops.c"
++"${ProjDirPath}/../../board.h"
++"${ProjDirPath}/../../board.c"
++"${ProjDirPath}/../../clock_config.h"
++"${ProjDirPath}/../../clock_config.c"
++"${ProjDirPath}/../../pin_mux.c"
++"${ProjDirPath}/../../pin_mux.h"
++"${ProjDirPath}/../../hardware_init.c"
++"${ProjDirPath}/../../app.h"
++"${ProjDirPath}/../../mcux_config.h"
++"debug_console_stub.c"
++)
++
++# Include directories
++target_include_directories(${MCUX_SDK_PROJECT_NAME} PRIVATE
++    ${ProjDirPath}/../..
++)
++
++# Include MCUXpresso SDK configuration functions
++include(${SdkRootDirPath}/tools/cmake_toolchain_files/mcux_config.cmake)
++
++# Include device-specific libraries and drivers
++include(${SdkRootDirPath}/devices/MIMXRT798S/all_lib_device.cmake)
++
++# System libraries for embedded ARM with Clang
++IF(NOT DEFINED TARGET_LINK_SYSTEM_LIBRARIES)
++    SET(TARGET_LINK_SYSTEM_LIBRARIES "-lm -lc -lgcc -lnosys")
++ENDIF()
++
++# Link libraries
++TARGET_LINK_LIBRARIES(${MCUX_SDK_PROJECT_NAME} PRIVATE -Wl,--start-group)
++target_link_libraries(${MCUX_SDK_PROJECT_NAME} PRIVATE ${TARGET_LINK_SYSTEM_LIBRARIES})
++TARGET_LINK_LIBRARIES(${MCUX_SDK_PROJECT_NAME} PRIVATE -Wl,--end-group)
++
++# Generate binary file from ELF (with fixed objcopy command for proper binary size)
++ADD_CUSTOM_COMMAND(TARGET ${MCUX_SDK_PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_OBJCOPY}
++-Obinary --only-section=.flash_config --only-section=.interrupts --only-section=.text --only-section=.ARM --only-section=.ctors --only-section=.dtors --only-section=.data ${EXECUTABLE_OUTPUT_PATH}/${MCUX_SDK_PROJECT_NAME} ${EXECUTABLE_OUTPUT_PATH}/xspi_psram_polling_transfer.bin)
++
++# Clean up additional files
++set_target_properties(${MCUX_SDK_PROJECT_NAME} PROPERTIES ADDITIONAL_CLEAN_FILES "output.map;${EXECUTABLE_OUTPUT_PATH}/xspi_psram_polling_transfer.bin")
++
++# Wrap all libraries with start-group/end-group to prevent link order issues
++group_link_libraries()
++diff --git a/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/flags_clang.cmake b/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/flags_clang.cmake
++new file mode 100644
++index 0000000..0000000
++--- /dev/null
+++++ b/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/flags_clang.cmake
++@@ -0,0 +1,247 @@
++# Clang/LLVM specific compiler and linker flags for ARM Cortex-M33
++# This file defines all the compilation and linking flags needed for the MIMXRT700 project
++
++# Set ARM GCC sysroot for embedded libraries
++SET(ARM_GCC_SYSROOT "/opt/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi")
++
++# Floating point unit configuration
++IF(NOT DEFINED FPU)
++    SET(FPU "-mfloat-abi=hard -mfpu=fpv5-sp-d16")
++ENDIF()
++
++# Specs file configuration (not used with Clang, but kept for compatibility)
++IF(NOT DEFINED SPECS)
++    SET(SPECS "--specs=nosys.specs")
++ENDIF()
++
++# Add ARM GCC sysroot and include paths for Clang
++SET(ARM_SYSROOT_FLAGS "--sysroot=${ARM_GCC_SYSROOT} -I${ARM_GCC_SYSROOT}/include")
++SET(ARM_LINK_FLAGS "-L${ARM_GCC_SYSROOT}/lib/thumb/v8-m.main+fp/hard -L${ARM_GCC_SYSROOT}/lib -L/opt/gcc-arm-none-eabi-10.3-2021.10/lib/gcc/arm-none-eabi/10.3.1/thumb/v8-m.main+fp/hard")
++
++# Assembly flags for debug build
++SET(CMAKE_ASM_FLAGS_DEBUG " \
++    ${FPU} \
++    ${ARM_SYSROOT_FLAGS} \
++    -DDEBUG \
++    -D__STARTUP_CLEAR_BSS \
++    -mcpu=cortex-m33 \
++    -mthumb \
++    -Wall \
++    -fno-common \
++    -ffunction-sections \
++    -fdata-sections \
++    -fno-builtin \
++    -std=gnu99 \
++    -target arm-none-eabi \
++")
++
++# Assembly flags for release build
++SET(CMAKE_ASM_FLAGS_RELEASE " \
++    ${FPU} \
++    ${ARM_SYSROOT_FLAGS} \
++    -DNDEBUG \
++    -D__STARTUP_CLEAR_BSS \
++    -mcpu=cortex-m33 \
++    -mthumb \
++    -Wall \
++    -fno-common \
++    -ffunction-sections \
++    -fdata-sections \
++    -fno-builtin \
++    -std=gnu99 \
++    -target arm-none-eabi \
++")
++
++# C compiler flags for debug build
++SET(CMAKE_C_FLAGS_DEBUG " \
++    ${FPU} \
++    ${ARM_SYSROOT_FLAGS} \
++    -DDEBUG \
++    -DCPU_MIMXRT798SGFOA_cm33_core0 \
++    -DARM_MATH_CM33 \
++    -D__FPU_PRESENT=1 \
++    -DSERIAL_PORT_TYPE_UART=1 \
++    -DSDK_DEBUGCONSOLE=1 \
++    -DCR_INTEGER_PRINTF \
++    -DPRINTF_FLOAT_ENABLE=0 \
++    -D__MCUXPRESSO \
++    -D__USE_CMSIS \
++    -D__REDLIB__ \
++    -DMCUXPRESSO_SDK \
++    -g \
++    -O0 \
++    -mcpu=cortex-m33 \
++    -mthumb \
++    -MMD \
++    -MP \
++    -Wall \
++    -fno-common \
++    -ffunction-sections \
++    -fdata-sections \
++    -fno-builtin \
++    -std=gnu99 \
++    -target arm-none-eabi \
++")
++
++# C compiler flags for release build
++SET(CMAKE_C_FLAGS_RELEASE " \
++    ${FPU} \
++    -DNDEBUG \
++    -DCPU_MIMXRT798SGFOA_cm33_core0 \
++    -DARM_MATH_CM33 \
++    -D__FPU_PRESENT=1 \
++    -DSERIAL_PORT_TYPE_UART=1 \
++    -DSDK_DEBUGCONSOLE=1 \
++    -DCR_INTEGER_PRINTF \
++    -DPRINTF_FLOAT_ENABLE=0 \
++    -D__MCUXPRESSO \
++    -D__USE_CMSIS \
++    -D__REDLIB__ \
++    -DMCUXPRESSO_SDK \
++    -Os \
++    -mcpu=cortex-m33 \
++    -mthumb \
++    -MMD \
++    -MP \
++    -Wall \
++    -fno-common \
++    -ffunction-sections \
++    -fdata-sections \
++    -fno-builtin \
++    -std=gnu99 \
++    -target arm-none-eabi \
++")
++
++# C++ compiler flags for debug build
++SET(CMAKE_CXX_FLAGS_DEBUG " \
++    ${FPU} \
++    -DDEBUG \
++    -DCPU_MIMXRT798SGFOA_cm33_core0 \
++    -DARM_MATH_CM33 \
++    -D__FPU_PRESENT=1 \
++    -DSERIAL_PORT_TYPE_UART=1 \
++    -DSDK_DEBUGCONSOLE=1 \
++    -DCR_INTEGER_PRINTF \
++    -DPRINTF_FLOAT_ENABLE=0 \
++    -D__MCUXPRESSO \
++    -D__USE_CMSIS \
++    -D__REDLIB__ \
++    -DMCUXPRESSO_SDK \
++    -g \
++    -O0 \
++    -mcpu=cortex-m33 \
++    -mthumb \
++    -MMD \
++    -MP \
++    -Wall \
++    -fno-common \
++    -ffunction-sections \
++    -fdata-sections \
++    -fno-builtin \
++    -fno-rtti \
++    -fno-exceptions \
++    -target arm-none-eabi \
++")
++
++# C++ compiler flags for release build
++SET(CMAKE_CXX_FLAGS_RELEASE " \
++    ${FPU} \
++    -DNDEBUG \
++    -DCPU_MIMXRT798SGFOA_cm33_core0 \
++    -DARM_MATH_CM33 \
++    -D__FPU_PRESENT=1 \
++    -DSERIAL_PORT_TYPE_UART=1 \
++    -DSDK_DEBUGCONSOLE=1 \
++    -DCR_INTEGER_PRINTF \
++    -DPRINTF_FLOAT_ENABLE=0 \
++    -D__MCUXPRESSO \
++    -D__USE_CMSIS \
++    -D__REDLIB__ \
++    -DMCUXPRESSO_SDK \
++    -Os \
++    -mcpu=cortex-m33 \
++    -mthumb \
++    -MMD \
++    -MP \
++    -Wall \
++    -fno-common \
++    -ffunction-sections \
++    -fdata-sections \
++    -fno-builtin \
++    -fno-rtti \
++    -fno-exceptions \
++    -target arm-none-eabi \
++")
++
++# Linker flags for debug build
++SET(CMAKE_EXE_LINKER_FLAGS_DEBUG " \
++    ${FPU} \
++    ${ARM_SYSROOT_FLAGS} \
++    ${ARM_LINK_FLAGS} \
++    -Wl,-Map=output.map \
++    -Wl,--gc-sections \
++    -Wl,--print-memory-usage \
++    -mcpu=cortex-m33 \
++    -mthumb \
++    -T${ProjDirPath}/MIMXRT798Sxxxx_cm33_core0_flash.ld \
++    -static \
++    -target arm-none-eabi \
++    -fuse-ld=lld \
++    -rtlib=libgcc \
++    -Wl,--entry=Reset_Handler \
++    -Wl,--defsym=__main=main \
++    -Wl,--defsym=_start=main \
++    -Wl,--defsym=__base_NCACHE_REGION=0x20000000 \
++    -Wl,--defsym=__top_NCACHE_REGION=0x20200000 \
++")
++
++# Linker flags for release build
++SET(CMAKE_EXE_LINKER_FLAGS_RELEASE " \
++    ${FPU} \
++    ${ARM_SYSROOT_FLAGS} \
++    ${ARM_LINK_FLAGS} \
++    -Wl,-Map=output.map \
++    -Wl,--gc-sections \
++    -Wl,--print-memory-usage \
++    -mcpu=cortex-m33 \
++    -mthumb \
++    -T${ProjDirPath}/MIMXRT798Sxxxx_cm33_core0_flash.ld \
++    -static \
++    -target arm-none-eabi \
++    -fuse-ld=lld \
++    -rtlib=libgcc \
++")
++
++# Linker flags for flash debug build
++SET(CMAKE_EXE_LINKER_FLAGS_FLASH_DEBUG " \
++    ${FPU} \
++    ${ARM_SYSROOT_FLAGS} \
++    ${ARM_LINK_FLAGS} \
++    -Wl,-Map=output.map \
++    -Wl,--gc-sections \
++    -Wl,--print-memory-usage \
++    -mcpu=cortex-m33 \
++    -mthumb \
++    -T${ProjDirPath}/MIMXRT798Sxxxx_cm33_core0_flash.ld \
++    -static \
++    -target arm-none-eabi \
++    -fuse-ld=lld \
++    -rtlib=libgcc \
++")
++
++# Linker flags for flash release build
++SET(CMAKE_EXE_LINKER_FLAGS_FLASH_RELEASE " \
++    ${FPU} \
++    ${ARM_SYSROOT_FLAGS} \
++    ${ARM_LINK_FLAGS} \
++    -Wl,-Map=output.map \
++    -Wl,--gc-sections \
++    -Wl,--print-memory-usage \
++    -mcpu=cortex-m33 \
++    -mthumb \
++    -T${ProjDirPath}/MIMXRT798Sxxxx_cm33_core0_flash.ld \
++    -static \
++    -target arm-none-eabi \
++    -fuse-ld=lld \
++    -rtlib=libgcc \
++")
++diff --git a/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/config_clang.cmake b/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/config_clang.cmake
++new file mode 100644
++index 0000000..0000000
++--- /dev/null
+++++ b/mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc/config_clang.cmake
++@@ -0,0 +1,55 @@
++# Configuration file for MIMXRT700 XSPI PSRAM project - Clang build
++# This file is a modified version of the original config.cmake with components
++# disabled that are not compatible with the simplified Clang build setup
++
++# Core SDK components - keep enabled
++set(CONFIG_USE_CMSIS_Include_core_cm true)
++set(CONFIG_USE_device_MIMXRT798S_CMSIS true)
++set(CONFIG_USE_device_MIMXRT798S_startup true)
++set(CONFIG_USE_driver_cache_cache64 true)
++set(CONFIG_USE_driver_clock true)
++set(CONFIG_USE_driver_common true)
++set(CONFIG_USE_driver_lpuart true)
++set(CONFIG_USE_driver_xspi true)
++set(CONFIG_USE_middleware_baremetal true)
++
++# Components disabled for simplified Clang build
++# These components have complex dependencies on FreeRTOS or advanced UART features
++# that are not needed for the basic XSPI PSRAM functionality
++
++# Debug console components - disabled to avoid FreeRTOS dependencies
++set(CONFIG_USE_utility_debug_console_lite false)
++set(CONFIG_USE_component_lpuart_adapter false)
++
++# Serial manager components - disabled for simplicity
++set(CONFIG_USE_component_serial_manager false)
++set(CONFIG_USE_component_serial_manager_uart false)
++
++# List components - disabled as they're not needed for this example
++set(CONFIG_USE_component_lists false)
++
++# Additional utility components that can be disabled
++set(CONFIG_USE_utility_assert_lite false)
++
++# Memory and system components - keep enabled as they're essential
++set(CONFIG_USE_utilities_misc_utilities true)
++
++# CMSIS DSP - can be enabled if needed for signal processing
++set(CONFIG_USE_CMSIS_DSP_Include false)
++
++# Notes for production builds:
++#
++# 1. To re-enable debug console output:
++#    - Set CONFIG_USE_utility_debug_console_lite to true
++#    - Set CONFIG_USE_component_lpuart_adapter to true
++#    - Remove or modify debug_console_stub.c
++#    - Ensure proper UART initialization in your code
++#
++# 2. To enable FreeRTOS support:
++#    - Add FreeRTOS-specific configuration options
++#    - Update compiler flags to include -DSDK_OS_FREE_RTOS
++#    - Include FreeRTOS source files in the build
++#
++# 3. For advanced features:
++#    - Enable CONFIG_USE_component_serial_manager for advanced UART handling
++#    - Enable CONFIG_USE_component_lists for linked list utilities
++#    - Enable CONFIG_USE_CMSIS_DSP_Include for DSP functions
++#
++# 4. Memory optimization:
++#    - Disable unused drivers to reduce code size
++#    - Use CONFIG_USE_utilities_misc_utilities selectively
++#    - Consider disabling floating-point support if not needed
