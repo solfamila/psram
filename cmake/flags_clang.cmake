@@ -2,7 +2,7 @@
 # This file defines all the compilation and linking flags needed for the MIMXRT700 project
 
 # Set ARM GCC sysroot for embedded libraries
-SET(ARM_GCC_SYSROOT "/usr/lib/arm-none-eabi")
+SET(ARM_GCC_SYSROOT "/opt/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi")
 
 # Floating point unit configuration
 IF(NOT DEFINED FPU)  
@@ -16,7 +16,7 @@ ENDIF()
 
 # Add ARM GCC sysroot and include paths for Clang
 SET(ARM_SYSROOT_FLAGS "--sysroot=${ARM_GCC_SYSROOT} -I${ARM_GCC_SYSROOT}/include")
-SET(ARM_LINK_FLAGS "-L${ARM_GCC_SYSROOT}/newlib/thumb/v8-m.main+fp/hard -L${ARM_GCC_SYSROOT}/newlib -L/usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/hard")
+SET(ARM_LINK_FLAGS "-L${ARM_GCC_SYSROOT}/lib/thumb/v8-m.main+fp/hard -L${ARM_GCC_SYSROOT}/lib -L/opt/gcc-arm-none-eabi-10.3-2021.10/lib/gcc/arm-none-eabi/10.3.1/thumb/v8-m.main+fp/hard")
 
 # Assembly flags for debug build
 SET(CMAKE_ASM_FLAGS_DEBUG " \
