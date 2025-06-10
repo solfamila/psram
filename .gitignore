@@ -41,3 +41,20 @@ build.ninja
 .augment/cache/
 .augment/logs/
 .augment/temp/
+
+# LLVM IR files (contain false positive secrets)
+clang_ir_final/*.ll
+clang_ir_final/drivers/*.ll
+clang_ir_final/board_init/*.ll
+
+# Analysis directories (temporary)
+clang_ir_analysis/
+clang_llvm_pass_analysis/
+clang_peripheral_analysis/
+
+# Clang build artifacts
+**/build_clang_*/
+
+# Temporary analysis files
+peripheral_analysis.json
+test_peripheral_access.ll
