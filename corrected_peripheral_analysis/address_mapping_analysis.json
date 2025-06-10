@@ -1,0 +1,38 @@
+{
+  "CLKCTL0": {
+    "reference_base": 1073745920,
+    "actual_base": 1937002496,
+    "difference": 863256576,
+    "status": "VIRTUAL_MAPPING"
+  },
+  "CLKCTL1": {
+    "reference_base": 1073754112,
+    "actual_base": 1937063936,
+    "difference": 863309824,
+    "status": "VIRTUAL_MAPPING"
+  },
+  "GPIO0": {
+    "reference_base": 1074790400,
+    "actual_base": 1954086912,
+    "difference": 879296512,
+    "status": "VIRTUAL_MAPPING"
+  },
+  "RSTCTL0": {
+    "reference_base": 1073758208,
+    "actual_base": 1937080320,
+    "difference": 863322112,
+    "status": "VIRTUAL_MAPPING"
+  },
+  "SYSCON0": {
+    "reference_base": 1073750016,
+    "actual_base": 1937047552,
+    "difference": 863297536,
+    "status": "VIRTUAL_MAPPING"
+  },
+  "XSPI2": {
+    "reference_base": 1078005760,
+    "actual_base": 2013286400,
+    "difference": 935280640,
+    "status": "VIRTUAL_MAPPING"
+  }
+}
