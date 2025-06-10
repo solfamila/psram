@@ -106,7 +106,37 @@ private:
     
     /// Analyze compare-and-swap operations
     void analyzeCmpXchgInstruction(AtomicCmpXchgInst *CXI);
-    
+
+    /// Analyze function calls for peripheral operations
+    void analyzeFunctionCall(CallInst *CI);
+
+    /// Analyze IOPCTL_PinMuxSet function calls
+    void analyzeIOPCTLPinMuxSet(CallInst *CI);
+
+    /// Analyze RESET_ClearPeripheralReset function calls
+    void analyzeRESETClearPeripheralReset(CallInst *CI);
+
+    /// Analyze CLOCK_AttachClk function calls
+    void analyzeCLOCKAttachClk(CallInst *CI);
+
+    /// Analyze CLOCK_SetClkDiv function calls
+    void analyzeCLOCKSetClkDiv(CallInst *CI);
+
+    /// Analyze ARM_MPU_SetRegion function calls
+    void analyzeARMMPUSetRegion(CallInst *CI);
+
+    /// Analyze ARM_MPU_Enable function calls
+    void analyzeARMMPUEnable(CallInst *CI);
+
+    /// Analyze XCACHE_EnableCache function calls
+    void analyzeXCACHEEnableCache(CallInst *CI);
+
+    /// Calculate IOPCTL register address from port/pin
+    uint64_t calculateIOPCTLRegisterAddress(uint32_t port, uint32_t pin);
+
+    /// Get IOPCTL peripheral name from port number
+    std::string getIOPCTLPeripheralName(uint32_t port);
+
     /// Get the effective address from a pointer value
     uint64_t getEffectiveAddress(Value *Ptr);
 

@@ -433,7 +433,48 @@ void PeripheralAnalysisPass::initializePeripheralDefinitions() {
     trng.registers[0x40187038] = "SCR1L";        // Statistical Check Run Length 1 Limit Register
     peripherals["TRNG"] = trng;
 
+    // Add MPU (Memory Protection Unit) peripheral
+    PeripheralInfo mpu;
+    mpu.name = "MPU";
+    mpu.baseAddress = 0xE000ED90;  // ARM Cortex-M33 MPU base address
+    mpu.registers[0xE000ED90] = "TYPE";      // MPU Type Register
+    mpu.registers[0xE000ED94] = "CTRL";      // MPU Control Register
+    mpu.registers[0xE000ED98] = "RNR";       // MPU Region Number Register
+    mpu.registers[0xE000ED9C] = "RBAR";      // MPU Region Base Address Register
+    mpu.registers[0xE000EDA0] = "RLAR";      // MPU Region Limit Address Register
+    mpu.registers[0xE000EDA4] = "RBAR_A1";   // MPU Region Base Address Register Alias 1
+    mpu.registers[0xE000EDA8] = "RLAR_A1";   // MPU Region Limit Address Register Alias 1
+    mpu.registers[0xE000EDAC] = "RBAR_A2";   // MPU Region Base Address Register Alias 2
+    mpu.registers[0xE000EDB0] = "RLAR_A2";   // MPU Region Limit Address Register Alias 2
+    mpu.registers[0xE000EDB4] = "RBAR_A3";   // MPU Region Base Address Register Alias 3
+    mpu.registers[0xE000EDB8] = "RLAR_A3";   // MPU Region Limit Address Register Alias 3
+    mpu.registers[0xE000EDBC] = "MAIR0";     // MPU Memory Attribute Indirection Register 0
+    mpu.registers[0xE000EDC0] = "MAIR1";     // MPU Memory Attribute Indirection Register 1
+    peripherals["MPU"] = mpu;
 
+    // Add XCACHE0 peripheral
+    PeripheralInfo xcache0;
+    xcache0.name = "XCACHE0";
+    xcache0.baseAddress = 0x40180000;
+    xcache0.registers[0x40180000] = "CCR";       // Cache Control Register
+    xcache0.registers[0x40180004] = "CLCR";      // Cache Line Control Register
+    xcache0.registers[0x40180008] = "CSAR";      // Cache Search Address Register
+    xcache0.registers[0x4018000C] = "CCVR";      // Cache Read/Write Value Register
+    xcache0.registers[0x40180020] = "CCIR";      // Cache Invalidate Register
+    xcache0.registers[0x40180024] = "CCLR";      // Cache Clear Register
+    peripherals["XCACHE0"] = xcache0;
+
+    // Add XCACHE1 peripheral
+    PeripheralInfo xcache1;
+    xcache1.name = "XCACHE1";
+    xcache1.baseAddress = 0x40181000;
+    xcache1.registers[0x40181000] = "CCR";       // Cache Control Register
+    xcache1.registers[0x40181004] = "CLCR";      // Cache Line Control Register
+    xcache1.registers[0x40181008] = "CSAR";      // Cache Search Address Register
+    xcache1.registers[0x4018100C] = "CCVR";      // Cache Read/Write Value Register
+    xcache1.registers[0x40181020] = "CCIR";      // Cache Invalidate Register
+    xcache1.registers[0x40181024] = "CCLR";      // Cache Clear Register
+    peripherals["XCACHE1"] = xcache1;
 
     // Add SYSCON1 peripheral
     PeripheralInfo syscon1;
@@ -458,70 +499,92 @@ void PeripheralAnalysisPass::initializePeripheralDefinitions() {
     clkctl1.registers[0x40003010] = "PSCCTL4";
     peripherals["CLKCTL1"] = clkctl1;
 
-    // RSTCTL0 already defined above with real MIMXRT798S definitions (base: 0x40000000)
-
-    // Add RSTCTL1 peripheral
+    // Add RSTCTL1 peripheral - REAL MIMXRT798S ADDRESSES
     PeripheralInfo rstctl1;
     rstctl1.name = "RSTCTL1";
-    rstctl1.baseAddress = 0x40005000;
-    rstctl1.registers[0x40005000] = "PRSTCTL0";
-    rstctl1.registers[0x40005004] = "PRSTCTL1";
-    rstctl1.registers[0x40005008] = "PRSTCTL2";
-    rstctl1.registers[0x4000500C] = "PRSTCTL3";
-    rstctl1.registers[0x40005010] = "PRSTCTL4";
-    rstctl1.registers[0x40005020] = "PRSTCTLSET0";
-    rstctl1.registers[0x40005024] = "PRSTCTLSET1";
-    rstctl1.registers[0x40005028] = "PRSTCTLSET2";
-    rstctl1.registers[0x4000502C] = "PRSTCTLSET3";
-    rstctl1.registers[0x40005030] = "PRSTCTLSET4";
-    rstctl1.registers[0x40005040] = "PRSTCTLCLR0";
-    rstctl1.registers[0x40005044] = "PRSTCTLCLR1";
-    rstctl1.registers[0x40005048] = "PRSTCTLCLR2";
-    rstctl1.registers[0x4000504C] = "PRSTCTLCLR3";
-    rstctl1.registers[0x40005050] = "PRSTCTLCLR4";
+    rstctl1.baseAddress = 0x40061000;  // Corrected from SDK headers
+    rstctl1.registers[0x40061010] = "PRSTCTL0";
+    rstctl1.registers[0x40061040] = "PRSTCTL0_SET";
+    rstctl1.registers[0x40061070] = "PRSTCTL0_CLR";
     peripherals["RSTCTL1"] = rstctl1;
 
-    // Add IOPCTL0 peripheral (I/O Pin Control)
+    // Add RSTCTL2 peripheral - REAL MIMXRT798S ADDRESSES
+    PeripheralInfo rstctl2;
+    rstctl2.name = "RSTCTL2";
+    rstctl2.baseAddress = 0x40067000;  // Corrected from SDK headers
+    rstctl2.registers[0x40067010] = "PRSTCTL0";
+    rstctl2.registers[0x40067040] = "PRSTCTL0_SET";
+    rstctl2.registers[0x40067070] = "PRSTCTL0_CLR";
+    peripherals["RSTCTL2"] = rstctl2;
+
+    // Add RSTCTL3 peripheral - REAL MIMXRT798S ADDRESSES
+    PeripheralInfo rstctl3;
+    rstctl3.name = "RSTCTL3";
+    rstctl3.baseAddress = 0x40060000;  // Corrected from SDK headers
+    rstctl3.registers[0x40060000] = "SYSRSTSTAT";
+    rstctl3.registers[0x40060004] = "DOMRSTSTAT";
+    rstctl3.registers[0x40060010] = "PRSTCTL0";
+    rstctl3.registers[0x40060014] = "PRSTCTL1";
+    rstctl3.registers[0x40060040] = "PRSTCTL0_SET";
+    rstctl3.registers[0x40060044] = "PRSTCTL1_SET";
+    rstctl3.registers[0x40060070] = "PRSTCTL0_CLR";
+    rstctl3.registers[0x40060074] = "PRSTCTL1_CLR";
+    peripherals["RSTCTL3"] = rstctl3;
+
+    // Add RSTCTL4 peripheral - REAL MIMXRT798S ADDRESSES
+    PeripheralInfo rstctl4;
+    rstctl4.name = "RSTCTL4";
+    rstctl4.baseAddress = 0x400A0000;  // Corrected from SDK headers
+    rstctl4.registers[0x400A0010] = "PRSTCTL0";
+    rstctl4.registers[0x400A0014] = "PRSTCTL1";
+    rstctl4.registers[0x400A0040] = "PRSTCTL0_SET";
+    rstctl4.registers[0x400A0044] = "PRSTCTL1_SET";
+    rstctl4.registers[0x400A0070] = "PRSTCTL0_CLR";
+    rstctl4.registers[0x400A0074] = "PRSTCTL1_CLR";
+    peripherals["RSTCTL4"] = rstctl4;
+
+    // Add IOPCTL0 peripheral (I/O Pin Control) - REAL MIMXRT798S ADDRESSES
     PeripheralInfo iopctl0;
     iopctl0.name = "IOPCTL0";
-    iopctl0.baseAddress = 0x40140000;
-    iopctl0.registers[0x40140000] = "PIO0_0";
-    iopctl0.registers[0x40140004] = "PIO0_1";
-    iopctl0.registers[0x40140008] = "PIO0_2";
-    iopctl0.registers[0x4014000C] = "PIO0_3";
-    iopctl0.registers[0x40140010] = "PIO0_4";
-    iopctl0.registers[0x40140014] = "PIO0_5";
-    iopctl0.registers[0x40140018] = "PIO0_6";
-    iopctl0.registers[0x4014001C] = "PIO0_7";
-    // Add more PIO registers as needed
+    iopctl0.baseAddress = 0x40004000;  // Corrected from SDK headers
+    // IOPCTL0 has 4 ports with 32 pins each, offset by 0x80 per port
+    for (int port = 0; port < 4; port++) {
+        for (int pin = 0; pin < 32; pin++) {
+            uint32_t regAddr = 0x40004000 + (port * 0x80) + (pin * 0x4);
+            iopctl0.registers[regAddr] = "PIO" + std::to_string(port) + "_" + std::to_string(pin);
+        }
+    }
     peripherals["IOPCTL0"] = iopctl0;
 
-    // Add IOPCTL1 peripheral
+    // Add IOPCTL1 peripheral - REAL MIMXRT798S ADDRESSES
     PeripheralInfo iopctl1;
     iopctl1.name = "IOPCTL1";
-    iopctl1.baseAddress = 0x40141000;
-    iopctl1.registers[0x40141000] = "PIO1_0";
-    iopctl1.registers[0x40141004] = "PIO1_1";
-    iopctl1.registers[0x40141008] = "PIO1_2";
-    iopctl1.registers[0x4014100C] = "PIO1_3";
-    iopctl1.registers[0x40141010] = "PIO1_4";
-    iopctl1.registers[0x40141014] = "PIO1_5";
-    iopctl1.registers[0x40141018] = "PIO1_6";
-    iopctl1.registers[0x4014101C] = "PIO1_7";
+    iopctl1.baseAddress = 0x40064000;  // Corrected from SDK headers
+    // IOPCTL1 has 3 ports, different pin counts per port
+    for (int port = 0; port < 3; port++) {
+        int maxPins = (port == 0) ? 32 : (port == 1) ? 3 : 18;
+        for (int pin = 0; pin < maxPins; pin++) {
+            uint32_t regAddr = 0x40064000 + (port * 0x80) + (pin * 0x4);
+            iopctl1.registers[regAddr] = "PIO" + std::to_string(port + 8) + "_" + std::to_string(pin);
+        }
+    }
+    // Add special PMIC I2C registers
+    iopctl1.registers[0x40064180] = "PMIC_I2C_SDA";
+    iopctl1.registers[0x40064184] = "PMIC_I2C_SCL";
     peripherals["IOPCTL1"] = iopctl1;
 
-    // Add IOPCTL2 peripheral
+    // Add IOPCTL2 peripheral - REAL MIMXRT798S ADDRESSES
     PeripheralInfo iopctl2;
     iopctl2.name = "IOPCTL2";
-    iopctl2.baseAddress = 0x40142000;
-    iopctl2.registers[0x40142000] = "PIO2_0";
-    iopctl2.registers[0x40142004] = "PIO2_1";
-    iopctl2.registers[0x40142008] = "PIO2_2";
-    iopctl2.registers[0x4014200C] = "PIO2_3";
-    iopctl2.registers[0x40142010] = "PIO2_4";
-    iopctl2.registers[0x40142014] = "PIO2_5";
-    iopctl2.registers[0x40142018] = "PIO2_6";
-    iopctl2.registers[0x4014201C] = "PIO2_7";
+    iopctl2.baseAddress = 0x400A5000;  // Corrected from SDK headers
+    // IOPCTL2 has 4 ports with different pin counts
+    int iopctl2_pins[] = {21, 21, 13, 26};
+    for (int port = 0; port < 4; port++) {
+        for (int pin = 0; pin < iopctl2_pins[port]; pin++) {
+            uint32_t regAddr = 0x400A5000 + (port * 0x80) + (pin * 0x4);
+            iopctl2.registers[regAddr] = "PIO" + std::to_string(port + 4) + "_" + std::to_string(pin);
+        }
+    }
     peripherals["IOPCTL2"] = iopctl2;
 
     // Add GLIKEY peripheral (Global Key Registers)
@@ -572,26 +635,7 @@ void PeripheralAnalysisPass::initializePeripheralDefinitions() {
     cache64_ctrl1.registers[0x40171010] = "CRMR";
     peripherals["CACHE64_CTRL1"] = cache64_ctrl1;
 
-    // Add XCACHE peripherals (System Cache)
-    PeripheralInfo xcache0;
-    xcache0.name = "XCACHE0";
-    xcache0.baseAddress = 0x40172000;
-    xcache0.registers[0x40172000] = "CCR";           // Cache Control Register
-    xcache0.registers[0x40172004] = "CLCR";          // Cache Line Control Register
-    xcache0.registers[0x40172008] = "CSAR";          // Cache Search Address Register
-    xcache0.registers[0x4017200C] = "CCVR";          // Cache Control Value Register
-    xcache0.registers[0x40172010] = "CRMR";          // Cache Region Mask Register
-    peripherals["XCACHE0"] = xcache0;
-
-    PeripheralInfo xcache1;
-    xcache1.name = "XCACHE1";
-    xcache1.baseAddress = 0x40173000;
-    xcache1.registers[0x40173000] = "CCR";
-    xcache1.registers[0x40173004] = "CLCR";
-    xcache1.registers[0x40173008] = "CSAR";
-    xcache1.registers[0x4017300C] = "CCVR";
-    xcache1.registers[0x40173010] = "CRMR";
-    peripherals["XCACHE1"] = xcache1;
+    // XCACHE peripherals already defined above
 
     // Add SYSCON3 peripheral (for Silicon Revision ID)
     PeripheralInfo syscon3;
@@ -617,6 +661,8 @@ void PeripheralAnalysisPass::analyzeFunction(Function &F) {
                 analyzeAtomicRMWInstruction(RMWI);
             } else if (auto *CXI = dyn_cast<AtomicCmpXchgInst>(&I)) {
                 analyzeCmpXchgInstruction(CXI);
+            } else if (auto *CI = dyn_cast<CallInst>(&I)) {
+                analyzeFunctionCall(CI);
             }
         }
     }
@@ -853,6 +899,44 @@ void PeripheralAnalysisPass::analyzeCmpXchgInstruction(AtomicCmpXchgInst *CXI) {
 
     registerAccesses.push_back(access);
     peripherals[peripheralName].accessedAddresses.insert(address);
+}
+
+void PeripheralAnalysisPass::analyzeFunctionCall(CallInst *CI) {
+    Function *calledFunction = CI->getCalledFunction();
+    if (!calledFunction) {
+        return; // Indirect call, can't analyze
+    }
+
+    std::string functionName = calledFunction->getName().str();
+
+    // Analyze IOPCTL_PinMuxSet calls
+    if (functionName == "IOPCTL_PinMuxSet") {
+        analyzeIOPCTLPinMuxSet(CI);
+    }
+    // Analyze RESET_ClearPeripheralReset calls
+    else if (functionName == "RESET_ClearPeripheralReset") {
+        analyzeRESETClearPeripheralReset(CI);
+    }
+    // Analyze CLOCK_AttachClk calls
+    else if (functionName == "CLOCK_AttachClk") {
+        analyzeCLOCKAttachClk(CI);
+    }
+    // Analyze CLOCK_SetClkDiv calls
+    else if (functionName == "CLOCK_SetClkDiv") {
+        analyzeCLOCKSetClkDiv(CI);
+    }
+    // Analyze ARM_MPU_SetRegion calls
+    else if (functionName == "ARM_MPU_SetRegion") {
+        analyzeARMMPUSetRegion(CI);
+    }
+    // Analyze ARM_MPU_Enable calls
+    else if (functionName == "ARM_MPU_Enable") {
+        analyzeARMMPUEnable(CI);
+    }
+    // Analyze XCACHE_EnableCache calls
+    else if (functionName == "XCACHE_EnableCache") {
+        analyzeXCACHEEnableCache(CI);
+    }
 }
 
 uint64_t PeripheralAnalysisPass::getEffectiveAddress(Value *Ptr) {
@@ -1534,4 +1618,182 @@ void PeripheralAnalysisPass::exportChronologicalJSON(const std::string& filename
     }
 
     OS << json::Value(std::move(root)) << "\n";
+}
+
+void PeripheralAnalysisPass::analyzeIOPCTLPinMuxSet(CallInst *CI) {
+    // IOPCTL_PinMuxSet(uint8_t port, uint8_t pin, uint32_t modefunc)
+    if (CI->getNumOperands() < 4) return; // 3 args + function
+
+    // Extract port and pin numbers
+    uint32_t port = 0, pin = 0;
+    if (auto *portConst = dyn_cast<ConstantInt>(CI->getOperand(0))) {
+        port = portConst->getZExtValue();
+    }
+    if (auto *pinConst = dyn_cast<ConstantInt>(CI->getOperand(1))) {
+        pin = pinConst->getZExtValue();
+    }
+
+    // Calculate IOPCTL register address based on port/pin
+    uint64_t address = calculateIOPCTLRegisterAddress(port, pin);
+    std::string peripheralName = getIOPCTLPeripheralName(port);
+    std::string registerName = "PIO" + std::to_string(port) + "_" + std::to_string(pin);
+
+    RegisterAccess access;
+    access.peripheralName = peripheralName;
+    access.registerName = registerName;
+    access.address = address;
+    access.accessType = "function_call_write";
+    access.dataSize = 32;
+    access.bitsModified = {}; // Pin mux configuration affects multiple bits
+
+    auto [fileName, functionName, lineNumber] = getDebugInfo(CI);
+    access.fileName = fileName;
+    access.functionName = functionName;
+    access.lineNumber = lineNumber;
+    access.purpose = "Pin mux configuration for port " + std::to_string(port) + " pin " + std::to_string(pin);
+
+    assignExecutionOrder(access, CI);
+    registerAccesses.push_back(access);
+
+    if (!peripheralName.empty() && peripherals.find(peripheralName) != peripherals.end()) {
+        peripherals[peripheralName].accessedAddresses.insert(address);
+    }
+}
+
+void PeripheralAnalysisPass::analyzeRESETClearPeripheralReset(CallInst *CI) {
+    // RESET_ClearPeripheralReset(reset_ip_name_t peripheral)
+    if (CI->getNumOperands() < 2) return; // 1 arg + function
+
+    RegisterAccess access;
+    access.peripheralName = "RSTCTL";
+    access.registerName = "PRSTCTL_CLR";
+    access.address = 0x40000070; // Default to RSTCTL0 PRSTCTL0_CLR
+    access.accessType = "function_call_write";
+    access.dataSize = 32;
+    access.bitsModified = {};
+
+    auto [fileName, functionName, lineNumber] = getDebugInfo(CI);
+    access.fileName = fileName;
+    access.functionName = functionName;
+    access.lineNumber = lineNumber;
+    access.purpose = "Clear peripheral reset";
+
+    assignExecutionOrder(access, CI);
+    registerAccesses.push_back(access);
+}
+
+uint64_t PeripheralAnalysisPass::calculateIOPCTLRegisterAddress(uint32_t port, uint32_t pin) {
+    // Based on IOPCTL_PinMuxSet implementation in fsl_iopctl.h
+    if (port >= 8U) { // IOPCTL1
+        return 0x40064000 + ((port - 8U) * 0x80) + (pin * 4);
+    } else if (port >= 4U) { // IOPCTL2
+        return 0x400A5000 + ((port - 4U) * 0x80) + (pin * 4);
+    } else { // IOPCTL0
+        return 0x40004000 + (port * 0x80) + (pin * 4);
+    }
+}
+
+std::string PeripheralAnalysisPass::getIOPCTLPeripheralName(uint32_t port) {
+    if (port >= 8U) {
+        return "IOPCTL1";
+    } else if (port >= 4U) {
+        return "IOPCTL2";
+    } else {
+        return "IOPCTL0";
+    }
+}
+
+void PeripheralAnalysisPass::analyzeCLOCKAttachClk(CallInst *CI) {
+    RegisterAccess access;
+    access.peripheralName = "CLKCTL0";
+    access.registerName = "CLKSEL";
+    access.address = 0x40001434; // MAINCLKSEL register
+    access.accessType = "function_call_write";
+    access.dataSize = 32;
+    access.bitsModified = {};
+
+    auto [fileName, functionName, lineNumber] = getDebugInfo(CI);
+    access.fileName = fileName;
+    access.functionName = functionName;
+    access.lineNumber = lineNumber;
+    access.purpose = "Clock source attachment";
+
+    assignExecutionOrder(access, CI);
+    registerAccesses.push_back(access);
+}
+
+void PeripheralAnalysisPass::analyzeCLOCKSetClkDiv(CallInst *CI) {
+    RegisterAccess access;
+    access.peripheralName = "CLKCTL0";
+    access.registerName = "CLKDIV";
+    access.address = 0x40001400; // MAINCLKDIV register
+    access.accessType = "function_call_write";
+    access.dataSize = 32;
+    access.bitsModified = {};
+
+    auto [fileName, functionName, lineNumber] = getDebugInfo(CI);
+    access.fileName = fileName;
+    access.functionName = functionName;
+    access.lineNumber = lineNumber;
+    access.purpose = "Clock divider configuration";
+
+    assignExecutionOrder(access, CI);
+    registerAccesses.push_back(access);
+}
+
+void PeripheralAnalysisPass::analyzeARMMPUSetRegion(CallInst *CI) {
+    RegisterAccess access;
+    access.peripheralName = "MPU";
+    access.registerName = "RBAR";
+    access.address = 0xE000ED9C; // MPU Region Base Address Register
+    access.accessType = "function_call_write";
+    access.dataSize = 32;
+    access.bitsModified = {};
+
+    auto [fileName, functionName, lineNumber] = getDebugInfo(CI);
+    access.fileName = fileName;
+    access.functionName = functionName;
+    access.lineNumber = lineNumber;
+    access.purpose = "MPU region configuration";
+
+    assignExecutionOrder(access, CI);
+    registerAccesses.push_back(access);
+}
+
+void PeripheralAnalysisPass::analyzeARMMPUEnable(CallInst *CI) {
+    RegisterAccess access;
+    access.peripheralName = "MPU";
+    access.registerName = "CTRL";
+    access.address = 0xE000ED94; // MPU Control Register
+    access.accessType = "function_call_write";
+    access.dataSize = 32;
+    access.bitsModified = {};
+
+    auto [fileName, functionName, lineNumber] = getDebugInfo(CI);
+    access.fileName = fileName;
+    access.functionName = functionName;
+    access.lineNumber = lineNumber;
+    access.purpose = "MPU enable";
+
+    assignExecutionOrder(access, CI);
+    registerAccesses.push_back(access);
+}
+
+void PeripheralAnalysisPass::analyzeXCACHEEnableCache(CallInst *CI) {
+    RegisterAccess access;
+    access.peripheralName = "XCACHE0";
+    access.registerName = "CCR";
+    access.address = 0x40180000; // Cache Control Register
+    access.accessType = "function_call_write";
+    access.dataSize = 32;
+    access.bitsModified = {};
+
+    auto [fileName, functionName, lineNumber] = getDebugInfo(CI);
+    access.fileName = fileName;
+    access.functionName = functionName;
+    access.lineNumber = lineNumber;
+    access.purpose = "Cache enable";
+
+    assignExecutionOrder(access, CI);
+    registerAccesses.push_back(access);
 }
