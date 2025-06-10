@@ -1,12 +1,21 @@
 # Clang/LLVM Toolchain file for ARM Cortex-M33
 # This file configures CMake to use LLVM/Clang for cross-compilation to ARM Cortex-M33
+#
+# WORKING CONFIGURATION NOTES:
+# - Uses system-installed ARM GCC for libraries (/usr/lib/arm-none-eabi)
+# - LLVM/Clang must be built with ARM target support
+# - This configuration is verified working with compile_all_drivers_to_llvm.sh
+# - DO NOT use /opt/gcc-arm-none-eabi paths - they don't exist on most systems
+# - Use 'apt install gcc-arm-none-eabi' for the system ARM GCC installation
 
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_PROCESSOR arm)
 
 # Set ARM GCC sysroot for embedded libraries
-# Using system-installed ARM GCC
-set(ARM_GCC_SYSROOT "/opt/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi")
+# IMPORTANT: Use system-installed ARM GCC, NOT the /opt/ path!
+# The working path is /usr/lib/arm-none-eabi (verified in compile_all_drivers_to_llvm.sh)
+# DO NOT change this to /opt/gcc-arm-none-eabi-* as it doesn't exist on most systems
+set(ARM_GCC_SYSROOT "/usr/lib/arm-none-eabi")
 
 # Configure Clang/LLVM toolchain for compilation, ARM GCC for linking
 # Auto-detect LLVM installation or use environment variable
@@ -45,8 +54,10 @@ set(COMMON_FLAGS "${COMMON_FLAGS} --sysroot=${ARM_GCC_SYSROOT}")
 set(COMMON_FLAGS "${COMMON_FLAGS} -I${ARM_GCC_SYSROOT}/include")
 
 # Library paths for ARM Cortex-M33 with hard float
+# IMPORTANT: Use system GCC paths, not /opt/ paths!
+# These paths are for the system-installed gcc-arm-none-eabi package
 set(ARM_LIB_PATH "${ARM_GCC_SYSROOT}/lib/thumb/v8-m.main+fp/hard")
-set(GCC_LIB_PATH "/opt/gcc-arm-none-eabi-10.3-2021.10/lib/gcc/arm-none-eabi/10.3.1/thumb/v8-m.main+fp/hard")
+set(GCC_LIB_PATH "/usr/lib/gcc/arm-none-eabi/13.2.1/thumb/v8-m.main+fp/hard")
 
 # Set initial compiler flags to help CMake's compiler tests pass
 set(CMAKE_C_FLAGS_INIT "${COMMON_FLAGS}")
