@@ -26,17 +26,47 @@ static RegisterPass<PeripheralAnalysisLegacyPass> X(
 PreservedAnalyses PeripheralAnalysisPass::run(Module &M, ModuleAnalysisManager &AM) {
     // Initialize peripheral definitions
     initializePeripheralDefinitions();
-    
+
+    // Initialize execution order tracking
+    initializeExecutionPhaseMapping();
+    globalSequenceCounter = 0;
+
     // Clear previous results
     registerAccesses.clear();
-    
-    // Analyze each function in the module
+
+    // Analyze each function in the module in a specific order to maintain execution sequence
+    // First analyze board initialization functions
+    std::vector<Function*> boardInitFunctions;
+    std::vector<Function*> driverFunctions;
+    std::vector<Function*> otherFunctions;
+
+    // Categorize functions by execution phase
     for (Function &F : M) {
         if (!F.isDeclaration()) {
-            analyzeFunction(F);
+            std::string functionName = F.getName().str();
+            std::string phase = determineExecutionPhase(functionName, "");
+
+            if (phase == "board_init") {
+                boardInitFunctions.push_back(&F);
+            } else if (phase == "driver_init") {
+                driverFunctions.push_back(&F);
+            } else {
+                otherFunctions.push_back(&F);
+            }
         }
     }
-    
+
+    // Analyze functions in execution order: board init → driver init → runtime
+    for (Function *F : boardInitFunctions) {
+        analyzeFunction(*F);
+    }
+    for (Function *F : driverFunctions) {
+        analyzeFunction(*F);
+    }
+    for (Function *F : otherFunctions) {
+        analyzeFunction(*F);
+    }
+
     return PreservedAnalyses::all();
 }
 
@@ -697,6 +727,9 @@ void PeripheralAnalysisPass::analyzeLoadInstruction(LoadInst *LI) {
     access.lineNumber = lineNumber;
     access.purpose = determinePurpose(LI, peripheralName, registerName);
 
+    // Assign execution order information
+    assignExecutionOrder(access, LI);
+
     registerAccesses.push_back(access);
     if (!peripheralName.empty() && peripherals.find(peripheralName) != peripherals.end()) {
         peripherals[peripheralName].accessedAddresses.insert(address);
@@ -777,6 +810,9 @@ void PeripheralAnalysisPass::analyzeStoreInstruction(StoreInst *SI) {
     access.lineNumber = lineNumber;
     access.purpose = determinePurpose(SI, peripheralName, registerName);
 
+    // Assign execution order information
+    assignExecutionOrder(access, SI);
+
     registerAccesses.push_back(access);
     if (!peripheralName.empty() && peripherals.find(peripheralName) != peripherals.end()) {
         peripherals[peripheralName].accessedAddresses.insert(address);
@@ -807,7 +843,10 @@ void PeripheralAnalysisPass::analyzeAtomicRMWInstruction(AtomicRMWInst *RMWI) {
     access.functionName = functionName;
     access.lineNumber = lineNumber;
     access.purpose = determinePurpose(RMWI, peripheralName, registerName);
-    
+
+    // Assign execution order information
+    assignExecutionOrder(access, RMWI);
+
     registerAccesses.push_back(access);
     peripherals[peripheralName].accessedAddresses.insert(address);
 }
@@ -836,7 +875,10 @@ void PeripheralAnalysisPass::analyzeCmpXchgInstruction(AtomicCmpXchgInst *CXI) {
     access.functionName = functionName;
     access.lineNumber = lineNumber;
     access.purpose = determinePurpose(CXI, peripheralName, registerName);
-    
+
+    // Assign execution order information
+    assignExecutionOrder(access, CXI);
+
     registerAccesses.push_back(access);
     peripherals[peripheralName].accessedAddresses.insert(address);
 }
@@ -1259,6 +1301,251 @@ void PeripheralAnalysisPass::exportToJSON(const std::string& filename) const {
     }
 
     root["peripheral_accesses"] = std::move(peripheralArray);
+
+    // Write to file
+    std::error_code EC;
+    raw_fd_ostream OS(filename, EC);
+    if (EC) {
+        errs() << "Error opening file " << filename << ": " << EC.message() << "\n";
+        return;
+    }
+
+    OS << json::Value(std::move(root)) << "\n";
+}
+
+void PeripheralAnalysisPass::initializeExecutionPhaseMapping() {
+    // Board initialization functions (executed first during system startup)
+    functionToPhaseMap["BOARD_InitHardware"] = "board_init";
+    functionToPhaseMap["BOARD_SetXspiClock"] = "board_init";
+    functionToPhaseMap["BOARD_DeinitXspi"] = "board_init";
+    functionToPhaseMap["BOARD_InitI2c2PinAsGpio"] = "board_init";
+    functionToPhaseMap["BOARD_RestoreI2c2PinMux"] = "board_init";
+    functionToPhaseMap["hardware_init"] = "board_init";
+    functionToPhaseMap["board_init"] = "board_init";
+    functionToPhaseMap["pin_mux_init"] = "board_init";
+    functionToPhaseMap["clock_config"] = "board_init";
+    functionToPhaseMap["CLOCK_SetupExtClocking"] = "board_init";
+    functionToPhaseMap["CLOCK_SetupFROClocking"] = "board_init";
+    functionToPhaseMap["POWER_DisablePD"] = "board_init";
+    functionToPhaseMap["POWER_ApplyPD"] = "board_init";
+
+    // Driver initialization functions (executed after board init)
+    functionToPhaseMap["XSPI_Init"] = "driver_init";
+    functionToPhaseMap["XSPI_SetFlashConfig"] = "driver_init";
+    functionToPhaseMap["XSPI_UpdateLUT"] = "driver_init";
+    functionToPhaseMap["GPIO_PinInit"] = "driver_init";
+    functionToPhaseMap["CLOCK_AttachClk"] = "driver_init";
+    functionToPhaseMap["CLOCK_SetClkDiv"] = "driver_init";
+    functionToPhaseMap["CLOCK_EnableClock"] = "driver_init";
+    functionToPhaseMap["RESET_PeripheralReset"] = "driver_init";
+
+    // Runtime operation functions (executed during normal operation)
+    functionToPhaseMap["XSPI_TransferBlocking"] = "runtime";
+    functionToPhaseMap["XSPI_WriteBlocking"] = "runtime";
+    functionToPhaseMap["XSPI_ReadBlocking"] = "runtime";
+    functionToPhaseMap["GPIO_PinWrite"] = "runtime";
+    functionToPhaseMap["GPIO_PinRead"] = "runtime";
+    functionToPhaseMap["GPIO_PortSet"] = "runtime";
+    functionToPhaseMap["GPIO_PortClear"] = "runtime";
+    functionToPhaseMap["GPIO_PortToggle"] = "runtime";
+}
+
+std::string PeripheralAnalysisPass::determineExecutionPhase(const std::string& functionName, const std::string& fileName) {
+    // Check exact function name match first
+    auto it = functionToPhaseMap.find(functionName);
+    if (it != functionToPhaseMap.end()) {
+        return it->second;
+    }
+
+    // Check function name patterns for board initialization
+    if (functionName.find("BOARD_") == 0 ||
+        functionName.find("board_") == 0 ||
+        functionName.find("hardware_init") != std::string::npos ||
+        functionName.find("pin_mux") != std::string::npos ||
+        functionName.find("clock_config") != std::string::npos ||
+        functionName.find("CLOCK_Setup") != std::string::npos ||
+        functionName.find("POWER_") == 0) {
+        return "board_init";
+    }
+
+    // Check function name patterns for driver initialization
+    if (functionName.find("_Init") != std::string::npos ||
+        functionName.find("_Config") != std::string::npos ||
+        functionName.find("CLOCK_Attach") != std::string::npos ||
+        functionName.find("CLOCK_Enable") != std::string::npos ||
+        functionName.find("RESET_") == 0) {
+        return "driver_init";
+    }
+
+    // Check file name patterns
+    if (fileName.find("board.c") != std::string::npos ||
+        fileName.find("hardware_init.c") != std::string::npos ||
+        fileName.find("pin_mux.c") != std::string::npos ||
+        fileName.find("clock_config.c") != std::string::npos) {
+        return "board_init";
+    }
+
+    // Default to runtime for other functions
+    return "runtime";
+}
+
+std::string PeripheralAnalysisPass::buildCallStackContext(Instruction *I) {
+    std::string callStack;
+    Function *currentFunction = I->getFunction();
+
+    // Start with the current function
+    callStack = currentFunction->getName().str();
+
+    // Try to trace back through call sites (simplified approach)
+    // In a full implementation, we would need interprocedural analysis
+    // For now, we'll just include the immediate function context
+
+    return callStack;
+}
+
+std::string PeripheralAnalysisPass::generateBasicBlockId(BasicBlock *BB) {
+    Function *F = BB->getParent();
+    std::string functionName = F->getName().str();
+
+    // Generate a unique identifier for the basic block
+    // Use function name + basic block address as a simple identifier
+    std::string bbId = functionName + "_BB_" + std::to_string(reinterpret_cast<uintptr_t>(BB));
+
+    return bbId;
+}
+
+uint64_t PeripheralAnalysisPass::getInstructionIndex(Instruction *I) {
+    BasicBlock *BB = I->getParent();
+    uint64_t index = 0;
+
+    // Count instructions in the basic block until we reach the target instruction
+    for (auto &Inst : *BB) {
+        if (&Inst == I) {
+            return index;
+        }
+        index++;
+    }
+
+    return index;
+}
+
+void PeripheralAnalysisPass::assignExecutionOrder(RegisterAccess &access, Instruction *I) {
+    // Assign global sequence number
+    access.sequenceNumber = globalSequenceCounter++;
+
+    // Determine execution phase
+    access.executionPhase = determineExecutionPhase(access.functionName, access.fileName);
+
+    // Build call stack context
+    access.callStack = buildCallStackContext(I);
+
+    // Generate basic block identifier
+    access.basicBlockId = generateBasicBlockId(I->getParent());
+
+    // Get instruction index within basic block
+    access.instructionIndex = getInstructionIndex(I);
+
+    // Determine execution context based on phase and function
+    if (access.executionPhase == "board_init") {
+        if (access.functionName.find("Clock") != std::string::npos ||
+            access.functionName.find("CLOCK") != std::string::npos) {
+            access.executionContext = "clock_configuration";
+        } else if (access.functionName.find("Pin") != std::string::npos ||
+                   access.functionName.find("GPIO") != std::string::npos) {
+            access.executionContext = "pin_configuration";
+        } else if (access.functionName.find("Power") != std::string::npos ||
+                   access.functionName.find("POWER") != std::string::npos) {
+            access.executionContext = "power_management";
+        } else {
+            access.executionContext = "hardware_initialization";
+        }
+    } else if (access.executionPhase == "driver_init") {
+        access.executionContext = "driver_initialization";
+    } else {
+        if (access.accessType.find("read") != std::string::npos) {
+            access.executionContext = "status_monitoring";
+        } else {
+            access.executionContext = "runtime_operation";
+        }
+    }
+}
+
+std::vector<RegisterAccess> PeripheralAnalysisPass::getChronologicalAccesses() const {
+    std::vector<RegisterAccess> chronologicalAccesses = registerAccesses;
+
+    // Sort by sequence number to maintain chronological execution order
+    std::sort(chronologicalAccesses.begin(), chronologicalAccesses.end(),
+              [](const RegisterAccess& a, const RegisterAccess& b) {
+                  return a.sequenceNumber < b.sequenceNumber;
+              });
+
+    return chronologicalAccesses;
+}
+
+void PeripheralAnalysisPass::exportChronologicalJSON(const std::string& filename) const {
+    json::Object root;
+
+    // Get accesses in chronological order
+    std::vector<RegisterAccess> chronologicalAccesses = getChronologicalAccesses();
+
+    // Add metadata
+    root["analysis_type"] = "chronological_peripheral_access_sequence";
+    root["total_accesses"] = static_cast<int64_t>(chronologicalAccesses.size());
+    root["description"] = "Peripheral register accesses in chronological execution order";
+
+    // Group by execution phase for summary
+    std::map<std::string, int> phaseCount;
+    for (const auto& access : chronologicalAccesses) {
+        phaseCount[access.executionPhase]++;
+    }
+
+    json::Object phaseSummary;
+    for (const auto& [phase, count] : phaseCount) {
+        phaseSummary[phase] = count;
+    }
+    root["execution_phase_summary"] = std::move(phaseSummary);
+
+    // Create chronological sequence array
+    json::Array sequenceArray;
+
+    for (const auto& access : chronologicalAccesses) {
+        json::Object accessObj;
+
+        // Basic access information
+        accessObj["sequence_number"] = static_cast<int64_t>(access.sequenceNumber);
+        accessObj["peripheral_name"] = access.peripheralName;
+        accessObj["register_name"] = access.registerName;
+        accessObj["address"] = "0x" + std::to_string(access.address);
+        accessObj["access_type"] = access.accessType;
+        accessObj["data_size"] = static_cast<int64_t>(access.dataSize);
+
+        // Execution order information
+        accessObj["execution_phase"] = access.executionPhase;
+        accessObj["execution_context"] = access.executionContext;
+        accessObj["call_stack"] = access.callStack;
+        accessObj["basic_block_id"] = access.basicBlockId;
+        accessObj["instruction_index"] = static_cast<int64_t>(access.instructionIndex);
+
+        // Source location
+        json::Object sourceObj;
+        sourceObj["file"] = access.fileName;
+        sourceObj["function"] = access.functionName;
+        sourceObj["line"] = static_cast<int64_t>(access.lineNumber);
+        accessObj["source_location"] = std::move(sourceObj);
+
+        // Purpose and bit modifications
+        accessObj["purpose"] = access.purpose;
+
+        json::Array bitsArray;
+        for (const auto& bit : access.bitsModified) {
+            bitsArray.push_back(bit);
+        }
+        accessObj["bits_modified"] = std::move(bitsArray);
+
+        sequenceArray.push_back(std::move(accessObj));
+    }
+
+    root["chronological_sequence"] = std::move(sequenceArray);
 
     // Write to file
     std::error_code EC;

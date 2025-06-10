@@ -31,7 +31,7 @@
 
 namespace llvm {
 
-/// Structure to represent a peripheral register access
+/// Structure to represent a peripheral register access with execution order
 struct RegisterAccess {
     std::string peripheralName;
     std::string registerName;
@@ -43,6 +43,14 @@ struct RegisterAccess {
     std::string functionName;
     unsigned lineNumber;
     std::string purpose;
+
+    // Enhanced fields for chronological execution order
+    uint64_t sequenceNumber;     // Global sequence number for execution order
+    std::string executionPhase;  // "board_init", "driver_init", "runtime"
+    std::string callStack;       // Function call stack context
+    std::string basicBlockId;    // Basic block identifier for ordering within function
+    uint64_t instructionIndex;   // Index within basic block for precise ordering
+    std::string executionContext; // Additional context (e.g., "startup", "configuration", "operation")
 };
 
 /// Structure to represent a peripheral definition
@@ -67,9 +75,19 @@ public:
     /// Export results to JSON format
     void exportToJSON(const std::string& filename) const;
 
+    /// Export results in chronological execution order
+    void exportChronologicalJSON(const std::string& filename) const;
+
+    /// Get register accesses sorted by execution order
+    std::vector<RegisterAccess> getChronologicalAccesses() const;
+
 private:
     std::vector<RegisterAccess> registerAccesses;
     std::map<std::string, PeripheralInfo> peripherals;
+
+    // Enhanced fields for execution order tracking
+    uint64_t globalSequenceCounter;
+    std::map<std::string, std::string> functionToPhaseMap; // Map function names to execution phases
     
     /// Initialize peripheral definitions for MIMXRT700
     void initializePeripheralDefinitions();
@@ -134,6 +152,26 @@ private:
     
     /// Get data size from type
     unsigned getDataSizeFromType(Type *Ty);
+
+    /// Enhanced methods for execution order tracking
+
+    /// Initialize execution phase mapping based on function names
+    void initializeExecutionPhaseMapping();
+
+    /// Determine execution phase from function name and context
+    std::string determineExecutionPhase(const std::string& functionName, const std::string& fileName);
+
+    /// Build call stack context for an instruction
+    std::string buildCallStackContext(Instruction *I);
+
+    /// Generate basic block identifier for ordering
+    std::string generateBasicBlockId(BasicBlock *BB);
+
+    /// Get instruction index within basic block
+    uint64_t getInstructionIndex(Instruction *I);
+
+    /// Assign sequence number and execution context to register access
+    void assignExecutionOrder(RegisterAccess &access, Instruction *I);
 };
 
 /// Legacy pass wrapper for compatibility

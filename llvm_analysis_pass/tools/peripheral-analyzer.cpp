@@ -30,6 +30,10 @@ static cl::opt<bool> Verbose("v",
                            cl::desc("Enable verbose output"),
                            cl::init(false));
 
+static cl::opt<bool> Chronological("chronological",
+                                  cl::desc("Export results in chronological execution order"),
+                                  cl::init(false));
+
 int main(int argc, char **argv) {
     InitLLVM X(argc, argv);
 
@@ -64,25 +68,43 @@ int main(int argc, char **argv) {
     
     if (Verbose) {
         outs() << "Found " << accesses.size() << " peripheral register accesses\n";
-        
+
         // Print summary
         std::map<std::string, int> accessCounts;
+        std::map<std::string, int> phaseCounts;
+
         for (const auto& access : accesses) {
             accessCounts[access.peripheralName]++;
+            phaseCounts[access.executionPhase]++;
         }
-        
+
         outs() << "\nAccess summary by peripheral:\n";
         for (const auto& [peripheral, count] : accessCounts) {
             outs() << "  " << peripheral << ": " << count << " accesses\n";
         }
+
+        if (Chronological) {
+            outs() << "\nAccess summary by execution phase:\n";
+            for (const auto& [phase, count] : phaseCounts) {
+                outs() << "  " << phase << ": " << count << " accesses\n";
+            }
+        }
     }
-    
+
     // Export results to JSON
     if (Verbose) {
-        outs() << "\nExporting results to: " << OutputFilename << "\n";
+        outs() << "\nExporting results to: " << OutputFilename;
+        if (Chronological) {
+            outs() << " (chronological order)";
+        }
+        outs() << "\n";
     }
-    
-    Pass.exportToJSON(OutputFilename);
+
+    if (Chronological) {
+        Pass.exportChronologicalJSON(OutputFilename);
+    } else {
+        Pass.exportToJSON(OutputFilename);
+    }
     
     if (Verbose) {
         outs() << "Analysis complete!\n";
