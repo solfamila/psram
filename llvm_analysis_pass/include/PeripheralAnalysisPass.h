@@ -50,6 +50,7 @@ struct PeripheralInfo {
     std::string name;
     uint64_t baseAddress;
     std::map<uint64_t, std::string> registers;
+    std::map<uint32_t, std::string> structMemberToRegister; // Map struct member index to register name
     std::set<uint64_t> accessedAddresses;
 };
 
@@ -90,9 +91,33 @@ private:
     
     /// Get the effective address from a pointer value
     uint64_t getEffectiveAddress(Value *Ptr);
-    
+
+    /// Get effective address from GEP instruction or constant expression
+    uint64_t getEffectiveAddressFromGEP(Value *GEP);
+
+    /// Calculate offset from GEP instruction
+    uint64_t calculateGEPOffset(uint64_t baseAddr, GetElementPtrInst *GEP);
+
+    /// Calculate offset from GEP constant expression
+    uint64_t calculateGEPOffsetFromConstantExpr(uint64_t baseAddr, ConstantExpr *GEPCE);
+
+    /// Trace peripheral base address from function argument
+    uint64_t tracePeripheralBaseFromArgument(Argument *Arg);
+
+    /// Infer peripheral address from instruction context (function name, etc.)
+    uint64_t inferPeripheralAddressFromContext(Instruction *I);
+
     /// Determine which peripheral and register an address belongs to
     std::pair<std::string, std::string> identifyPeripheralRegister(uint64_t address);
+
+    /// Identify peripheral register from struct member index
+    std::pair<std::string, std::string> identifyPeripheralRegisterFromStructMember(uint64_t baseAddress, uint32_t memberIndex);
+
+    /// Extract struct member index from GEP instruction
+    uint32_t extractStructMemberIndex(GetElementPtrInst *GEP);
+
+    /// Extract struct member index from GEP constant expression
+    uint32_t extractStructMemberIndexFromConstantExpr(ConstantExpr *GEPCE);
     
     /// Analyze bitfield operations in store instructions
     std::vector<std::string> analyzeBitfieldOperations(StoreInst *SI);
