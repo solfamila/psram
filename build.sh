@@ -16,6 +16,7 @@ RUN_TESTS="false"
 CLEAN_BUILD="false"
 VERBOSE="false"
 CONTAINER_BUILD="false"
+TOOLCHAIN="gcc"
 
 # Color codes for output
 RED='\033[0;31m'
@@ -54,11 +55,14 @@ OPTIONS:
     -T, --test              Run unit tests after building
     -v, --verbose           Enable verbose output
     -C, --container         Build in container (simulates remote agent)
+    --toolchain TOOLCHAIN   Toolchain to use: gcc, clang, both (default: gcc)
     -h, --help              Show this help message
 
 EXAMPLES:
-    $0                      # Build debug version
-    $0 -t release           # Build release version
+    $0                      # Build debug version with GCC
+    $0 -t release           # Build release version with GCC
+    $0 --toolchain clang    # Build with Clang/LLVM
+    $0 --toolchain both     # Build with both GCC and Clang
     $0 -c -t debug          # Clean and build debug version
     $0 -T                   # Build and run tests
     $0 -C                   # Build in container
@@ -67,6 +71,7 @@ ENVIRONMENT VARIABLES:
     ARMGCC_DIR              Path to ARM GCC toolchain (default: /opt/gcc-arm-none-eabi)
     SDK_ROOT                Path to SDK root directory (auto-detected)
     UNITY_ROOT              Path to Unity testing framework (default: /opt/unity)
+    LLVM_INSTALL_DIR        Path to LLVM installation (default: ./llvm-install)
 
 EOF
 }
@@ -94,6 +99,10 @@ while [[ $# -gt 0 ]]; do
             CONTAINER_BUILD="true"
             shift
             ;;
+        --toolchain)
+            TOOLCHAIN="$2"
+            shift 2
+            ;;
         -h|--help)
             show_help
             exit 0
@@ -113,6 +122,17 @@ case $BUILD_TYPE in
     *)
         log_error "Invalid build type: $BUILD_TYPE"
         log_info "Valid types: debug, release, flash_debug, flash_release"
+        exit 1
+        ;;
+esac
+
+# Validate toolchain
+case $TOOLCHAIN in
+    gcc|clang|both)
+        ;;
+    *)
+        log_error "Invalid toolchain: $TOOLCHAIN"
+        log_info "Valid toolchains: gcc, clang, both"
         exit 1
         ;;
 esac
@@ -255,6 +275,48 @@ setup_environment() {
     fi
 }
 
+# Clang environment setup
+setup_clang_environment() {
+    log_info "Setting up Clang/LLVM environment..."
+
+    # Set default LLVM path if not specified
+    if [[ -z "$LLVM_INSTALL_DIR" ]]; then
+        if [[ -d "$PROJECT_ROOT/llvm-install" ]]; then
+            export LLVM_INSTALL_DIR="$PROJECT_ROOT/llvm-install"
+        else
+            log_error "LLVM installation not found. Please set LLVM_INSTALL_DIR environment variable."
+            log_info "Expected LLVM installation at: $PROJECT_ROOT/llvm-install"
+            log_info "Run ./build_llvm_complete.sh to build LLVM/Clang first."
+            exit 1
+        fi
+    fi
+
+    # Verify Clang installation
+    if [[ ! -f "$LLVM_INSTALL_DIR/bin/clang" ]]; then
+        log_error "Clang not found at: $LLVM_INSTALL_DIR/bin/clang"
+        log_info "Please build LLVM/Clang first using ./build_llvm_complete.sh"
+        exit 1
+    fi
+
+    # Verify Clang version and ARM target support
+    local clang_version=$("$LLVM_INSTALL_DIR/bin/clang" --version | head -n1 | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+' | head -n1)
+    log_info "Clang Version: $clang_version"
+
+    # Check ARM target support
+    if ! "$LLVM_INSTALL_DIR/bin/clang" --print-targets | grep -q arm; then
+        log_error "Clang installation does not support ARM targets"
+        exit 1
+    fi
+
+    log_success "Clang environment setup complete"
+    if [[ "$VERBOSE" == "true" ]]; then
+        log_info "LLVM_INSTALL_DIR: $LLVM_INSTALL_DIR"
+        log_info "Clang Version: $clang_version"
+        log_info "Available targets:"
+        "$LLVM_INSTALL_DIR/bin/clang" --print-targets | grep arm
+    fi
+}
+
 # Container build function
 build_in_container() {
     log_info "Building in container (simulating remote agent)..."
@@ -377,6 +439,121 @@ build_project() {
     fi
 }
 
+# Clang build function
+build_project_clang() {
+    log_info "Building project with Clang (type: $BUILD_TYPE)..."
+
+    cd "$BUILD_DIR"
+
+    # Create Clang build directory
+    local clang_build_dir="build_clang_${BUILD_TYPE}"
+    mkdir -p "$clang_build_dir"
+    cd "$clang_build_dir"
+
+    # Copy necessary configuration files
+    log_info "Setting up Clang build configuration..."
+    cp "$PROJECT_ROOT/cmake/CMakeLists_clang.txt" CMakeLists.txt
+    cp "$PROJECT_ROOT/cmake/clang_toolchain.cmake" .
+    cp "$PROJECT_ROOT/cmake/flags_clang.cmake" .
+    cp "$PROJECT_ROOT/cmake/config_clang.cmake" .
+    cp ../config.cmake .
+    cp ../*.ld .
+
+    # Configure CMake with Clang toolchain
+    log_info "Configuring CMake with Clang toolchain..."
+    cmake -DCMAKE_TOOLCHAIN_FILE=clang_toolchain.cmake \
+          -DCMAKE_BUILD_TYPE="$BUILD_TYPE" \
+          -DSdkRootDirPath="$SDK_ROOT" \
+          .
+
+    # Build the project
+    if [[ "$VERBOSE" == "true" ]]; then
+        make -j4
+    else
+        make -j4 > /dev/null 2>&1
+    fi
+
+    # Verify build artifacts
+    ARTIFACT_DIR="$BUILD_TYPE"
+    if [[ ! -d "$ARTIFACT_DIR" ]]; then
+        log_error "Clang build failed: artifact directory not found"
+        exit 1
+    fi
+
+    ELF_FILE="$ARTIFACT_DIR/xspi_psram_polling_transfer_cm33_core0.elf"
+    BIN_FILE="$ARTIFACT_DIR/xspi_psram_polling_transfer.bin"
+
+    if [[ ! -f "$ELF_FILE" ]]; then
+        log_error "Clang build failed: ELF file not found"
+        exit 1
+    fi
+
+    if [[ ! -f "$BIN_FILE" ]]; then
+        log_error "Clang build failed: BIN file not found"
+        exit 1
+    fi
+
+    log_success "Clang build completed successfully"
+
+    if [[ "$VERBOSE" == "true" ]]; then
+        log_info "Clang build artifacts:"
+        ls -la "$ARTIFACT_DIR"
+
+        # Display ELF file info if 'file' command is available
+        if command -v file &> /dev/null; then
+            log_info "ELF file info:"
+            file "$ELF_FILE"
+        else
+            log_info "ELF file info: (file command not available)"
+            log_info "ELF file size: $(stat -c%s "$ELF_FILE" 2>/dev/null || echo "unknown") bytes"
+        fi
+    fi
+}
+
+# Compare build results
+compare_builds() {
+    log_info "Comparing GCC and Clang build results..."
+
+    local gcc_dir="$BUILD_DIR/$BUILD_TYPE"
+    local clang_dir="$BUILD_DIR/build_clang_${BUILD_TYPE}/$BUILD_TYPE"
+
+    if [[ ! -d "$gcc_dir" ]] || [[ ! -d "$clang_dir" ]]; then
+        log_warning "Cannot compare builds - one or both build directories missing"
+        return 0
+    fi
+
+    local gcc_elf="$gcc_dir/xspi_psram_polling_transfer_cm33_core0.elf"
+    local gcc_bin="$gcc_dir/xspi_psram_polling_transfer.bin"
+    local clang_elf="$clang_dir/xspi_psram_polling_transfer_cm33_core0.elf"
+    local clang_bin="$clang_dir/xspi_psram_polling_transfer.bin"
+
+    if [[ -f "$gcc_elf" ]] && [[ -f "$clang_elf" ]]; then
+        log_info "Build size comparison:"
+
+        local gcc_elf_size=$(stat -c%s "$gcc_elf" 2>/dev/null || echo "0")
+        local gcc_bin_size=$(stat -c%s "$gcc_bin" 2>/dev/null || echo "0")
+        local clang_elf_size=$(stat -c%s "$clang_elf" 2>/dev/null || echo "0")
+        local clang_bin_size=$(stat -c%s "$clang_bin" 2>/dev/null || echo "0")
+
+        printf "%-15s %-12s %-12s %-12s\n" "File Type" "GCC Size" "Clang Size" "Difference"
+        printf "%-15s %-12s %-12s %-12s\n" "----------" "--------" "----------" "----------"
+        printf "%-15s %-12s %-12s %-12s\n" "ELF" "${gcc_elf_size} B" "${clang_elf_size} B" "$((clang_elf_size - gcc_elf_size)) B"
+        printf "%-15s %-12s %-12s %-12s\n" "Binary" "${gcc_bin_size} B" "${clang_bin_size} B" "$((clang_bin_size - gcc_bin_size)) B"
+
+        # Calculate percentage difference for binary
+        if [[ $gcc_bin_size -gt 0 ]]; then
+            local percent_diff=$(( (clang_bin_size - gcc_bin_size) * 100 / gcc_bin_size ))
+            if [[ $percent_diff -lt 0 ]]; then
+                log_success "Clang binary is ${percent_diff#-}% smaller than GCC"
+            elif [[ $percent_diff -gt 0 ]]; then
+                log_info "Clang binary is ${percent_diff}% larger than GCC"
+            else
+                log_info "GCC and Clang binaries are the same size"
+            fi
+        fi
+    fi
+}
+
 # Test function
 run_tests() {
     log_info "Running unit tests..."
@@ -425,28 +602,55 @@ run_tests() {
 # Main execution
 main() {
     log_info "Starting MIMXRT700 build process..."
-    
+    log_info "Toolchain: $TOOLCHAIN, Build type: $BUILD_TYPE"
+
     # Handle container build
     if [[ "$CONTAINER_BUILD" == "true" ]]; then
         build_in_container
     fi
-    
-    # Setup environment
-    setup_environment
-    
+
+    # Setup environment based on toolchain
+    case $TOOLCHAIN in
+        gcc)
+            setup_environment
+            ;;
+        clang)
+            setup_environment  # Still need GCC for sysroot
+            setup_clang_environment
+            ;;
+        both)
+            setup_environment
+            setup_clang_environment
+            ;;
+    esac
+
     # Clean if requested
     if [[ "$CLEAN_BUILD" == "true" ]]; then
         clean_build
     fi
-    
-    # Build project
-    build_project
-    
+
+    # Build project based on toolchain
+    case $TOOLCHAIN in
+        gcc)
+            build_project
+            ;;
+        clang)
+            build_project_clang
+            ;;
+        both)
+            log_info "Building with GCC first..."
+            build_project
+            log_info "Building with Clang..."
+            build_project_clang
+            compare_builds
+            ;;
+    esac
+
     # Run tests if requested
     if [[ "$RUN_TESTS" == "true" ]]; then
         run_tests
     fi
-    
+
     log_success "Build process completed successfully!"
 }
 
