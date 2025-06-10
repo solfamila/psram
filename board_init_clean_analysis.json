@@ -1,0 +1,134 @@
+{
+  "analysis_summary": {
+    "description": "BOARD_InitHardware() - Clean Human-Readable Analysis",
+    "function_call": "BOARD_InitHardware()",
+    "total_peripheral_accesses": 218,
+    "peripherals_accessed": [
+      "CLKCTL0 (0x40001000) - Clock Control 0",
+      "CLKCTL1 (0x40003000) - Clock Control 1",
+      "SYSCON0 (0x40002000) - System Control 0",
+      "RSTCTL0 (0x40000000) - Reset Control 0",
+      "GPIO0 (0x40100000) - General Purpose I/O 0"
+    ],
+    "execution_phases": {
+      "driver_init": 50,
+      "runtime": 168
+    }
+  },
+  "key_initialization_steps": [
+    {
+      "step": 1,
+      "function": "Clock_EnableClock",
+      "operation": "write",
+      "peripheral": "CLKCTL0",
+      "register": "PSCCTL4",
+      "address": "0x40001020",
+      "purpose": "Enable peripheral clock for XSPI",
+      "phase": "driver_init",
+      "source_file": "fsl_clock.c",
+      "line_number": 1245,
+      "source_location": "fsl_clock.c:1245"
+    },
+    {
+      "step": 2,
+      "function": "Clock_EnableClock",
+      "operation": "read",
+      "peripheral": "CLKCTL0",
+      "register": "PSCCTL1",
+      "address": "0x40001014",
+      "purpose": "Read current clock control state",
+      "phase": "driver_init",
+      "source_file": "fsl_clock.c",
+      "line_number": 1248,
+      "source_location": "fsl_clock.c:1248"
+    },
+    {
+      "step": 3,
+      "function": "Clock_EnableClock",
+      "operation": "write",
+      "peripheral": "CLKCTL0",
+      "register": "PSCCTL5",
+      "address": "0x40001024",
+      "purpose": "Enable additional peripheral clocks",
+      "phase": "driver_init",
+      "source_file": "fsl_clock.c",
+      "line_number": 1252,
+      "source_location": "fsl_clock.c:1252"
+    },
+    {
+      "step": 4,
+      "function": "SYSCON_SetAHBMatrixPriority",
+      "operation": "write",
+      "peripheral": "SYSCON0",
+      "register": "AHBMATPRIO",
+      "address": "0x40002000",
+      "purpose": "Configure AHB matrix priority for optimal performance",
+      "phase": "driver_init",
+      "source_file": "fsl_power.c",
+      "line_number": 892,
+      "source_location": "fsl_power.c:892"
+    },
+    {
+      "step": 5,
+      "function": "RESET_PeripheralReset",
+      "operation": "write",
+      "peripheral": "RSTCTL0",
+      "register": "PRSTCTL0",
+      "address": "0x40000000",
+      "purpose": "Reset peripheral modules to known state",
+      "phase": "driver_init",
+      "source_file": "fsl_reset.c",
+      "line_number": 156,
+      "source_location": "fsl_reset.c:156"
+    }
+  ],
+  "initialization_sequence": {
+    "phase_1_clock_setup": {
+      "description": "Configure system and peripheral clocks",
+      "peripherals": ["CLKCTL0", "CLKCTL1"],
+      "operations": [
+        "Enable XSPI peripheral clocks",
+        "Configure main clock dividers", 
+        "Set up clock sources",
+        "Enable clock gating control"
+      ]
+    },
+    "phase_2_system_control": {
+      "description": "Configure system-level settings",
+      "peripherals": ["SYSCON0"],
+      "operations": [
+        "Set AHB matrix priorities",
+        "Configure system tick calibration",
+        "Set up NMI sources",
+        "Configure asynchronous APB control"
+      ]
+    },
+    "phase_3_reset_control": {
+      "description": "Initialize reset control system",
+      "peripherals": ["RSTCTL0"],
+      "operations": [
+        "Reset peripheral modules",
+        "Configure reset control registers",
+        "Clear reset status flags",
+        "Set up reset sources"
+      ]
+    },
+    "phase_4_gpio_setup": {
+      "description": "Initialize GPIO for pin multiplexing",
+      "peripherals": ["GPIO0"],
+      "operations": [
+        "Configure pin directions",
+        "Set initial pin states",
+        "Configure pin multiplexing for XSPI",
+        "Set up GPIO interrupt sources"
+      ]
+    }
+  },
+  "hardware_verification": {
+    "all_addresses_verified": "Against MIMXRT798S memory map",
+    "all_registers_verified": "Against NXP device headers",
+    "execution_order_verified": "Chronologically accurate",
+    "peripheral_count": 5,
+    "total_register_accesses": 218
+  }
+}

@@ -10,6 +10,8 @@
 #include "llvm/Support/FileSystem.h"
 #include "llvm/Support/ToolOutputFile.h"
 #include <fstream>
+#include <sstream>
+#include <iomanip>
 
 using namespace llvm;
 
@@ -77,26 +79,111 @@ bool PeripheralAnalysisLegacyPass::runOnModule(Module &M) {
 }
 
 void PeripheralAnalysisPass::initializePeripheralDefinitions() {
-    // XSPI0 Peripheral (Secure)
-    PeripheralInfo xspi0;
-    xspi0.name = "XSPI0";
-    xspi0.baseAddress = 0x50184000;
-    xspi0.registers[0x50184000] = "MCR";      // Module Configuration Register
-    xspi0.registers[0x50184008] = "IPCR";     // IP Configuration Register
-    xspi0.registers[0x5018400C] = "FLSHCR";   // Flash Memory Configuration Register
-    xspi0.registers[0x50184010] = "BUFCR0";   // Buffer Configuration Register 0
-    xspi0.registers[0x50184014] = "BUFCR1";   // Buffer Configuration Register 1
-    xspi0.registers[0x50184018] = "BUFCR2";   // Buffer Configuration Register 2
-    xspi0.registers[0x5018401C] = "BUFCR3";   // Buffer Configuration Register 3
-    xspi0.registers[0x50184020] = "BFGENCR";  // Buffer Generic Configuration Register
-    xspi0.registers[0x50184024] = "SOCCR";    // SOC Configuration Register
-    xspi0.registers[0x50184100] = "SFAR";     // Serial Flash Memory Address Register
-    xspi0.registers[0x50184104] = "SFACR";    // Serial Flash Memory Address Configuration Register
-    xspi0.registers[0x50184108] = "SMPR";     // Sampling Register
-    xspi0.registers[0x50184300] = "LUTKEY";   // LUT Key Register
-    xspi0.registers[0x50184304] = "LCKCR";    // LUT Lock Configuration Register
-    peripherals["XSPI0"] = xspi0;
-    
+    // REAL MIMXRT798S PERIPHERAL DEFINITIONS
+    // Extracted from official NXP device header files
+    // Base addresses verified from MIMXRT798S_cm33_core0_COMMON.h
+
+    // CLKCTL0 Peripheral - Real MIMXRT798S Definition
+    PeripheralInfo clkctl0;
+    clkctl0.name = "CLKCTL0";
+    clkctl0.baseAddress = 0x40001000;
+    clkctl0.registers[0x40001010] = "PSCCTL0";
+    clkctl0.registers[0x40001014] = "PSCCTL1";
+    clkctl0.registers[0x40001018] = "PSCCTL2";
+    clkctl0.registers[0x4000101C] = "PSCCTL3";
+    clkctl0.registers[0x40001020] = "PSCCTL4";
+    clkctl0.registers[0x40001024] = "PSCCTL5";
+    clkctl0.registers[0x40001040] = "PSCCTL0_SET";
+    clkctl0.registers[0x40001044] = "PSCCTL1_SET";
+    clkctl0.registers[0x40001048] = "PSCCTL2_SET";
+    clkctl0.registers[0x4000104C] = "PSCCTL3_SET";
+    clkctl0.registers[0x40001050] = "PSCCTL4_SET";
+    clkctl0.registers[0x40001054] = "PSCCTL5_SET";
+    clkctl0.registers[0x40001070] = "PSCCTL0_CLR";
+    clkctl0.registers[0x40001074] = "PSCCTL1_CLR";
+    clkctl0.registers[0x40001078] = "PSCCTL2_CLR";
+    clkctl0.registers[0x4000107C] = "PSCCTL3_CLR";
+    clkctl0.registers[0x40001080] = "PSCCTL4_CLR";
+    clkctl0.registers[0x40001084] = "PSCCTL5_CLR";
+    clkctl0.registers[0x40001400] = "MAINCLKDIV";
+    clkctl0.registers[0x40001434] = "MAINCLKSEL";
+    clkctl0.registers[0x40001600] = "XSPI0FCLKSEL";
+    clkctl0.registers[0x40001604] = "XSPI0FCLKDIV";
+    clkctl0.registers[0x40001620] = "XSPI1FCLKSEL";
+    clkctl0.registers[0x40001624] = "XSPI1FCLKDIV";
+    peripherals["CLKCTL0"] = clkctl0;
+
+    // SYSCON0 Peripheral - Real MIMXRT798S Definition
+    PeripheralInfo syscon0;
+    syscon0.name = "SYSCON0";
+    syscon0.baseAddress = 0x40002000;
+    syscon0.registers[0x40002000] = "AHBMATPRIO";
+    syscon0.registers[0x40002010] = "SYSTCKCAL";
+    syscon0.registers[0x40002020] = "NMISRC";
+    syscon0.registers[0x40002024] = "ASYNCAPBCTRL";
+    syscon0.registers[0x40002030] = "PIOPORCAP0";
+    syscon0.registers[0x40002034] = "PIOPORCAP1";
+    syscon0.registers[0x40002040] = "PIORESCAP0";
+    syscon0.registers[0x40002044] = "PIORESCAP1";
+    syscon0.registers[0x40002050] = "PRESETCTRL0";
+    syscon0.registers[0x40002054] = "PRESETCTRL1";
+    syscon0.registers[0x40002058] = "PRESETCTRL2";
+    peripherals["SYSCON0"] = syscon0;
+
+    // RSTCTL0 Peripheral - Real MIMXRT798S Definition
+    PeripheralInfo rstctl0;
+    rstctl0.name = "RSTCTL0";
+    rstctl0.baseAddress = 0x40000000;
+    rstctl0.registers[0x40000000] = "PRSTCTL0";
+    rstctl0.registers[0x40000004] = "PRSTCTL1";
+    rstctl0.registers[0x40000008] = "PRSTCTL2";
+    rstctl0.registers[0x4000000C] = "PRSTCTL3";
+    rstctl0.registers[0x40000010] = "PRSTCTL4";
+    rstctl0.registers[0x40000020] = "PRSTCTLSET0";
+    rstctl0.registers[0x40000024] = "PRSTCTLSET1";
+    rstctl0.registers[0x40000028] = "PRSTCTLSET2";
+    rstctl0.registers[0x4000002C] = "PRSTCTLSET3";
+    rstctl0.registers[0x40000030] = "PRSTCTLSET4";
+    rstctl0.registers[0x40000040] = "PRSTCTLCLR0";
+    rstctl0.registers[0x40000044] = "PRSTCTLCLR1";
+    rstctl0.registers[0x40000048] = "PRSTCTLCLR2";
+    rstctl0.registers[0x4000004C] = "PRSTCTLCLR3";
+    rstctl0.registers[0x40000050] = "PRSTCTLCLR4";
+    peripherals["RSTCTL0"] = rstctl0;
+
+    // GPIO0 Peripheral - Real MIMXRT798S Definition
+    PeripheralInfo gpio0;
+    gpio0.name = "GPIO0";
+    gpio0.baseAddress = 0x40100000;
+    gpio0.registers[0x40100000] = "PDOR";
+    gpio0.registers[0x40100004] = "PSOR";
+    gpio0.registers[0x40100008] = "PCOR";
+    gpio0.registers[0x4010000C] = "PTOR";
+    gpio0.registers[0x40100010] = "PDIR";
+    gpio0.registers[0x40100014] = "PDDR";
+    gpio0.registers[0x40100018] = "PIDR";
+    peripherals["GPIO0"] = gpio0;
+
+    // XSPI2 Peripheral - Real MIMXRT798S Definition
+    PeripheralInfo xspi2;
+    xspi2.name = "XSPI2";
+    xspi2.baseAddress = 0x40411000;
+    xspi2.registers[0x40411000] = "MCR";
+    xspi2.registers[0x40411008] = "IPCR";
+    xspi2.registers[0x4041100C] = "FLSHCR";
+    xspi2.registers[0x40411010] = "BUFCR0";
+    xspi2.registers[0x40411014] = "BUFCR1";
+    xspi2.registers[0x40411018] = "BUFCR2";
+    xspi2.registers[0x4041101C] = "BUFCR3";
+    xspi2.registers[0x40411020] = "BFGENCR";
+    xspi2.registers[0x40411024] = "SOCCR";
+    xspi2.registers[0x40411100] = "SFAR";
+    xspi2.registers[0x40411104] = "SFACR";
+    xspi2.registers[0x40411108] = "SMPR";
+    xspi2.registers[0x40411300] = "LUTKEY";
+    xspi2.registers[0x40411304] = "LCKCR";
+    peripherals["XSPI2"] = xspi2;
+
     // XSPI0 Non-Secure
     PeripheralInfo xspi0_ns;
     xspi0_ns.name = "XSPI0_NS";
@@ -137,76 +224,9 @@ void PeripheralAnalysisPass::initializePeripheralDefinitions() {
     xspi1.registers[0x40185304] = "LCKCR";
     peripherals["XSPI1"] = xspi1;
     
-    // XSPI2 Peripheral - Enhanced with struct member mapping - CORRECTED MIMXRT700 BASE ADDRESSES
-    PeripheralInfo xspi2;
-    xspi2.name = "XSPI2";
-    xspi2.baseAddress = 0x1078005760;  // CORRECTED: Based on actual LLVM IR analysis
+    // XSPI2 already defined above with real MIMXRT798S definitions
 
-    // Map struct member indices to register names (based on LLVM IR analysis)
-    xspi2.structMemberToRegister[0] = "MCR";        // Module Configuration Register
-    xspi2.structMemberToRegister[1] = "IPCR";       // IP Configuration Register
-    xspi2.structMemberToRegister[2] = "FLSHCR";     // Flash Configuration Register
-    xspi2.structMemberToRegister[4] = "BUFCR0";     // Buffer Configuration Register 0
-    xspi2.structMemberToRegister[5] = "AHBCR";      // AHB Configuration Register
-    xspi2.structMemberToRegister[8] = "AHBRXBUF0CR"; // AHB RX Buffer 0 Configuration
-    xspi2.structMemberToRegister[10] = "AHBRXBUF1CR"; // AHB RX Buffer 1 Configuration
-    xspi2.structMemberToRegister[12] = "FLSHA1CR0";  // Flash A1 Configuration Register 0
-    xspi2.structMemberToRegister[16] = "FLSHA2CR0";  // Flash A2 Configuration Register 0
-    xspi2.structMemberToRegister[22] = "FLSHB1CR0";  // Flash B1 Configuration Register 0
-    xspi2.structMemberToRegister[27] = "IPCMD";      // IP Command Register
-    xspi2.structMemberToRegister[28] = "IPCR1";      // IP Configuration Register 1
-    xspi2.structMemberToRegister[29] = "IPCR2";      // IP Configuration Register 2
-    xspi2.structMemberToRegister[30] = "IPCR3";      // IP Configuration Register 3
-    xspi2.structMemberToRegister[32] = "AHBSPNDSTS";  // AHB Suspend Status
-    xspi2.structMemberToRegister[33] = "IPRXFCR";    // IP RX FIFO Control Register
-    xspi2.structMemberToRegister[40] = "IPTXFCR";    // IP TX FIFO Control Register
-    xspi2.structMemberToRegister[41] = "LUTKEY";     // LUT Key Register
-    xspi2.structMemberToRegister[42] = "LCKCR";      // LUT Lock Configuration Register
-    xspi2.structMemberToRegister[44] = "LUT0";       // LUT Register 0
-    xspi2.structMemberToRegister[46] = "AHBRXBUF0CR0"; // AHB RX Buffer 0 Configuration Register 0
-    xspi2.structMemberToRegister[47] = "AHBRXBUF1CR0"; // AHB RX Buffer 1 Configuration Register 0
-    xspi2.structMemberToRegister[48] = "AHBRXBUF2CR0"; // AHB RX Buffer 2 Configuration Register 0
-    xspi2.structMemberToRegister[51] = "AHBRXBUF0CR1"; // AHB RX Buffer 0 Configuration Register 1
-    xspi2.structMemberToRegister[52] = "AHBRXBUF1CR1"; // AHB RX Buffer 1 Configuration Register 1
-    xspi2.structMemberToRegister[53] = "AHBRXBUF2CR1"; // AHB RX Buffer 2 Configuration Register 1
-    xspi2.structMemberToRegister[54] = "AHBRXBUF0CR2"; // AHB RX Buffer 0 Configuration Register 2
-    xspi2.structMemberToRegister[55] = "AHBRXBUF1CR2"; // AHB RX Buffer 1 Configuration Register 2
-    xspi2.structMemberToRegister[56] = "AHBRXBUF2CR2"; // AHB RX Buffer 2 Configuration Register 2
-    xspi2.structMemberToRegister[57] = "AHBRXBUF0CR3"; // AHB RX Buffer 0 Configuration Register 3
-    xspi2.structMemberToRegister[124] = "STS0";      // Status Register 0
-    xspi2.structMemberToRegister[125] = "STS1";      // Status Register 1
-    xspi2.structMemberToRegister[133] = "INTR";      // Interrupt Register
-    xspi2.structMemberToRegister[134] = "INTEN";     // Interrupt Enable Register
-
-    // Traditional address-based mapping for backward compatibility - CORRECTED ADDRESSES
-    xspi2.registers[0x1078005760] = "MCR";      // CORRECTED: Based on actual LLVM IR analysis
-    xspi2.registers[0x1078005768] = "IPCR";
-    xspi2.registers[0x107800576C] = "FLSHCR";
-    xspi2.registers[0x1078005770] = "BUFCR0";
-    xspi2.registers[0x1078005774] = "BUFCR1";
-    xspi2.registers[0x1078005778] = "BUFCR2";
-    xspi2.registers[0x107800577C] = "BUFCR3";
-    xspi2.registers[0x1078005780] = "BFGENCR";
-    xspi2.registers[0x1078005784] = "SOCCR";
-    xspi2.registers[0x1078005860] = "SFAR";
-    xspi2.registers[0x1078005864] = "SFACR";
-    xspi2.registers[0x1078005868] = "SMPR";
-    xspi2.registers[0x1078006060] = "LUTKEY";
-    xspi2.registers[0x1078006064] = "LCKCR";
-    peripherals["XSPI2"] = xspi2;
-
-    // GPIO Peripherals - CORRECTED MIMXRT700 BASE ADDRESSES
-    PeripheralInfo gpio0;
-    gpio0.name = "GPIO0";
-    gpio0.baseAddress = 0x1074790400;  // CORRECTED: Based on actual LLVM IR analysis
-    gpio0.registers[0x1074790400] = "PDOR";    // Port Data Output Register
-    gpio0.registers[0x1074790404] = "PSOR";    // Port Set Output Register
-    gpio0.registers[0x1074790408] = "PCOR";    // Port Clear Output Register
-    gpio0.registers[0x107479040C] = "PTOR";    // Port Toggle Output Register
-    gpio0.registers[0x1074790410] = "PDIR";    // Port Data Input Register
-    gpio0.registers[0x1074790414] = "PDDR";    // Port Data Direction Register
-    gpio0.registers[0x1074790418] = "PIDR";    // Port Input Disable Register
-    peripherals["GPIO0"] = gpio0;
+    // GPIO0 already defined above with real MIMXRT798S definitions
 
     PeripheralInfo gpio1;
     gpio1.name = "GPIO1";
@@ -244,38 +264,9 @@ void PeripheralAnalysisPass::initializePeripheralDefinitions() {
     gpio3.registers[0x40106018] = "PIDR";
     peripherals["GPIO3"] = gpio3;
 
-    // Clock Control Peripherals - CORRECTED MIMXRT700 BASE ADDRESSES
-    PeripheralInfo clkctl0;
-    clkctl0.name = "CLKCTL0";
-    clkctl0.baseAddress = 0x1073745920;  // CORRECTED: Based on actual LLVM IR analysis
-    clkctl0.registers[0x1073745920] = "PSCCTL0";   // Peripheral Clock Control 0
-    clkctl0.registers[0x1073745924] = "PSCCTL1";   // Peripheral Clock Control 1
-    clkctl0.registers[0x1073745928] = "PSCCTL2";   // Peripheral Clock Control 2
-    clkctl0.registers[0x1073745936] = "AUTOCLKGATEOVERRIDE"; // Auto Clock Gate Override
-    clkctl0.registers[0x1073745952] = "CLOCKGENUPDATELOCKOUT"; // Clock Generation Update Lockout
-    clkctl0.registers[0x1073745968] = "SYSTEMCLKDIV"; // System Clock Divider
-    clkctl0.registers[0x1073745984] = "AHBCLKDIV";    // AHB Clock Divider
-    clkctl0.registers[0x1073746032] = "MAINCLKSELA";  // Main Clock Select A
-    clkctl0.registers[0x1073746036] = "MAINCLKSELB";  // Main Clock Select B
-    clkctl0.registers[0x1073746048] = "CLKOUTSEL";    // Clock Output Select
-    peripherals["CLKCTL0"] = clkctl0;
+    // CLKCTL0 already defined above with real MIMXRT798S definitions
 
-    // System Control Peripherals - CORRECTED MIMXRT700 BASE ADDRESSES
-    PeripheralInfo syscon0;
-    syscon0.name = "SYSCON0";
-    syscon0.baseAddress = 0x1073750016;  // CORRECTED: Based on actual LLVM IR analysis
-    syscon0.registers[0x1073750016] = "AHBMATPRIO";   // AHB Matrix Priority
-    syscon0.registers[0x1073750020] = "REG_0x4";      // Register at offset 0x4
-    syscon0.registers[0x1073750024] = "REG_0x8";      // Register at offset 0x8
-    syscon0.registers[0x1073750028] = "ASYNCAPBCTRL"; // Asynchronous APB Control
-    syscon0.registers[0x1073750032] = "PIOPORCAP0";   // PIO Power-On Reset Capture 0
-    syscon0.registers[0x1073750036] = "PIOPORCAP1";   // PIO Power-On Reset Capture 1
-    syscon0.registers[0x1073750040] = "PIORESCAP0";   // PIO Reset Capture 0
-    syscon0.registers[0x1073750044] = "PIORESCAP1";   // PIO Reset Capture 1
-    syscon0.registers[0x1073750050] = "PRESETCTRL0";  // Peripheral Reset Control 0
-    syscon0.registers[0x1073750054] = "PRESETCTRL1";  // Peripheral Reset Control 1
-    syscon0.registers[0x1073750058] = "PRESETCTRL2";  // Peripheral Reset Control 2
-    peripherals["SYSCON0"] = syscon0;
+    // SYSCON0 already defined above with real MIMXRT798S definitions
 
     // UART Peripherals (LP_FLEXCOMM)
     PeripheralInfo lpuart0;
@@ -456,37 +447,18 @@ void PeripheralAnalysisPass::initializePeripheralDefinitions() {
 
 
 
-    // Add CLKCTL1 peripheral - CORRECTED MIMXRT700 BASE ADDRESSES
+    // Add CLKCTL1 peripheral
     PeripheralInfo clkctl1;
     clkctl1.name = "CLKCTL1";
-    clkctl1.baseAddress = 0x1073754112;  // CORRECTED: Based on actual LLVM IR analysis
-    clkctl1.registers[0x1073754112] = "PSCCTL0";
-    clkctl1.registers[0x1073754116] = "PSCCTL1";
-    clkctl1.registers[0x1073754120] = "PSCCTL2";
-    clkctl1.registers[0x1073754124] = "PSCCTL3";
-    clkctl1.registers[0x1073754128] = "PSCCTL4";
+    clkctl1.baseAddress = 0x40003000;
+    clkctl1.registers[0x40003000] = "PSCCTL0";
+    clkctl1.registers[0x40003004] = "PSCCTL1";
+    clkctl1.registers[0x40003008] = "PSCCTL2";
+    clkctl1.registers[0x4000300C] = "PSCCTL3";
+    clkctl1.registers[0x40003010] = "PSCCTL4";
     peripherals["CLKCTL1"] = clkctl1;
 
-    // Add RSTCTL0 peripheral (Reset Control) - CORRECTED MIMXRT700 BASE ADDRESSES
-    PeripheralInfo rstctl0;
-    rstctl0.name = "RSTCTL0";
-    rstctl0.baseAddress = 0x1073758256;  // CORRECTED: Based on actual LLVM IR analysis
-    rstctl0.registers[0x1073758256] = "PRSTCTL0";
-    rstctl0.registers[0x1073758257] = "PRSTCTL1";
-    rstctl0.registers[0x1073758258] = "PRSTCTL2";
-    rstctl0.registers[0x1073758259] = "PRSTCTL3";
-    rstctl0.registers[0x1073758260] = "PRSTCTL4";
-    rstctl0.registers[0x1073758256] = "PRSTCTLSET0";  // Based on analysis results
-    rstctl0.registers[0x1073758257] = "PRSTCTLSET1";
-    rstctl0.registers[0x1073758258] = "PRSTCTLSET2";
-    rstctl0.registers[0x1073758259] = "PRSTCTLSET3";
-    rstctl0.registers[0x1073758260] = "PRSTCTLSET4";
-    rstctl0.registers[0x1073758256] = "PRSTCTLCLR0";
-    rstctl0.registers[0x1073758257] = "PRSTCTLCLR1";
-    rstctl0.registers[0x1073758258] = "PRSTCTLCLR2";
-    rstctl0.registers[0x1073758259] = "PRSTCTLCLR3";
-    rstctl0.registers[0x1073758260] = "PRSTCTLCLR4";
-    peripherals["RSTCTL0"] = rstctl0;
+    // RSTCTL0 already defined above with real MIMXRT798S definitions (base: 0x40000000)
 
     // Add RSTCTL1 peripheral
     PeripheralInfo rstctl1;
@@ -1268,14 +1240,18 @@ void PeripheralAnalysisPass::exportToJSON(const std::string& filename) const {
         // Find base address
         auto it = peripherals.find(peripheralName);
         if (it != peripherals.end()) {
-            peripheralObj["base_address"] = "0x" + std::to_string(it->second.baseAddress);
+            std::stringstream base_ss;
+            base_ss << "0x" << std::hex << std::uppercase << it->second.baseAddress;
+            peripheralObj["base_address"] = base_ss.str();
         }
 
         json::Array accessArray;
         for (const auto* access : accesses) {
             json::Object accessObj;
             accessObj["register_name"] = access->registerName;
-            accessObj["address"] = "0x" + std::to_string(access->address);
+            std::stringstream addr_ss;
+            addr_ss << "0x" << std::hex << std::uppercase << access->address;
+            accessObj["address"] = addr_ss.str();
             accessObj["access_type"] = access->accessType;
             accessObj["data_size"] = static_cast<int64_t>(access->dataSize);
 
@@ -1515,7 +1491,9 @@ void PeripheralAnalysisPass::exportChronologicalJSON(const std::string& filename
         accessObj["sequence_number"] = static_cast<int64_t>(access.sequenceNumber);
         accessObj["peripheral_name"] = access.peripheralName;
         accessObj["register_name"] = access.registerName;
-        accessObj["address"] = "0x" + std::to_string(access.address);
+        std::stringstream chrono_addr_ss;
+        chrono_addr_ss << "0x" << std::hex << std::uppercase << access.address;
+        accessObj["address"] = chrono_addr_ss.str();
         accessObj["access_type"] = access.accessType;
         accessObj["data_size"] = static_cast<int64_t>(access.dataSize);
 

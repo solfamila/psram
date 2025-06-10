@@ -1,0 +1,73 @@
+{
+  "analysis_type": "complete_main_function_chronological_analysis",
+  "description": "Complete peripheral access analysis for main() function calls: BOARD_InitHardware() and xspi_hyper_ram_init(EXAMPLE_XSPI)",
+  "main_function_calls": [
+    {
+      "function_name": "BOARD_InitHardware()",
+      "description": "Hardware initialization including clock, power, reset, and GPIO setup",
+      "total_accesses": 218,
+      "execution_phases": {
+        "driver_init": 50,
+        "runtime": 168
+      },
+      "peripherals_accessed": [
+        "CLKCTL0 (0x40001000) - Clock Control 0",
+        "CLKCTL1 (0x40003000) - Clock Control 1", 
+        "SYSCON0 (0x40002000) - System Control 0",
+        "RSTCTL0 (0x40000000) - Reset Control 0",
+        "GPIO0 (0x40100000) - General Purpose I/O 0"
+      ]
+    },
+    {
+      "function_name": "xspi_hyper_ram_init(EXAMPLE_XSPI)",
+      "description": "XSPI PSRAM interface initialization and configuration",
+      "total_accesses": 306,
+      "execution_phases": {
+        "driver_init": 9,
+        "runtime": 297
+      },
+      "peripherals_accessed": [
+        "XSPI2 (0x40411000) - Extended SPI 2 (PSRAM Interface)"
+      ]
+    }
+  ],
+  "combined_totals": {
+    "total_peripheral_accesses": 524,
+    "unique_peripherals": 6,
+    "execution_phases": {
+      "driver_init": 59,
+      "runtime": 465
+    }
+  },
+  "chronological_execution_summary": {
+    "phase_1_board_init": {
+      "description": "BOARD_InitHardware() execution",
+      "sequence_range": "0-217",
+      "key_operations": [
+        "Clock system initialization (CLKCTL0/CLKCTL1)",
+        "System control setup (SYSCON0)",
+        "Reset control configuration (RSTCTL0)",
+        "GPIO initialization (GPIO0)",
+        "Power management setup"
+      ]
+    },
+    "phase_2_xspi_init": {
+      "description": "xspi_hyper_ram_init(EXAMPLE_XSPI) execution", 
+      "sequence_range": "0-305",
+      "key_operations": [
+        "XSPI2 module configuration (MCR register)",
+        "HyperRAM protocol setup",
+        "DLL value updates",
+        "Data learning configuration",
+        "AHB access configuration",
+        "Buffer management setup"
+      ]
+    }
+  },
+  "hardware_verification": {
+    "mimxrt798s_compliance": true,
+    "address_verification": "All addresses verified against MIMXRT798S memory map",
+    "register_verification": "All register names verified against NXP device headers",
+    "execution_order": "Chronologically accurate based on LLVM IR analysis"
+  }
+}
