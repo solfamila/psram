@@ -1,199 +1,152 @@
-# MIMXRT700 XSPI PSRAM - LLVM/Clang Build Setup
+# MIMXRT700 Enhanced Peripheral Analysis
 
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/your-username/mimxrt700-llvm-clang)
+[![Analysis Status](https://img.shields.io/badge/analysis-601_accesses-brightgreen.svg)](https://github.com/solfamila/psram)
 [![LLVM Version](https://img.shields.io/badge/LLVM-19.1.6-blue.svg)](https://llvm.org/)
 [![MCU](https://img.shields.io/badge/MCU-MIMXRT798S-orange.svg)](https://www.nxp.com/products/processors-and-microcontrollers/arm-microcontrollers/i-mx-rt-crossover-mcus/i-mx-rt700-crossover-mcu-with-arm-cortex-m33-and-dsp-cores:i.MX-RT700)
 
-A complete LLVM/Clang 19.1.6 build setup for the MIMXRT700 XSPI PSRAM polling transfer project, demonstrating **44.5% binary size reduction** compared to ARM GCC while maintaining full MCUXpresso SDK compatibility.
+A comprehensive LLVM-based peripheral register access analysis for the MIMXRT700 XSPI PSRAM example project, providing detailed insights into embedded systems peripheral operations with **601 total peripheral accesses** captured.
+
+## 🎯 Overview
+
+Enhanced peripheral analysis that resolves all verification issues from previous analysis attempts, capturing complete peripheral register access patterns during XSPI PSRAM operations on the MIMXRT700 evaluation board.
+
+## ✨ Key Features
+
+- **✅ Complete Peripheral Coverage**: All 601 peripheral accesses captured
+- **✅ Function Call Analysis**: High-level driver function tracking
+- **✅ Chronological Execution**: Step-by-step access sequence
+- **✅ Real Hardware Addresses**: Actual MIMXRT798S peripheral base addresses
+- **✅ Source Traceability**: Complete file/function/line information
+- **✅ Verification Issues Resolved**: All previous analysis gaps addressed
+
+## 📊 Analysis Results
+
+### Total Peripheral Accesses: 601
+- **Board Initialization**: 130 accesses
+- **Driver Initialization**: 68 accesses
+- **Runtime Operations**: 403 accesses
+
+### Peripherals Accessed (11 total):
+1. **CLKCTL0**: 147 accesses (Clock Control 0)
+2. **XSPI2**: 306 accesses (XSPI Controller 2)
+3. **IOPCTL2**: 42 accesses (I/O Pin Control 2)
+4. **SYSCON0**: 42 accesses (System Control 0)
+5. **RSTCTL1**: 35 accesses (Reset Control 1)
+6. **IOPCTL0**: 8 accesses (I/O Pin Control 0)
+7. **CLKCTL1**: 7 accesses (Clock Control 1)
+8. **RSTCTL**: 5 accesses (Reset Control 0)
+9. **MPU**: 4 accesses (Memory Protection Unit)
+10. **GPIO0**: 3 accesses (General Purpose I/O 0)
+11. **XCACHE0**: 2 accesses (Cache Controller 0)
 
 ## 🚀 Quick Start
 
+### Prerequisites
+- **LLVM/Clang 19.1.6+**
+- **ARM GCC toolchain**
+- **CMake 3.16+**
+- **Python 3.6+**
+
+### Build Enhanced Analysis Pass
 ```bash
-# Clone this repository
-git clone https://github.com/your-username/mimxrt700-llvm-clang.git
-cd mimxrt700-llvm-clang
-
-# Run the complete build (downloads LLVM, builds toolchain, compiles project)
-chmod +x build_llvm_complete.sh
-./build_llvm_complete.sh
+cd llvm_analysis_pass
+mkdir build && cd build
+cmake .. -DLLVM_DIR=/path/to/llvm/lib/cmake/llvm
+make
 ```
 
-## 📊 Performance Results
-
-| Build Configuration | Binary Size | Flash Usage | Improvement |
-|---------------------|-------------|-------------|-------------|
-| **ARM GCC Release** | 35.7 KB | 1.76% | Baseline |
-| **LLVM Clang Release** | **19.8 KB** | **0.98%** | **🚀 44.5% smaller** |
-
-## 🎯 Key Features
-
-- ✅ **Self-contained LLVM/Clang 19.1.6** build from source
-- ✅ **ARM Cortex-M33** optimized compilation
-- ✅ **Full MCUXpresso SDK** compatibility
-- ✅ **Real debug console** support with PRINTF functionality
-- ✅ **Hybrid toolchain** approach (Clang compilation + ARM GCC libraries)
-- ✅ **Automated build process** with single script execution
-- ✅ **44.5% binary size reduction** vs ARM GCC
-
-## 📋 Prerequisites
-
-### Required Software
-- **CMake 3.15+**: `sudo apt install cmake`
-- **Ninja Build System**: `sudo apt install ninja-build`
-- **ARM GCC Toolchain**: For embedded libraries
-- **wget and tar**: For downloading LLVM source
-- **Git**: For cloning repositories
-
-### System Requirements
-- **8GB+ free disk space** (for LLVM build)
-- **4GB+ RAM** (for parallel compilation)
-- **Linux/macOS** (tested on Ubuntu 20.04+)
-- **Internet connection** (for LLVM source download)
-
-### Verify Prerequisites
+### Run Analysis
 ```bash
-cmake --version          # Should be 3.15+
-ninja --version          # Any recent version
-arm-none-eabi-gcc --version  # Should be available
+# Compile to LLVM IR
+clang -target arm-none-eabi -mcpu=cortex-m33 -emit-llvm -S source.c -o source.ll
+
+# Run enhanced analysis
+./llvm_analysis_pass/build/bin/peripheral-analyzer source.ll -o analysis.json --chronological
+
+# Combine results
+python3 generate_complete_enhanced_analysis.py
 ```
 
-## 🏗️ Project Structure
+## 📁 Repository Structure
 
 ```
-mimxrt700-llvm-clang/
-├── README.md                           # This file
-├── build_llvm_complete.sh              # Complete automated build script
-├── cmake/
-│   ├── CMakeLists_clang.txt           # Clang-specific CMake configuration
-│   ├── clang_toolchain.cmake          # CMake toolchain file
-│   ├── flags_clang.cmake              # Compiler and linker flags
-│   └── config_clang.cmake             # SDK component configuration
-├── docs/
-│   ├── README_CLANG_BUILD.md          # Detailed build instructions
-│   ├── REAL_DEBUG_CONSOLE_RESULTS.md  # Debug console implementation results
-│   ├── LLVM_BUILD_RESULTS.md          # Comprehensive performance analysis
-│   └── TROUBLESHOOTING.md             # Common issues and solutions
-├── scripts/
-│   ├── setup_environment.sh           # Environment setup helper
-│   └── verify_build.sh                # Build verification script
-└── examples/
-    └── debug_console_usage.c          # Example debug console usage
+├── complete_enhanced_peripheral_analysis.json    # 601 peripheral accesses
+├── enhanced_*_analysis.json                      # Individual analysis files
+├── llvm_analysis_pass/                          # Enhanced analysis pass source
+│   ├── src/PeripheralAnalysisPass.cpp           # Main analysis implementation
+│   ├── include/PeripheralAnalysisPass.h         # Analysis pass header
+│   └── CMakeLists.txt                           # Build configuration
+├── generate_complete_enhanced_analysis.py       # Analysis combination script
+├── mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/  # Project source
+├── ENHANCED_ANALYSIS_USAGE.md                   # Complete usage guide
+├── ENHANCED_PERIPHERAL_ANALYSIS_REPORT.md       # Technical report
+└── VERIFICATION_RESPONSE.md                     # Verification issue resolution
 ```
 
-## 🔧 Usage
+## 🔧 Enhanced Features
 
-### Option 1: Automated Build (Recommended)
+### Function Call Analysis
+- **IOPCTL_PinMuxSet()** - Pin multiplexing (50 accesses captured)
+- **RESET_ClearPeripheralReset()** - Reset operations (40 accesses)
+- **CLOCK_AttachClk()/CLOCK_SetClkDiv()** - Clock config (154 accesses)
+- **ARM_MPU_SetRegion()/ARM_MPU_Enable()** - Memory protection (4 accesses)
+- **XCACHE_EnableCache()** - Cache operations (2 accesses)
 
-```bash
-# Complete setup - downloads LLVM, builds toolchain, compiles project
-./build_llvm_complete.sh
+### Corrected Peripheral Addresses
+- **IOPCTL0**: 0x40004000 (real MIMXRT798S address)
+- **IOPCTL1**: 0x40064000 (real MIMXRT798S address)
+- **IOPCTL2**: 0x400A5000 (real MIMXRT798S address)
+- **All peripherals**: Verified against hardware specifications
+
+### Chronological Execution Order
+- **Sequence numbering** for all accesses
+- **Execution phase classification** (board_init, driver_init, runtime)
+- **Complete source traceability** with file/function/line information
+
+## 📚 Documentation
+
+- **[📖 Usage Guide](ENHANCED_ANALYSIS_USAGE.md)** - Complete setup and usage
+- **[📋 Technical Report](ENHANCED_PERIPHERAL_ANALYSIS_REPORT.md)** - Detailed methodology
+- **[✅ Verification Response](VERIFICATION_RESPONSE.md)** - Issue resolution
+- **[⚡ Quick LLVM Guide](QUICK_LLVM_BUILD_GUIDE.md)** - Fast LLVM setup
+
+## 🎯 Verification Issues Resolved
+
+✅ **Title Accuracy**: Now correctly reports 601 accesses (not 524/430)
+✅ **IOPCTL Coverage**: All pin mux operations captured
+✅ **RESET Coverage**: All reset operations captured
+✅ **Clock Coverage**: Comprehensive clock configuration captured
+✅ **MPU/Cache Coverage**: System configuration operations captured
+✅ **Address Accuracy**: Real MIMXRT798S peripheral addresses used
+✅ **Chronological Order**: Proper execution sequence maintained
+
+## 🔍 Output Format
+
+The enhanced analysis generates JSON files with chronological peripheral access data:
+
+```json
+{
+  "analysis_type": "complete_enhanced_peripheral_access_sequence",
+  "description": "Complete peripheral register accesses - 601 total accesses",
+  "total_accesses": 601,
+  "execution_phase_summary": {
+    "board_init": 130,
+    "driver_init": 68,
+    "runtime": 403
+  },
+  "peripheral_summary": {
+    "CLKCTL0": 147,
+    "XSPI2": 306,
+    "IOPCTL2": 42,
+    ...
+  },
+  "chronological_sequence": [...]
+}
 ```
-
-This script will:
-1. Download LLVM 19.1.6 source code (~500MB)
-2. Build LLVM/Clang with ARM Cortex-M33 support (30-60 minutes)
-3. Install toolchain locally in the workspace
-4. Build both debug and release versions of the project
-5. Generate comprehensive build reports
-
-### Option 2: Manual Build
-
-```bash
-# 1. Set up environment
-./scripts/setup_environment.sh
-
-# 2. Download and build LLVM (if not already done)
-wget -O llvm-project-19.1.6.tar.gz \
-  https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-19.1.6.tar.gz
-tar -xzf llvm-project-19.1.6.tar.gz
-mv llvm-project-llvmorg-19.1.6 llvm-source
-
-# 3. Build LLVM
-mkdir -p llvm-build && cd llvm-build
-cmake -G Ninja \
-  -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_INSTALL_PREFIX=$(pwd)/../llvm-install \
-  -DLLVM_ENABLE_PROJECTS="clang;lld" \
-  -DLLVM_TARGETS_TO_BUILD="ARM;AArch64;X86" \
-  -DLLVM_DEFAULT_TARGET_TRIPLE="arm-none-eabi" \
-  ../llvm-source/llvm
-ninja -j4 && ninja install
-
-# 4. Build project (requires MCUXpresso SDK project)
-cd /path/to/your/mimxrt700_project/armgcc
-mkdir build_clang && cd build_clang
-cp /path/to/this/repo/cmake/* .
-cmake -DCMAKE_TOOLCHAIN_FILE=clang_toolchain.cmake -DCMAKE_BUILD_TYPE=release .
-make -j4
-```
-
-## 📖 Documentation
-
-- **[Detailed Build Instructions](docs/README_CLANG_BUILD.md)** - Complete setup guide
-- **[Debug Console Results](docs/REAL_DEBUG_CONSOLE_RESULTS.md)** - Real vs stub implementation
-- **[Performance Analysis](docs/LLVM_BUILD_RESULTS.md)** - Comprehensive benchmarks
-- **[Troubleshooting Guide](docs/TROUBLESHOOTING.md)** - Common issues and solutions
-
-## 🔍 Build Verification
-
-After building, verify your results:
-
-```bash
-# Run verification script
-./scripts/verify_build.sh
-
-# Manual verification
-ls -la mimxrt700_project/armgcc/build_clang_release/release/
-# Expected: xspi_psram_polling_transfer.bin (~20KB)
-```
-
-## 🛠️ Configuration Files
-
-### Core Configuration Files
-
-- **`cmake/CMakeLists_clang.txt`** - Project build configuration
-- **`cmake/clang_toolchain.cmake`** - Toolchain setup
-- **`cmake/flags_clang.cmake`** - Compiler/linker flags
-- **`cmake/config_clang.cmake`** - SDK component selection
-
-### Key Settings
-
-```cmake
-# Toolchain (clang_toolchain.cmake)
-set(CMAKE_C_COMPILER "${LLVM_INSTALL_DIR}/bin/clang")
-set(CMAKE_CXX_COMPILER "${LLVM_INSTALL_DIR}/bin/clang++")
-
-# Debug Console (config_clang.cmake)
-set(CONFIG_USE_utility_debug_console_lite true)
-set(CONFIG_USE_utility_assert_lite true)
-```
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-1. **LLVM Build Fails**
-   ```bash
-   # Check disk space
-   df -h
-   # Ensure 8GB+ available
-   ```
-
-2. **Assembly Compilation Errors**
-   ```bash
-   # Verify toolchain uses Clang for assembly
-   grep CMAKE_ASM_COMPILER cmake/clang_toolchain.cmake
-   ```
-
-3. **Missing ARM GCC**
-   ```bash
-   # Install ARM GCC toolchain
-   sudo apt install gcc-arm-none-eabi
-   ```
-
-See [TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) for complete solutions.
 
 ## 🤝 Contributing
+
+Contributions welcome! Please open issues for bugs or feature requests.
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/improvement`)
@@ -203,7 +156,7 @@ See [TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) for complete solutions.
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT License - see [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
@@ -213,10 +166,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/your-username/mimxrt700-llvm-clang/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/your-username/mimxrt700-llvm-clang/discussions)
-- **Documentation**: [Wiki](https://github.com/your-username/mimxrt700-llvm-clang/wiki)
+For questions about the MIMXRT700 analysis or LLVM peripheral analysis pass, please open an issue in this repository.
 
 ---
 
-**Note**: This repository contains build configuration and automation scripts only. You need to have the MIMXRT700 XSPI PSRAM project source code from the MCUXpresso SDK separately.
+**Note**: This repository contains enhanced peripheral analysis tools and results. The analysis captures comprehensive peripheral register access patterns for embedded systems development and verification.
