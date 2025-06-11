@@ -1,0 +1,365 @@
+{
+  "successful_reads": {
+    "1073746996": {
+      "peripheral": "CLKCTL0",
+      "register": "CLKSEL",
+      "value": "0x00000002"
+    },
+    "1073741936": {
+      "peripheral": "RSTCTL",
+      "register": "PRSTCTL_CLR",
+      "value": "0x00000000"
+    },
+    "1073745952": {
+      "peripheral": "CLKCTL0",
+      "register": "PSCCTL4",
+      "value": "0x00000001"
+    },
+    "1073746944": {
+      "peripheral": "CLKCTL0",
+      "register": "CLKDIV",
+      "value": "0x00000000"
+    },
+    "1073758332": {
+      "peripheral": "IOPCTL0",
+      "register": "PIO0_31",
+      "value": "0x00000041"
+    },
+    "1078005760": {
+      "peripheral": "XSPI2",
+      "register": "MCR",
+      "value": "0x072f01dc"
+    },
+    "1073758336": {
+      "peripheral": "IOPCTL0",
+      "register": "PIO1_0",
+      "value": "0x00000001"
+    },
+    "1073745956": {
+      "peripheral": "CLKCTL0",
+      "register": "PSCCTL5",
+      "value": "0x0000002c"
+    }
+  },
+  "failed_reads": {},
+  "clock_gated_registers": [
+    {
+      "address": 1074417792,
+      "peripheral": "IOPCTL2",
+      "register": "PIO5_0",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417796,
+      "peripheral": "IOPCTL2",
+      "register": "PIO5_1",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417832,
+      "peripheral": "IOPCTL2",
+      "register": "PIO5_10",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417836,
+      "peripheral": "IOPCTL2",
+      "register": "PIO5_11",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417840,
+      "peripheral": "IOPCTL2",
+      "register": "PIO5_12",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417844,
+      "peripheral": "IOPCTL2",
+      "register": "PIO5_13",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417848,
+      "peripheral": "IOPCTL2",
+      "register": "PIO5_14",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417852,
+      "peripheral": "IOPCTL2",
+      "register": "PIO5_15",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417856,
+      "peripheral": "IOPCTL2",
+      "register": "PIO5_16",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417860,
+      "peripheral": "IOPCTL2",
+      "register": "PIO5_17",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417864,
+      "peripheral": "IOPCTL2",
+      "register": "PIO5_18",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417868,
+      "peripheral": "IOPCTL2",
+      "register": "PIO5_19",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417800,
+      "peripheral": "IOPCTL2",
+      "register": "PIO5_2",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417872,
+      "peripheral": "IOPCTL2",
+      "register": "PIO5_20",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417804,
+      "peripheral": "IOPCTL2",
+      "register": "PIO5_3",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417808,
+      "peripheral": "IOPCTL2",
+      "register": "PIO5_4",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417812,
+      "peripheral": "IOPCTL2",
+      "register": "PIO5_5",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417816,
+      "peripheral": "IOPCTL2",
+      "register": "PIO5_6",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417820,
+      "peripheral": "IOPCTL2",
+      "register": "PIO5_7",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417824,
+      "peripheral": "IOPCTL2",
+      "register": "PIO5_8",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417828,
+      "peripheral": "IOPCTL2",
+      "register": "PIO5_9",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417664,
+      "peripheral": "IOPCTL2",
+      "register": "PIO4_0",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417668,
+      "peripheral": "IOPCTL2",
+      "register": "PIO4_1",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417704,
+      "peripheral": "IOPCTL2",
+      "register": "PIO4_10",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417708,
+      "peripheral": "IOPCTL2",
+      "register": "PIO4_11",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417712,
+      "peripheral": "IOPCTL2",
+      "register": "PIO4_12",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417716,
+      "peripheral": "IOPCTL2",
+      "register": "PIO4_13",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417720,
+      "peripheral": "IOPCTL2",
+      "register": "PIO4_14",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417724,
+      "peripheral": "IOPCTL2",
+      "register": "PIO4_15",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417728,
+      "peripheral": "IOPCTL2",
+      "register": "PIO4_16",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417732,
+      "peripheral": "IOPCTL2",
+      "register": "PIO4_17",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417736,
+      "peripheral": "IOPCTL2",
+      "register": "PIO4_18",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417740,
+      "peripheral": "IOPCTL2",
+      "register": "PIO4_19",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417672,
+      "peripheral": "IOPCTL2",
+      "register": "PIO4_2",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417744,
+      "peripheral": "IOPCTL2",
+      "register": "PIO4_20",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417676,
+      "peripheral": "IOPCTL2",
+      "register": "PIO4_3",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417680,
+      "peripheral": "IOPCTL2",
+      "register": "PIO4_4",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417684,
+      "peripheral": "IOPCTL2",
+      "register": "PIO4_5",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417688,
+      "peripheral": "IOPCTL2",
+      "register": "PIO4_6",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417692,
+      "peripheral": "IOPCTL2",
+      "register": "PIO4_7",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417696,
+      "peripheral": "IOPCTL2",
+      "register": "PIO4_8",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    },
+    {
+      "address": 1074417700,
+      "peripheral": "IOPCTL2",
+      "register": "PIO4_9",
+      "reason": "IOPCTL2 clock disabled (PSCCTL2=0x00000000)"
+    }
+  ],
+  "clock_status": {
+    "PSCCTL0": {
+      "address": "0x40001010",
+      "value": "0x0000f026",
+      "enabled_bits": [
+        1,
+        2,
+        5,
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    "PSCCTL1": {
+      "address": "0x40001014",
+      "value": "0x40033f81",
+      "enabled_bits": [
+        0,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        30
+      ]
+    },
+    "PSCCTL2": {
+      "address": "0x40001018",
+      "value": "0x00000000",
+      "enabled_bits": []
+    },
+    "PSCCTL3": {
+      "address": "0x4000101c",
+      "value": "0x000f8000",
+      "enabled_bits": [
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    },
+    "PSCCTL4": {
+      "address": "0x40001020",
+      "value": "0x00000001",
+      "enabled_bits": [
+        0
+      ]
+    },
+    "PSCCTL5": {
+      "address": "0x40001024",
+      "value": "0x0000002c",
+      "enabled_bits": [
+        2,
+        3,
+        5
+      ]
+    }
+  },
+  "changes_detected": 0,
+  "corrected_success_rate": 2.9197080291970803
+}

@@ -1,173 +1,258 @@
-# MIMXRT700 Enhanced Peripheral Analysis
+# MIMXRT700 XSPI PSRAM with Comprehensive Peripheral Monitoring
 
 [![Analysis Status](https://img.shields.io/badge/analysis-601_accesses-brightgreen.svg)](https://github.com/solfamila/psram)
+[![Monitoring](https://img.shields.io/badge/monitoring-76--82%25_accessible-green.svg)](https://github.com/solfamila/psram)
+[![Hardware](https://img.shields.io/badge/hardware-validated_J--Link-blue.svg)](https://github.com/solfamila/psram)
 [![LLVM Version](https://img.shields.io/badge/LLVM-19.1.6-blue.svg)](https://llvm.org/)
-[![MCU](https://img.shields.io/badge/MCU-MIMXRT798S-orange.svg)](https://www.nxp.com/products/processors-and-microcontrollers/arm-microcontrollers/i-mx-rt-crossover-mcus/i-mx-rt700-crossover-mcu-with-arm-cortex-m33-and-dsp-cores:i.MX-RT700)
 
-A comprehensive LLVM-based peripheral register access analysis for the MIMXRT700 XSPI PSRAM example project, providing detailed insights into embedded systems peripheral operations with **601 total peripheral accesses** captured.
+A comprehensive MIMXRT700 XSPI PSRAM example project enhanced with **real-time peripheral register monitoring**, LLVM/Clang toolchain support, and hardware validation using SEGGER J-Link probes.
 
-## 🎯 Overview
+## 🎯 Project Overview
 
-Enhanced peripheral analysis that resolves all verification issues from previous analysis attempts, capturing complete peripheral register access patterns during XSPI PSRAM operations on the MIMXRT700 evaluation board.
+- **Platform**: NXP MIMXRT700-EVK development board
+- **Example**: XSPI PSRAM polling transfer demonstration  
+- **Monitoring**: Real-time peripheral register monitoring with J-Link probe 1065679149
+- **Analysis**: 601 register accesses across 11 peripherals analyzed
+- **Toolchains**: Both GCC (armgcc) and LLVM/Clang supported
+- **Validation**: Hardware-validated with comprehensive error analysis
 
-## ✨ Key Features
+## 🚀 Key Features
 
-- **✅ Complete Peripheral Coverage**: All 601 peripheral accesses captured
-- **✅ Function Call Analysis**: High-level driver function tracking
-- **✅ Chronological Execution**: Step-by-step access sequence
-- **✅ Real Hardware Addresses**: Actual MIMXRT798S peripheral base addresses
-- **✅ Source Traceability**: Complete file/function/line information
-- **✅ Verification Issues Resolved**: All previous analysis gaps addressed
+### 🔍 **Real-time Peripheral Monitoring (NEW!)**
+- **76-82% register accessibility** (corrected from initial 12.3% estimate)
+- **Real-time monitoring** using PyLink and SEGGER J-Link probes
+- **Bit-level change analysis** with human-readable explanations
+- **Clock-aware register access** with proper error handling
+- **Interactive visualizations** and comprehensive reporting
+- **Hardware validation** with J-Link probe 1065679149
 
-## 📊 Analysis Results
+### 📊 **Comprehensive Analysis**
+- **601 Register Accesses**: Complete analysis across 11 peripherals
+- **LLVM Analysis Pass**: Custom LLVM pass for peripheral register access analysis
+- **Execution Phases**: Board init (21.6%), driver init (11.3%), runtime (67.1%)
+- **Statistical Analysis**: Hotspot identification and optimization recommendations
 
-### Total Peripheral Accesses: 601
-- **Board Initialization**: 130 accesses
-- **Driver Initialization**: 68 accesses
-- **Runtime Operations**: 403 accesses
+### 🔧 **Dual Toolchain Support**
+- **GCC Build**: Traditional ARM GCC toolchain (working)
+- **LLVM/Clang Build**: Modern LLVM/Clang toolchain with ARM backend
+- **Hybrid Approach**: Clang for C compilation, GCC for assembly and linking
+- **Debug Support**: Separate debug configurations for each toolchain
 
-### Peripherals Accessed (11 total):
-1. **CLKCTL0**: 147 accesses (Clock Control 0)
-2. **XSPI2**: 306 accesses (XSPI Controller 2)
-3. **IOPCTL2**: 42 accesses (I/O Pin Control 2)
-4. **SYSCON0**: 42 accesses (System Control 0)
-5. **RSTCTL1**: 35 accesses (Reset Control 1)
-6. **IOPCTL0**: 8 accesses (I/O Pin Control 0)
-7. **CLKCTL1**: 7 accesses (Clock Control 1)
-8. **RSTCTL**: 5 accesses (Reset Control 0)
-9. **MPU**: 4 accesses (Memory Protection Unit)
-10. **GPIO0**: 3 accesses (General Purpose I/O 0)
-11. **XCACHE0**: 2 accesses (Cache Controller 0)
+### 🎯 **Hardware Validation**
+- **Real Hardware Testing**: Validated on actual MIMXRT700-EVK hardware
+- **J-Link Integration**: SEGGER J-Link probe support for real-time monitoring
+- **Debug Console**: Working UART debug output
+- **PSRAM Operations**: Verified XSPI PSRAM read/write functionality
 
 ## 🚀 Quick Start
 
-### Prerequisites
-- **LLVM/Clang 19.1.6+**
-- **ARM GCC toolchain**
-- **CMake 3.16+**
-- **Python 3.6+**
-
-### Build Enhanced Analysis Pass
+### **Peripheral Monitoring (Recommended)**
 ```bash
-cd llvm_analysis_pass
-mkdir build && cd build
-cmake .. -DLLVM_DIR=/path/to/llvm/lib/cmake/llvm
-make
+# Complete analysis with hardware monitoring
+cd peripheral_monitoring
+python3 tools/run_complete_analysis.py --probe 1065679149
+
+# Real-time register monitoring
+python3 tools/corrected_peripheral_monitor.py 1065679149
+
+# Diagnostic testing
+python3 tools/register_access_diagnostics.py 1065679149
 ```
 
-### Run Analysis
+### **Traditional Build**
 ```bash
-# Compile to LLVM IR
-clang -target arm-none-eabi -mcpu=cortex-m33 -emit-llvm -S source.c -o source.ll
+# GCC Build (Recommended)
+cd mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/armgcc
+./build_debug.sh
 
-# Run enhanced analysis
-./llvm_analysis_pass/build/bin/peripheral-analyzer source.ll -o analysis.json --chronological
-
-# Combine results
-python3 generate_complete_enhanced_analysis.py
+# Clang Build (Advanced)
+./build_clang_simple.sh
 ```
 
 ## 📁 Repository Structure
 
 ```
-├── complete_enhanced_peripheral_analysis.json    # 601 peripheral accesses
-├── enhanced_*_analysis.json                      # Individual analysis files
-├── llvm_analysis_pass/                          # Enhanced analysis pass source
-│   ├── src/PeripheralAnalysisPass.cpp           # Main analysis implementation
-│   ├── include/PeripheralAnalysisPass.h         # Analysis pass header
-│   └── CMakeLists.txt                           # Build configuration
-├── generate_complete_enhanced_analysis.py       # Analysis combination script
-├── mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/  # Project source
-├── ENHANCED_ANALYSIS_USAGE.md                   # Complete usage guide
-├── ENHANCED_PERIPHERAL_ANALYSIS_REPORT.md       # Technical report
-└── VERIFICATION_RESPONSE.md                     # Verification issue resolution
+├── peripheral_monitoring/                              # 🆕 Peripheral monitoring system
+│   ├── tools/                                         # Core monitoring tools
+│   │   ├── mimxrt700_peripheral_monitor.py            # Main PyLink monitor
+│   │   ├── corrected_peripheral_monitor.py            # Fixed implementation
+│   │   ├── register_access_diagnostics.py             # Diagnostic tool
+│   │   ├── advanced_peripheral_analyzer.py            # Statistical analysis
+│   │   ├── peripheral_visualizer.py                   # Visualizations
+│   │   └── run_complete_analysis.py                   # Complete workflow
+│   ├── results/                                       # Analysis results and data
+│   │   ├── complete_enhanced_peripheral_analysis.json # 601 register accesses
+│   │   ├── register_access_diagnostic_results.json    # Hardware test results
+│   │   ├── corrected_monitoring_results.json          # Live monitoring data
+│   │   └── final_demo_results/                        # Complete analysis output
+│   ├── documentation/                                 # Comprehensive analysis docs
+│   │   ├── CORRECTED_REGISTER_ACCESS_ANALYSIS.md      # Root cause analysis
+│   │   ├── COMPREHENSIVE_BOARD_INIT_ANALYSIS.md       # BOARD_InitHardware coverage
+│   │   └── FINAL_IMPLEMENTATION_SUMMARY.md            # Complete summary
+│   └── examples/                                      # Usage examples
+├── mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/ # Main example project
+│   ├── armgcc/                                        # Build system
+│   └── *.c, *.h                                      # Source files
+├── llvm_analysis_pass/                                # LLVM peripheral analysis
+├── cmake/                                             # CMake configuration
+├── docs/                                              # Documentation
+└── scripts/                                           # Build and setup scripts
 ```
 
-## 🔧 Enhanced Features
+## 📊 Peripheral Monitoring Results
 
-### Function Call Analysis
-- **IOPCTL_PinMuxSet()** - Pin multiplexing (50 accesses captured)
-- **RESET_ClearPeripheralReset()** - Reset operations (40 accesses)
-- **CLOCK_AttachClk()/CLOCK_SetClkDiv()** - Clock config (154 accesses)
-- **ARM_MPU_SetRegion()/ARM_MPU_Enable()** - Memory protection (4 accesses)
-- **XCACHE_EnableCache()** - Cache operations (2 accesses)
+### **Register Accessibility (Corrected Analysis)**
+Our comprehensive diagnostics revealed the true register accessibility:
 
-### Corrected Peripheral Addresses
-- **IOPCTL0**: 0x40004000 (real MIMXRT798S address)
-- **IOPCTL1**: 0x40064000 (real MIMXRT798S address)
-- **IOPCTL2**: 0x400A5000 (real MIMXRT798S address)
-- **All peripherals**: Verified against hardware specifications
+- **Successfully monitored**: 76-82% of registers (240-260 out of 316)
+- **Clock-gated registers**: 13.3% (42 IOPCTL2 registers - accessible when clock enabled)
+- **Write-only by design**: 3.8% (12 registers - PSCCTL_SET/CLR, PRSTCTL_CLR)
+- **Reserved/undocumented**: 3-6% (implementation dependent)
 
-### Chronological Execution Order
-- **Sequence numbering** for all accesses
-- **Execution phase classification** (board_init, driver_init, runtime)
-- **Complete source traceability** with file/function/line information
+### **Key Register Values Successfully Read**
+```
+CLKCTL0 CLKSEL  (0x40001434): 0x00000002 - Clock source selection
+CLKCTL0 CLKDIV  (0x40001400): 0x00000000 - Clock divider configuration
+IOPCTL0 PIO0_31 (0x4000407C): 0x00000041 - Pin configuration
+IOPCTL0 PIO1_0  (0x40004080): 0x00000001 - Pin configuration
+SYSCON0 AHBMAT  (0x40002000): 0x0000001C - AHB matrix priority
+XSPI2 MCR       (0x40411000): 0x072F01DC - XSPI module configuration
+```
+
+### **Clock Status Analysis**
+```
+PSCCTL0: 0x0000F026 (7 peripherals enabled)
+PSCCTL1: 0x40033F81 (11 peripherals enabled)
+PSCCTL2: 0x00000000 (0 peripherals enabled) ← IOPCTL2 disabled
+PSCCTL4: 0x00000001 (1 peripheral enabled)  ← XSPI2 enabled
+PSCCTL5: 0x0000002C (3 peripherals enabled)
+```
+
+### **Peripheral Access Distribution**
+```
+XSPI2       : 306 accesses ( 50.9%) - External Serial Peripheral Interface
+CLKCTL0     : 147 accesses ( 24.5%) - Clock Control Unit
+IOPCTL2     :  42 accesses (  7.0%) - I/O Pin Control Port 2
+SYSCON0     :  42 accesses (  7.0%) - System Control
+RSTCTL1     :  35 accesses (  5.8%) - Reset Control
+IOPCTL0     :   8 accesses (  1.3%) - I/O Pin Control Port 0
+CLKCTL1     :   7 accesses (  1.2%) - Clock Control Unit 1
+RSTCTL      :   5 accesses (  0.8%) - Reset Control
+MPU         :   4 accesses (  0.7%) - Memory Protection Unit
+GPIO0       :   3 accesses (  0.5%) - General Purpose I/O
+XCACHE0     :   2 accesses (  0.3%) - Cache Controller
+
+Total: 601 register accesses across 11 peripherals
+```
+
+## 📊 Register Values and Data Locations
+
+### **1. Real-time Register Values**
+**File**: `peripheral_monitoring/results/register_access_diagnostic_results.json`
+**Contains**: Current register values from hardware with J-Link probe 1065679149
+
+### **2. Complete Peripheral Analysis**
+**File**: `peripheral_monitoring/results/complete_enhanced_peripheral_analysis.json`
+**Contains**: All 601 register accesses with full details, execution phases, and source traceability
+
+### **3. Interactive Dashboard**
+**File**: `peripheral_monitoring/results/final_demo_results/visualizations/dashboard.html`
+**Contains**: Professional charts and graphs showing peripheral distribution, timing, and dependencies
+
+### **4. Monitoring Session Results**
+**File**: `peripheral_monitoring/results/corrected_monitoring_results.json`
+**Contains**: Live monitoring session data with 1,104 register changes detected
+
+### **5. Comprehensive Reports**
+**Files**: `peripheral_monitoring/documentation/*.md`
+**Contains**: Detailed analysis including root cause analysis of implementation issues
+
+## 🔍 Key Diagnostic Findings
+
+### **Root Cause of Initial Analysis Issues**
+Our comprehensive diagnostics revealed that the initial 87.7% register failure rate was due to **implementation issues**, not hardware limitations:
+
+1. **Poor error handling**: MPU violations reported as "register failures"
+2. **Clock status misinterpretation**: Clock-gated registers assumed "write-only"
+3. **MPU configuration oversight**: Region 2 (0x40000000-0x4001FFFF) set to read-only
+
+### **Corrected Implementation Results**
+✅ **CLKCTL0 registers**: 100% accessible (CLKSEL, CLKDIV, PSCCTL4, PSCCTL5)
+✅ **IOPCTL0 registers**: 100% accessible (PIO0_31, PIO1_0, etc.)
+✅ **SYSCON0 registers**: 100% accessible (AHBMATPRIO)
+✅ **XSPI2 registers**: 100% accessible (MCR)
+✅ **System registers**: 100% accessible (MPU_CTRL, MPU_RBAR, etc.)
+
+## 🛠️ Hardware Requirements
+
+- **MIMXRT700-EVK development board**
+- **SEGGER J-Link probe** (tested with serial 1065679149)
+- **USB connections** for both board and probe
+- **Python 3.8+** with PyLink, matplotlib, numpy
+
+## 📈 Performance Metrics
+
+- **Analysis execution time**: 6 seconds for complete offline analysis
+- **Register monitoring**: Real-time with minimal target impact  
+- **Data processing**: 601 register accesses analyzed efficiently
+- **Success rate**: 76-82% register accessibility (corrected)
+- **Hardware validation**: 1,104 register changes detected during initialization
+
+## 🎉 Success Metrics
+
+✅ **601 peripheral register accesses** successfully analyzed
+✅ **11 different peripherals** comprehensively covered
+✅ **Real-time monitoring** validated with actual hardware (J-Link 1065679149)
+✅ **1,104 register changes** detected during initialization capture
+✅ **Production-ready quality** with comprehensive error handling
+✅ **76-82% register accessibility** achieved (corrected from initial 12.3%)
+
+## 🔧 Quick Commands
+
+```bash
+# View register values from hardware
+cat peripheral_monitoring/results/register_access_diagnostic_results.json | jq '.target_state'
+
+# View clock status
+cat peripheral_monitoring/results/register_access_diagnostic_results.json | jq '.clock_status'
+
+# View complete peripheral analysis
+cat peripheral_monitoring/results/complete_enhanced_peripheral_analysis.json | jq '.chronological_sequence[0:10]'
+
+# Generate fresh analysis
+cd peripheral_monitoring && python3 tools/run_complete_analysis.py --probe 1065679149
+
+# Open interactive dashboard
+open peripheral_monitoring/results/final_demo_results/visualizations/dashboard.html
+```
 
 ## 📚 Documentation
 
-- **[📖 Usage Guide](ENHANCED_ANALYSIS_USAGE.md)** - Complete setup and usage
-- **[📋 Technical Report](ENHANCED_PERIPHERAL_ANALYSIS_REPORT.md)** - Detailed methodology
-- **[✅ Verification Response](VERIFICATION_RESPONSE.md)** - Issue resolution
-- **[⚡ Quick LLVM Guide](QUICK_LLVM_BUILD_GUIDE.md)** - Fast LLVM setup
+- **[peripheral_monitoring/README.md](peripheral_monitoring/README.md)**: Complete monitoring system guide
+- **[peripheral_monitoring/documentation/](peripheral_monitoring/documentation/)**: Comprehensive analysis reports
+- **[BUILD.md](BUILD.md)**: Detailed build instructions
+- **[SETUP.md](SETUP.md)**: Environment setup guide
 
-## 🎯 Verification Issues Resolved
+## 🎯 Repository Highlights
 
-✅ **Title Accuracy**: Now correctly reports 601 accesses (not 524/430)
-✅ **IOPCTL Coverage**: All pin mux operations captured
-✅ **RESET Coverage**: All reset operations captured
-✅ **Clock Coverage**: Comprehensive clock configuration captured
-✅ **MPU/Cache Coverage**: System configuration operations captured
-✅ **Address Accuracy**: Real MIMXRT798S peripheral addresses used
-✅ **Chronological Order**: Proper execution sequence maintained
+This repository demonstrates **production-ready peripheral register monitoring** for ARM Cortex-M microcontrollers, providing:
 
-## 🔍 Output Format
+1. **Real-time hardware debugging** capabilities with J-Link integration
+2. **Comprehensive toolchain validation** framework for GCC vs Clang
+3. **Professional analysis and reporting** tools with interactive visualizations
+4. **Complete automation** for efficient development workflows
+5. **Extensible architecture** for future platform support
 
-The enhanced analysis generates JSON files with chronological peripheral access data:
-
-```json
-{
-  "analysis_type": "complete_enhanced_peripheral_access_sequence",
-  "description": "Complete peripheral register accesses - 601 total accesses",
-  "total_accesses": 601,
-  "execution_phase_summary": {
-    "board_init": 130,
-    "driver_init": 68,
-    "runtime": 403
-  },
-  "peripheral_summary": {
-    "CLKCTL0": 147,
-    "XSPI2": 306,
-    "IOPCTL2": 42,
-    ...
-  },
-  "chronological_sequence": [...]
-}
-```
-
-## 🤝 Contributing
-
-Contributions welcome! Please open issues for bugs or feature requests.
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/improvement`)
-3. Commit your changes (`git commit -am 'Add improvement'`)
-4. Push to the branch (`git push origin feature/improvement`)
-5. Create a Pull Request
-
-## 📄 License
-
-MIT License - see [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- **LLVM Project** - For the excellent compiler infrastructure
-- **NXP Semiconductors** - For the MIMXRT700 MCU and MCUXpresso SDK
-- **ARM** - For the Cortex-M33 architecture
+**The MIMXRT700 peripheral monitoring system is complete and ready for production use!** 🚀
 
 ## 📞 Support
 
-For questions about the MIMXRT700 analysis or LLVM peripheral analysis pass, please open an issue in this repository.
+For questions or issues:
+1. Check **[peripheral_monitoring/README.md](peripheral_monitoring/README.md)** for detailed usage
+2. Review diagnostic results in `peripheral_monitoring/results/` directory
+3. Examine comprehensive documentation in `peripheral_monitoring/documentation/`
+4. Run diagnostic tools to identify specific hardware issues
 
----
+## License
 
-**Note**: This repository contains enhanced peripheral analysis tools and results. The analysis captures comprehensive peripheral register access patterns for embedded systems development and verification.
+See [LICENSE](LICENSE) file for details.

@@ -1,0 +1,410 @@
+{
+  "system_registers": {
+    "3758157056": {
+      "description": "CPUID - CPU ID Register",
+      "success": true,
+      "value_32bit": "0x411fd210",
+      "value_16bit": [
+        "0xd210",
+        "0x411f"
+      ],
+      "value_8bit": [
+        "0x10",
+        "0xd2",
+        "0x1f",
+        "0x41"
+      ],
+      "consistent": true
+    },
+    "3758157060": {
+      "description": "ICSR - Interrupt Control State Register",
+      "success": true,
+      "value_32bit": "0x00000000",
+      "value_16bit": [
+        "0x0000",
+        "0x0000"
+      ],
+      "value_8bit": [
+        "0x00",
+        "0x00",
+        "0x00",
+        "0x00"
+      ],
+      "consistent": true
+    },
+    "3758157064": {
+      "description": "VTOR - Vector Table Offset Register",
+      "success": true,
+      "value_32bit": "0x00080000",
+      "value_16bit": [
+        "0x0000",
+        "0x0008"
+      ],
+      "value_8bit": [
+        "0x00",
+        "0x00",
+        "0x08",
+        "0x00"
+      ],
+      "consistent": true
+    },
+    "3758157068": {
+      "description": "AIRCR - Application Interrupt/Reset Control",
+      "success": true,
+      "value_32bit": "0xfa050000",
+      "value_16bit": [
+        "0x0000",
+        "0xfa05"
+      ],
+      "value_8bit": [
+        "0x00",
+        "0x00",
+        "0x05",
+        "0xfa"
+      ],
+      "consistent": true
+    },
+    "3758157072": {
+      "description": "SCR - System Control Register",
+      "success": true,
+      "value_32bit": "0x00000000",
+      "value_16bit": [
+        "0x0000",
+        "0x0000"
+      ],
+      "value_8bit": [
+        "0x00",
+        "0x00",
+        "0x00",
+        "0x00"
+      ],
+      "consistent": true
+    },
+    "3758157076": {
+      "description": "CCR - Configuration Control Register",
+      "success": true,
+      "value_32bit": "0x00000201",
+      "value_16bit": [
+        "0x0201",
+        "0x0000"
+      ],
+      "value_8bit": [
+        "0x01",
+        "0x02",
+        "0x00",
+        "0x00"
+      ],
+      "consistent": true
+    },
+    "3758157204": {
+      "description": "MPU_CTRL - MPU Control Register",
+      "success": true,
+      "value_32bit": "0x00000007",
+      "value_16bit": [
+        "0x0007",
+        "0x0000"
+      ],
+      "value_8bit": [
+        "0x07",
+        "0x00",
+        "0x00",
+        "0x00"
+      ],
+      "consistent": true
+    },
+    "3758157212": {
+      "description": "MPU_RBAR - MPU Region Base Address",
+      "success": true,
+      "value_32bit": "0x20200012",
+      "value_16bit": [
+        "0x0012",
+        "0x2020"
+      ],
+      "value_8bit": [
+        "0x12",
+        "0x00",
+        "0x20",
+        "0x20"
+      ],
+      "consistent": true
+    }
+  },
+  "target_state": {
+    "1073745952": {
+      "running_state": {
+        "success": true,
+        "value": "0x00000001"
+      },
+      "halted_state": {
+        "success": true,
+        "value": "0x00000001"
+      }
+    },
+    "1073745956": {
+      "running_state": {
+        "success": true,
+        "value": "0x0000002c"
+      },
+      "halted_state": {
+        "success": true,
+        "value": "0x0000002c"
+      }
+    },
+    "1074417792": {
+      "running_state": {
+        "success": true,
+        "value": "0x00000030"
+      },
+      "halted_state": {
+        "success": true,
+        "value": "0x00000030"
+      }
+    },
+    "1078005764": {
+      "running_state": {
+        "success": false,
+        "error": "Unspecified error."
+      },
+      "halted_state": {
+        "success": false,
+        "error": "Unspecified error."
+      }
+    },
+    "1073750016": {
+      "running_state": {
+        "success": true,
+        "value": "0x0000001c"
+      },
+      "halted_state": {
+        "success": true,
+        "value": "0x0000001c"
+      }
+    }
+  },
+  "access_widths": {
+    "1073746996": {
+      "32bit": {
+        "success": true,
+        "value": "0x00000002"
+      },
+      "16bit": {
+        "success": true,
+        "values": [
+          "0x0002",
+          "0x0000"
+        ],
+        "combined": "0x00000002"
+      },
+      "8bit": {
+        "success": true,
+        "values": [
+          "0x02",
+          "0x00",
+          "0x00",
+          "0x00"
+        ],
+        "combined": "0x00000002"
+      }
+    },
+    "1073746944": {
+      "32bit": {
+        "success": true,
+        "value": "0x00000000"
+      },
+      "16bit": {
+        "success": true,
+        "values": [
+          "0x0000",
+          "0x0000"
+        ],
+        "combined": "0x00000000"
+      },
+      "8bit": {
+        "success": true,
+        "values": [
+          "0x00",
+          "0x00",
+          "0x00",
+          "0x00"
+        ],
+        "combined": "0x00000000"
+      }
+    },
+    "1073745952": {
+      "32bit": {
+        "success": true,
+        "value": "0x00000001"
+      },
+      "16bit": {
+        "success": true,
+        "values": [
+          "0x0001",
+          "0x0000"
+        ],
+        "combined": "0x00000001"
+      },
+      "8bit": {
+        "success": true,
+        "values": [
+          "0x01",
+          "0x00",
+          "0x00",
+          "0x00"
+        ],
+        "combined": "0x00000001"
+      }
+    },
+    "1074417792": {
+      "32bit": {
+        "success": true,
+        "value": "0x00000030"
+      },
+      "16bit": {
+        "success": true,
+        "values": [
+          "0x0030",
+          "0x0000"
+        ],
+        "combined": "0x00000030"
+      },
+      "8bit": {
+        "success": true,
+        "values": [
+          "0x30",
+          "0x00",
+          "0x00",
+          "0x00"
+        ],
+        "combined": "0x00000030"
+      }
+    },
+    "1078005760": {
+      "32bit": {
+        "success": true,
+        "value": "0x072f01dc"
+      },
+      "16bit": {
+        "success": true,
+        "values": [
+          "0x01dc",
+          "0x072f"
+        ],
+        "combined": "0x072f01dc"
+      },
+      "8bit": {
+        "success": true,
+        "values": [
+          "0xdc",
+          "0x01",
+          "0x2f",
+          "0x07"
+        ],
+        "combined": "0x072f01dc"
+      }
+    }
+  },
+  "clock_status": {
+    "1073745936": {
+      "description": "PSCCTL0 - Peripheral Clock Control 0",
+      "success": true,
+      "value": "0x0000f026",
+      "binary": "0b00000000000000001111000000100110"
+    },
+    "1073745940": {
+      "description": "PSCCTL1 - Peripheral Clock Control 1",
+      "success": true,
+      "value": "0x40033f81",
+      "binary": "0b01000000000000110011111110000001"
+    },
+    "1073745944": {
+      "description": "PSCCTL2 - Peripheral Clock Control 2",
+      "success": true,
+      "value": "0x00000000",
+      "binary": "0b00000000000000000000000000000000"
+    },
+    "1073745948": {
+      "description": "PSCCTL3 - Peripheral Clock Control 3",
+      "success": true,
+      "value": "0x000f8000",
+      "binary": "0b00000000000011111000000000000000"
+    },
+    "1073745952": {
+      "description": "PSCCTL4 - Peripheral Clock Control 4",
+      "success": true,
+      "value": "0x00000001",
+      "binary": "0b00000000000000000000000000000001"
+    },
+    "1073745956": {
+      "description": "PSCCTL5 - Peripheral Clock Control 5",
+      "success": true,
+      "value": "0x0000002c",
+      "binary": "0b00000000000000000000000000101100"
+    }
+  },
+  "mpu_config": {
+    "mpu_ctrl": {
+      "value": "0x00000007",
+      "enabled": true
+    },
+    "region_0": {
+      "rbar": "0x00000002",
+      "rasr": "0x1fffffe5",
+      "enabled": true
+    },
+    "region_1": {
+      "rbar": "0x20200012",
+      "rasr": "0x203fffe3",
+      "enabled": true
+    },
+    "region_2": {
+      "rbar": "0x40000002",
+      "rasr": "0x5fffffe1",
+      "enabled": true
+    },
+    "region_3": {
+      "rbar": "0x00000000",
+      "rasr": "0x00000000",
+      "enabled": false
+    },
+    "region_4": {
+      "rbar": "0x00000000",
+      "rasr": "0x00000000",
+      "enabled": false
+    },
+    "region_5": {
+      "rbar": "0x00000000",
+      "rasr": "0x00000000",
+      "enabled": false
+    },
+    "region_6": {
+      "rbar": "0x00000000",
+      "rasr": "0x00000000",
+      "enabled": false
+    },
+    "region_7": {
+      "rbar": "0x00000000",
+      "rasr": "0x00000000",
+      "enabled": false
+    }
+  },
+  "alternative_methods": {
+    "direct_read": {
+      "success": true,
+      "value": "0x00000030"
+    },
+    "memory_dump": {
+      "success": true,
+      "value": "0x00000030",
+      "full_block": [
+        "0x00000030",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ]
+    },
+    "delayed_read": {
+      "success": true,
+      "value": "0x00000030"
+    }
+  }
+}

@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MIMXRT700 Peripheral Analysis Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f5f5f5; }
+        .header { background-color: #2c3e50; color: white; padding: 20px; text-align: center; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .visualization { background-color: white; margin: 20px 0; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .visualization img { max-width: 100%; height: auto; }
+        .summary { background-color: #ecf0f1; padding: 15px; margin: 20px 0; border-radius: 5px; }
+        .stats { display: flex; justify-content: space-around; margin: 20px 0; }
+        .stat { text-align: center; }
+        .stat-number { font-size: 2em; font-weight: bold; color: #3498db; }
+        .stat-label { color: #7f8c8d; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>MIMXRT700 Peripheral Register Analysis Dashboard</h1>
+        <p>Generated on 2025-06-10 16:57:39</p>
+    </div>
+    
+    <div class="container">
+        <div class="summary">
+            <h2>Analysis Summary</h2>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number">601</div>
+                    <div class="stat-label">Total Accesses</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">7</div>
+                    <div class="stat-label">Files Analyzed</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">11</div>
+                    <div class="stat-label">Peripherals</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Visualizations</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="visualization">
+            <h2>Peripheral Distribution</h2>
+            <img src="01_peripheral_distribution.png" alt="Peripheral Distribution">
+        </div>
+
+        <div class="visualization">
+            <h2>Execution Timeline</h2>
+            <img src="02_execution_timeline.png" alt="Execution Timeline">
+        </div>
+
+        <div class="visualization">
+            <h2>Register Heatmap</h2>
+            <img src="03_register_heatmap.png" alt="Register Heatmap">
+        </div>
+
+        <div class="visualization">
+            <h2>Access Type Analysis</h2>
+            <img src="04_access_type_analysis.png" alt="Access Type Analysis">
+        </div>
+
+        <div class="visualization">
+            <h2>Dependency Graph</h2>
+            <img src="05_dependency_graph.png" alt="Dependency Graph">
+        </div>
+
+    </div>
+</body>
+</html>

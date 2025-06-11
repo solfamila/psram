@@ -1,0 +1,184 @@
+{
+  "description": "Configuration file for MIMXRT700 Peripheral Register Monitor",
+  "version": "1.0.0",
+  
+  "hardware_config": {
+    "jlink_probe_serial": "1065679149",
+    "device_name": "MIMXRT798S_M33_CORE0",
+    "interface": "SWD",
+    "speed_khz": 4000,
+    "reset_strategy": "normal"
+  },
+  
+  "firmware_config": {
+    "elf_file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0.elf",
+    "load_address": "0x00000000",
+    "auto_load": false,
+    "auto_start": false,
+    "reset_after_load": true
+  },
+  
+  "analysis_config": {
+    "analysis_file": "complete_enhanced_peripheral_analysis.json",
+    "filter_by_peripheral": [],
+    "filter_by_execution_phase": [],
+    "filter_by_access_type": ["volatile_write", "function_call_write"],
+    "max_monitored_addresses": 50
+  },
+  
+  "monitoring_config": {
+    "default_duration_seconds": 30,
+    "polling_interval_ms": 100,
+    "enable_bit_analysis": true,
+    "enable_chronological_tracking": true,
+    "log_unchanged_reads": false,
+    "max_changes_per_register": 10
+  },
+  
+  "output_config": {
+    "verbose_mode": false,
+    "log_to_file": false,
+    "log_file_path": "register_monitor.log",
+    "timestamp_format": "%Y-%m-%d %H:%M:%S.%f",
+    "show_source_location": true,
+    "show_bit_field_descriptions": true
+  },
+  
+  "peripheral_priorities": {
+    "description": "Priority order for monitoring when address limit is reached",
+    "high_priority": [
+      "XSPI2",
+      "CLKCTL0", 
+      "RSTCTL",
+      "SYSCON0"
+    ],
+    "medium_priority": [
+      "IOPCTL0",
+      "IOPCTL2",
+      "RSTCTL1"
+    ],
+    "low_priority": [
+      "GPIO0",
+      "MPU",
+      "XCACHE0"
+    ]
+  },
+  
+  "register_filters": {
+    "description": "Specific register filtering rules",
+    "include_registers": {
+      "XSPI2": ["MCR", "FLSHCR", "BUFCR"],
+      "CLKCTL0": ["PSCCTL0", "PSCCTL1", "PSCCTL2", "CLKSEL", "CLKDIV"],
+      "IOPCTL0": ["PIO0_31", "PIO1_0"],
+      "IOPCTL2": ["PIO5_0", "PIO5_1", "PIO5_10", "PIO5_11", "PIO5_12", "PIO5_13", "PIO5_14", "PIO5_15", "PIO5_16"]
+    },
+    "exclude_registers": {
+      "CLKCTL0": ["REG_0x4", "REG_0x8", "REG_0x12", "REG_0x40", "REG_0x44", "REG_0x48", "REG_0x52", "REG_0x184", "REG_0x188"]
+    }
+  },
+  
+  "execution_phases": {
+    "description": "Execution phase filtering options",
+    "board_init": {
+      "enabled": true,
+      "description": "Hardware initialization phase"
+    },
+    "driver_init": {
+      "enabled": true, 
+      "description": "Driver initialization phase"
+    },
+    "runtime": {
+      "enabled": true,
+      "description": "Runtime operation phase"
+    }
+  },
+  
+  "bit_field_analysis": {
+    "description": "Configuration for bit field analysis",
+    "show_unchanged_bits": false,
+    "group_consecutive_bits": true,
+    "show_bit_positions": true,
+    "show_field_descriptions": true,
+    "highlight_critical_bits": {
+      "reset_bits": true,
+      "enable_bits": true,
+      "clock_select_bits": true
+    }
+  },
+  
+  "advanced_features": {
+    "description": "Advanced monitoring features",
+    "memory_watchpoints": {
+      "enabled": false,
+      "max_watchpoints": 4,
+      "watchpoint_size": 4
+    },
+    "breakpoint_monitoring": {
+      "enabled": false,
+      "source_level_breakpoints": false,
+      "function_entry_breakpoints": []
+    },
+    "performance_monitoring": {
+      "track_access_frequency": true,
+      "measure_timing": false,
+      "detect_access_patterns": true
+    }
+  },
+  
+  "error_handling": {
+    "description": "Error handling configuration",
+    "continue_on_read_error": true,
+    "retry_failed_reads": 3,
+    "timeout_seconds": 5,
+    "ignore_disconnection": false
+  },
+  
+  "debug_options": {
+    "description": "Debug and development options",
+    "dry_run_mode": false,
+    "simulate_register_changes": false,
+    "debug_pylink_calls": false,
+    "trace_memory_access": false
+  },
+  
+  "presets": {
+    "description": "Predefined monitoring configurations",
+    "clock_analysis": {
+      "filter_by_peripheral": ["CLKCTL0"],
+      "duration_seconds": 15,
+      "focus": "Clock configuration and PLL setup"
+    },
+    "xspi_initialization": {
+      "filter_by_peripheral": ["XSPI2"],
+      "filter_by_execution_phase": ["driver_init"],
+      "duration_seconds": 10,
+      "focus": "XSPI controller initialization"
+    },
+    "pin_configuration": {
+      "filter_by_peripheral": ["IOPCTL0", "IOPCTL2"],
+      "filter_by_execution_phase": ["board_init"],
+      "duration_seconds": 20,
+      "focus": "Pin mux and electrical configuration"
+    },
+    "full_system_init": {
+      "filter_by_execution_phase": ["board_init", "driver_init"],
+      "duration_seconds": 45,
+      "focus": "Complete system initialization sequence"
+    }
+  },
+  
+  "validation": {
+    "description": "Configuration validation rules",
+    "required_files": [
+      "complete_enhanced_peripheral_analysis.json"
+    ],
+    "optional_files": [
+      "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0.elf"
+    ],
+    "min_pylink_version": "0.14.0",
+    "supported_devices": [
+      "MIMXRT798S_M33_CORE0",
+      "MIMXRT798S_M33_CORE1"
+    ]
+  }
+}
