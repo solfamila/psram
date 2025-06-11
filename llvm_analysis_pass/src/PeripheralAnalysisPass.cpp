@@ -29,44 +29,29 @@ PreservedAnalyses PeripheralAnalysisPass::run(Module &M, ModuleAnalysisManager &
     // Initialize peripheral definitions
     initializePeripheralDefinitions();
 
-    // Initialize execution order tracking
-    initializeExecutionPhaseMapping();
-    globalSequenceCounter = 0;
+    // Initialize execution order tracking (only if first module)
+    if (registerAccesses.empty()) {
+        initializeExecutionPhaseMapping();
+        globalSequenceCounter = 0;
+    }
 
-    // Clear previous results
-    registerAccesses.clear();
+    // Don't clear previous results for multi-module analysis
+    // registerAccesses.clear(); // Commented out for multi-module support
 
     // Analyze each function in the module in a specific order to maintain execution sequence
     // First analyze board initialization functions
-    std::vector<Function*> boardInitFunctions;
-    std::vector<Function*> driverFunctions;
-    std::vector<Function*> otherFunctions;
-
-    // Categorize functions by execution phase
-    for (Function &F : M) {
-        if (!F.isDeclaration()) {
-            std::string functionName = F.getName().str();
-            std::string phase = determineExecutionPhase(functionName, "");
-
-            if (phase == "board_init") {
-                boardInitFunctions.push_back(&F);
-            } else if (phase == "driver_init") {
-                driverFunctions.push_back(&F);
-            } else {
-                otherFunctions.push_back(&F);
+    // Find main function and analyze in execution order
+    Function *mainFunction = M.getFunction("main");
+    if (mainFunction) {
+        // Start from main and follow call graph in execution order
+        analyzeFunctionInExecutionOrder(mainFunction);
+    } else {
+        // Fallback: analyze all functions if main not found
+        for (Function &F : M) {
+            if (!F.isDeclaration()) {
+                analyzeFunction(F);
             }
         }
-    }
-
-    // Analyze functions in execution order: board init → driver init → runtime
-    for (Function *F : boardInitFunctions) {
-        analyzeFunction(*F);
-    }
-    for (Function *F : driverFunctions) {
-        analyzeFunction(*F);
-    }
-    for (Function *F : otherFunctions) {
-        analyzeFunction(*F);
     }
 
     return PreservedAnalyses::all();
@@ -648,6 +633,39 @@ void PeripheralAnalysisPass::initializePeripheralDefinitions() {
     peripherals["SYSCON3"] = syscon3;
 
 
+}
+
+void PeripheralAnalysisPass::analyzeFunctionInExecutionOrder(Function *F) {
+    // Use instance variable instead of static to avoid cross-module issues
+    if (visitedFunctions.count(F) || F->isDeclaration()) {
+        return;
+    }
+    visitedFunctions.insert(F);
+
+    // Analyze this function's instructions in execution order
+    for (BasicBlock &BB : *F) {
+        for (Instruction &I : BB) {
+            // Handle all instruction types in execution order
+            if (auto *CI = dyn_cast<CallInst>(&I)) {
+                // First analyze the function call itself
+                analyzeFunctionCall(CI);
+
+                // Then recursively analyze the called function
+                Function *calledFunction = CI->getCalledFunction();
+                if (calledFunction && !calledFunction->isDeclaration()) {
+                    analyzeFunctionInExecutionOrder(calledFunction);
+                }
+            } else if (auto *LI = dyn_cast<LoadInst>(&I)) {
+                analyzeLoadInstruction(LI);
+            } else if (auto *SI = dyn_cast<StoreInst>(&I)) {
+                analyzeStoreInstruction(SI);
+            } else if (auto *RMWI = dyn_cast<AtomicRMWInst>(&I)) {
+                analyzeAtomicRMWInstruction(RMWI);
+            } else if (auto *CXI = dyn_cast<AtomicCmpXchgInst>(&I)) {
+                analyzeCmpXchgInstruction(CXI);
+            }
+        }
+    }
 }
 
 void PeripheralAnalysisPass::analyzeFunction(Function &F) {

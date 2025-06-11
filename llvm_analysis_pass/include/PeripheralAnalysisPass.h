@@ -80,7 +80,15 @@ public:
     const std::vector<RegisterAccess>& getRegisterAccesses() const {
         return registerAccesses;
     }
-    
+
+    /// Clear all analysis results (for fresh analysis)
+    void clearResults() {
+        registerAccesses.clear();
+        peripherals.clear();
+        visitedFunctions.clear();
+        globalSequenceCounter = 0;
+    }
+
     /// Export results to JSON format
     void exportToJSON(const std::string& filename) const;
 
@@ -97,12 +105,16 @@ private:
     // Enhanced fields for execution order tracking
     uint64_t globalSequenceCounter;
     std::map<std::string, std::string> functionToPhaseMap; // Map function names to execution phases
+    std::set<Function*> visitedFunctions; // Track visited functions for execution order analysis
     
     /// Initialize peripheral definitions for MIMXRT700
     void initializePeripheralDefinitions();
     
     /// Analyze a function for register accesses
     void analyzeFunction(Function &F);
+
+    /// Analyze functions in execution order starting from a root function
+    void analyzeFunctionInExecutionOrder(Function *F);
     
     /// Analyze a load instruction for register reads
     void analyzeLoadInstruction(LoadInst *LI);

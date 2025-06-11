@@ -19,18 +19,37 @@ class FinalChronologicalSequence:
         """Load our existing comprehensive analysis results"""
         print("📊 Loading existing comprehensive analysis results...")
 
-        # Load from our proven comprehensive analysis
-        analysis_file = "../results/complete_enhanced_peripheral_analysis.json"
+        # Load from our enhanced LLVM analysis results
+        analysis_file = "../../llvm_analysis_pass/build/board_analysis_enhanced.json"
         
         try:
             with open(analysis_file, 'r') as f:
                 data = json.load(f)
 
-            if 'chronological_sequence' in data:
+            # Handle enhanced LLVM analysis format
+            if 'peripheral_accesses' in data:
+                all_accesses = []
+                for peripheral in data['peripheral_accesses']:
+                    for access in peripheral['accesses']:
+                        # Convert to our expected format
+                        converted_access = {
+                            'peripheral_name': peripheral['peripheral_name'],
+                            'register_name': access['register_name'],
+                            'address': access['address'],
+                            'access_type': access['access_type'],
+                            'purpose': access['purpose'],
+                            'source_location': access['source_location']
+                        }
+                        all_accesses.append(converted_access)
+
+                self.register_sequence = all_accesses
+                print(f"   ✅ Loaded {len(self.register_sequence)} accesses from enhanced LLVM analysis")
+            elif 'chronological_sequence' in data:
                 self.register_sequence = data['chronological_sequence']
                 print(f"   ✅ Loaded {len(self.register_sequence)} accesses from comprehensive analysis")
             else:
-                print("   ⚠️  No chronological_sequence found in analysis file")
+                print("   ⚠️  No recognized data format found in analysis file")
+                return False
 
         except Exception as e:
             print(f"   ❌ Could not load {analysis_file}: {e}")
