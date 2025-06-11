@@ -1,0 +1,50 @@
+{
+  "timestamp": 1749609082.6494243,
+  "tests_run": 4,
+  "tests_passed": 3,
+  "tests_failed": 1,
+  "critical_failures": [],
+  "detailed_results": [
+    {
+      "test_name": "Source Code Validation",
+      "passed": true,
+      "message": "Source code validation passed",
+      "details": {
+        "expected_mpu_ctrl_value": "0x00000007",
+        "source_operations_found": 1
+      },
+      "timestamp": 1749609082.651596
+    },
+    {
+      "test_name": "LLVM Analysis Accuracy",
+      "passed": false,
+      "message": "LLVM IR files not found - run LLVM analysis pass first",
+      "details": {},
+      "timestamp": 1749609082.6516485
+    },
+    {
+      "test_name": "Hardware Monitoring Accuracy",
+      "passed": true,
+      "message": "Hardware monitoring accuracy validated",
+      "details": {
+        "expected_value": "0x00000007",
+        "current_value": "0x00000007",
+        "validation_passed": true
+      },
+      "timestamp": 1749609083.8541365
+    },
+    {
+      "test_name": "End-to-End Correlation",
+      "passed": true,
+      "message": "End-to-end correlation validated",
+      "details": {
+        "source_expected": 7,
+        "llvm_expected": null,
+        "hardware_value": 7
+      },
+      "timestamp": 1749609085.0408359
+    }
+  ],
+  "success_rate": 75.0,
+  "overall_status": "PASS"
+}

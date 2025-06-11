@@ -44,6 +44,12 @@ struct RegisterAccess {
     unsigned lineNumber;
     std::string purpose;
 
+    // Value tracking fields
+    uint64_t valueWritten;       // The actual value written to the register (0 if not applicable)
+    uint64_t valueRead;          // The value read from the register (0 if not applicable)
+    bool hasValueWritten;        // True if valueWritten is valid
+    bool hasValueRead;           // True if valueRead is valid
+
     // Enhanced fields for chronological execution order
     uint64_t sequenceNumber;     // Global sequence number for execution order
     std::string executionPhase;  // "board_init", "driver_init", "runtime"
@@ -51,6 +57,9 @@ struct RegisterAccess {
     std::string basicBlockId;    // Basic block identifier for ordering within function
     uint64_t instructionIndex;   // Index within basic block for precise ordering
     std::string executionContext; // Additional context (e.g., "startup", "configuration", "operation")
+
+    // Constructor to initialize value tracking fields
+    RegisterAccess() : valueWritten(0), valueRead(0), hasValueWritten(false), hasValueRead(false) {}
 };
 
 /// Structure to represent a peripheral definition
@@ -128,8 +137,26 @@ private:
     /// Analyze ARM_MPU_Enable function calls
     void analyzeARMMPUEnable(CallInst *CI);
 
+    /// Analyze ARM_MPU_Disable function calls
+    void analyzeARMMPUDisable(CallInst *CI);
+
     /// Analyze XCACHE_EnableCache function calls
     void analyzeXCACHEEnableCache(CallInst *CI);
+
+    /// Analyze XCACHE_DisableCache function calls
+    void analyzeXCACHEDisableCache(CallInst *CI);
+
+    /// Analyze ARM_MPU_SetMemAttr function calls
+    void analyzeARMMPUSetMemAttr(CallInst *CI);
+
+    /// Analyze GPIO_PinWrite function calls
+    void analyzeGPIOPinWrite(CallInst *CI);
+
+    /// Analyze GPIO_PinRead function calls
+    void analyzeGPIOPinRead(CallInst *CI);
+
+    /// Analyze GPIO_PinInit function calls
+    void analyzeGPIOPinInit(CallInst *CI);
 
     /// Calculate IOPCTL register address from port/pin
     uint64_t calculateIOPCTLRegisterAddress(uint32_t port, uint32_t pin);

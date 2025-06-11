@@ -1,0 +1,27 @@
+{
+  "MPU_CTRL": {
+    "address": "0xe000ed94",
+    "bit_fields": {
+      "ENABLE": {
+        "position": 0,
+        "mask": "0x00000001"
+      },
+      "HFNMIENA": {
+        "position": 1,
+        "mask": "0x00000002"
+      },
+      "PRIVDEFENA": {
+        "position": 2,
+        "mask": "0x00000004"
+      }
+    },
+    "expected_operations": {
+      "ARM_MPU_Enable": {
+        "input_mask": "0x00000006",
+        "enable_bit_added": "0x00000001",
+        "final_expected": "0x00000007",
+        "calculation": "(0x4 | 0x2) | 0x1 = 0x7"
+      }
+    }
+  }
+}

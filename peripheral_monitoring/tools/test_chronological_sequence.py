@@ -385,32 +385,103 @@ class ChronologicalSequenceValidator:
             return False
 
 
+def test_first_register_access_accuracy():
+    """Test that the first register access matches the actual hardware boot sequence."""
+    print("\n🔍 Testing first register access accuracy...")
+
+    # Load the corrected chronological sequence
+    with open('peripheral_monitoring/results/corrected_chronological_sequence.json', 'r') as f:
+        data = json.load(f)
+
+    first_entry = data['chronological_sequence'][0]
+
+    # Expected first register access based on BOARD_InitHardware() sequence:
+    # 1. BOARD_ConfigMPU() -> ARM_MPU_Enable() -> MPU_CTRL register
+    expected_first_access = {
+        'address': '0xe000ed94',  # MPU_CTRL register
+        'peripheral_name': 'MPU',
+        'register_name': 'CTRL',
+        'function_name': 'BOARD_ConfigMPU',
+        'execution_phase': 'board_init'
+    }
+
+    print(f"📋 First register access analysis:")
+    print(f"   Address: {first_entry['address']}")
+    print(f"   Peripheral: {first_entry['peripheral_name']}")
+    print(f"   Register: {first_entry['register_name']}")
+    print(f"   Function: {first_entry['function_name']}")
+    print(f"   Value Before: {first_entry['value_before']}")
+    print(f"   Value After: {first_entry['value_after']}")
+    print(f"   Value Written: {first_entry['value_written']}")
+    print(f"   Source: {first_entry['source_file_path']}:{first_entry['line_number']}")
+
+    # Verify the first access matches expectations
+    try:
+        assert first_entry['address'].lower() == expected_first_access['address'].lower(), \
+            f"First register address mismatch: expected {expected_first_access['address']}, got {first_entry['address']}"
+
+        assert first_entry['peripheral_name'] == expected_first_access['peripheral_name'], \
+            f"First peripheral mismatch: expected {expected_first_access['peripheral_name']}, got {first_entry['peripheral_name']}"
+
+        assert first_entry['register_name'] == expected_first_access['register_name'], \
+            f"First register name mismatch: expected {expected_first_access['register_name']}, got {first_entry['register_name']}"
+
+        assert first_entry['function_name'] == expected_first_access['function_name'], \
+            f"First function mismatch: expected {expected_first_access['function_name']}, got {first_entry['function_name']}"
+
+        assert first_entry['execution_phase'] == expected_first_access['execution_phase'], \
+            f"First execution phase mismatch: expected {expected_first_access['execution_phase']}, got {first_entry['execution_phase']}"
+
+        # Additional validation: Check if the MPU_CTRL write is meaningful
+        # ARM_MPU_Enable(MPU_CTRL_PRIVDEFENA_Msk | MPU_CTRL_HFNMIENA_Msk) should write 0x5, not 0x0
+        if first_entry['value_written'] == '0x00000000':
+            print("⚠️  WARNING: MPU_CTRL write value is 0x00000000, which suggests MPU is being disabled")
+            print("    Expected: 0x00000005 (PRIVDEFENA_Msk | HFNMIENA_Msk)")
+            print("    This may indicate a sequencing error or incorrect value capture")
+            print("    Checking if this is actually ARM_MPU_Disable() instead of ARM_MPU_Enable()")
+            return False
+
+        print("✅ First register access verification PASSED")
+        return True
+
+    except AssertionError as e:
+        print(f"❌ First register access verification FAILED: {e}")
+        return False
+
+
 def main():
     """Main function for running validation tests"""
     import argparse
-    
+
     parser = argparse.ArgumentParser(description="Validate corrected chronological sequence")
     parser.add_argument("--results-dir", default="peripheral_monitoring/results",
                        help="Directory containing results files")
     parser.add_argument("--save-results", action="store_true",
                        help="Save detailed validation results to JSON")
-    
+    parser.add_argument("--test-first-access", action="store_true",
+                       help="Run additional test for first register access accuracy")
+
     args = parser.parse_args()
-    
+
     print("🧪 MIMXRT700 Chronological Sequence Validation Test Suite")
     print("=" * 80)
     print()
-    
+
     # Initialize validator
     validator = ChronologicalSequenceValidator(args.results_dir)
-    
+
     # Run all validations
     success = validator.run_all_validations()
-    
+
+    # Run additional first access test if requested
+    if args.test_first_access:
+        first_access_success = test_first_register_access_accuracy()
+        success = success and first_access_success
+
     # Save results if requested
     if args.save_results:
         validator.save_validation_results()
-    
+
     # Exit with appropriate code
     return 0 if success else 1
 

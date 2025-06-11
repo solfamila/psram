@@ -14,6 +14,9 @@
 #include "llvm/Support/InitLLVM.h"
 #include "llvm/Support/TargetSelect.h"
 #include <memory>
+#include <fstream>
+#include <regex>
+#include <cstdio>
 
 using namespace llvm;
 
@@ -44,9 +47,40 @@ int main(int argc, char **argv) {
     
     // Load the LLVM IR module
     std::unique_ptr<Module> M = parseIRFile(InputFilename, Err, Context);
+
+    // If parsing fails due to debug info, try to strip it and retry
     if (!M) {
-        Err.print(argv[0], errs());
-        return 1;
+        errs() << "Warning: Failed to parse IR file, attempting to strip debug info...\n";
+
+        // Try to read the file and strip debug declarations
+        std::ifstream file(InputFilename);
+        if (file.is_open()) {
+            std::string content((std::istreambuf_iterator<char>(file)),
+                               std::istreambuf_iterator<char>());
+            file.close();
+
+            // Remove debug declarations that cause parsing issues
+            std::regex debug_regex(R"(\s*#dbg_[^,\n]*(?:,[^,\n]*)*(?:,[^)]*\))?\s*\n?)");
+            content = std::regex_replace(content, debug_regex, "\n");
+
+            // Write to temporary file and try parsing again
+            std::string tempFile = std::string(InputFilename) + ".temp";
+            std::ofstream temp(tempFile);
+            if (temp.is_open()) {
+                temp << content;
+                temp.close();
+
+                M = parseIRFile(tempFile, Err, Context);
+
+                // Clean up temp file
+                std::remove(tempFile.c_str());
+            }
+        }
+
+        if (!M) {
+            Err.print(argv[0], errs());
+            return 1;
+        }
     }
     
     if (Verbose) {

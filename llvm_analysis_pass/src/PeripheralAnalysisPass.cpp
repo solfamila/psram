@@ -937,6 +937,34 @@ void PeripheralAnalysisPass::analyzeFunctionCall(CallInst *CI) {
     else if (functionName == "XCACHE_EnableCache") {
         analyzeXCACHEEnableCache(CI);
     }
+    // Analyze XCACHE_DisableCache calls
+    else if (functionName == "XCACHE_DisableCache") {
+        analyzeXCACHEDisableCache(CI);
+    }
+    // Analyze ARM_MPU_Disable calls
+    else if (functionName == "ARM_MPU_Disable") {
+        analyzeARMMPUDisable(CI);
+    }
+    // Analyze ARM_MPU_SetMemAttr calls
+    else if (functionName == "ARM_MPU_SetMemAttr") {
+        analyzeARMMPUSetMemAttr(CI);
+    }
+    // Analyze GPIO_PinWrite calls
+    else if (functionName == "GPIO_PinWrite") {
+        analyzeGPIOPinWrite(CI);
+    }
+    // Analyze GPIO_PinRead calls
+    else if (functionName == "GPIO_PinRead") {
+        analyzeGPIOPinRead(CI);
+    }
+    // Analyze GPIO_PinInit calls
+    else if (functionName == "GPIO_PinInit") {
+        analyzeGPIOPinInit(CI);
+    }
+    // Analyze XCACHE_DisableCache calls
+    else if (functionName == "XCACHE_DisableCache") {
+        analyzeXCACHEDisableCache(CI);
+    }
 }
 
 uint64_t PeripheralAnalysisPass::getEffectiveAddress(Value *Ptr) {
@@ -1581,6 +1609,23 @@ void PeripheralAnalysisPass::exportChronologicalJSON(const std::string& filename
         accessObj["access_type"] = access.accessType;
         accessObj["data_size"] = static_cast<int64_t>(access.dataSize);
 
+        // Value information
+        if (access.hasValueWritten) {
+            std::stringstream value_ss;
+            value_ss << "0x" << std::hex << std::uppercase << std::setfill('0') << std::setw(8) << access.valueWritten;
+            accessObj["value_written"] = value_ss.str();
+        } else {
+            accessObj["value_written"] = nullptr;
+        }
+
+        if (access.hasValueRead) {
+            std::stringstream value_ss;
+            value_ss << "0x" << std::hex << std::uppercase << std::setfill('0') << std::setw(8) << access.valueRead;
+            accessObj["value_read"] = value_ss.str();
+        } else {
+            accessObj["value_read"] = nullptr;
+        }
+
         // Execution order information
         accessObj["execution_phase"] = access.executionPhase;
         accessObj["execution_context"] = access.executionContext;
@@ -1767,13 +1812,51 @@ void PeripheralAnalysisPass::analyzeARMMPUEnable(CallInst *CI) {
     access.address = 0xE000ED94; // MPU Control Register
     access.accessType = "function_call_write";
     access.dataSize = 32;
-    access.bitsModified = {};
+
+    // Extract the parameter value passed to ARM_MPU_Enable
+    uint64_t inputMask = 0;
+    if (CI->getNumOperands() > 1) { // First operand is the function, second is the first argument
+        Value *arg = CI->getOperand(0);
+        if (auto *constInt = dyn_cast<ConstantInt>(arg)) {
+            inputMask = constInt->getZExtValue();
+        } else {
+            // Try to evaluate constant expressions
+            if (auto *constExpr = dyn_cast<ConstantExpr>(arg)) {
+                if (constExpr->getOpcode() == Instruction::Or) {
+                    // Handle bitwise OR operations like MPU_CTRL_PRIVDEFENA_Msk | MPU_CTRL_HFNMIENA_Msk
+                    uint64_t leftVal = 0, rightVal = 0;
+                    if (auto *leftConst = dyn_cast<ConstantInt>(constExpr->getOperand(0))) {
+                        leftVal = leftConst->getZExtValue();
+                    }
+                    if (auto *rightConst = dyn_cast<ConstantInt>(constExpr->getOperand(1))) {
+                        rightVal = rightConst->getZExtValue();
+                    }
+                    inputMask = leftVal | rightVal;
+                }
+            }
+        }
+    }
+
+    // ARM_MPU_Enable adds the ENABLE bit (bit 0) to the input mask
+    // Final value = inputMask | MPU_CTRL_ENABLE_Msk (0x1)
+    uint64_t finalValue = inputMask | 0x1;
+
+    // Set the calculated value
+    access.valueWritten = finalValue;
+    access.hasValueWritten = true;
+
+    // Analyze bit modifications
+    std::vector<std::string> bitsModified;
+    if (finalValue & 0x1) bitsModified.push_back("ENABLE");
+    if (finalValue & 0x2) bitsModified.push_back("HFNMIENA");
+    if (finalValue & 0x4) bitsModified.push_back("PRIVDEFENA");
+    access.bitsModified = bitsModified;
 
     auto [fileName, functionName, lineNumber] = getDebugInfo(CI);
     access.fileName = fileName;
     access.functionName = functionName;
     access.lineNumber = lineNumber;
-    access.purpose = "MPU enable";
+    access.purpose = "MPU enable with control value 0x" + std::to_string(finalValue);
 
     assignExecutionOrder(access, CI);
     registerAccesses.push_back(access);
@@ -1793,6 +1876,169 @@ void PeripheralAnalysisPass::analyzeXCACHEEnableCache(CallInst *CI) {
     access.functionName = functionName;
     access.lineNumber = lineNumber;
     access.purpose = "Cache enable";
+
+    assignExecutionOrder(access, CI);
+    registerAccesses.push_back(access);
+}
+
+void PeripheralAnalysisPass::analyzeXCACHEDisableCache(CallInst *CI) {
+    RegisterAccess access;
+    access.peripheralName = "XCACHE0";
+    access.registerName = "CCR";
+    access.address = 0x40180000; // Cache Control Register
+    access.accessType = "function_call_write";
+    access.dataSize = 32;
+    access.bitsModified = {"ENCACHE"};
+
+    // Extract cache instance parameter if available
+    if (CI->getNumOperands() > 1) {
+        Value *cacheInstance = CI->getOperand(0);
+        if (auto *constInt = dyn_cast<ConstantInt>(cacheInstance)) {
+            uint64_t instance = constInt->getZExtValue();
+            if (instance == 1) {
+                access.peripheralName = "XCACHE1";
+                access.address = 0x40190000; // XCACHE1 base address
+            }
+        }
+    }
+
+    auto [fileName, functionName, lineNumber] = getDebugInfo(CI);
+    access.fileName = fileName;
+    access.functionName = functionName;
+    access.lineNumber = lineNumber;
+    access.purpose = "Cache disable";
+
+    assignExecutionOrder(access, CI);
+    registerAccesses.push_back(access);
+}
+
+void PeripheralAnalysisPass::analyzeARMMPUDisable(CallInst *CI) {
+    RegisterAccess access;
+    access.peripheralName = "MPU";
+    access.registerName = "CTRL";
+    access.address = 0xE000ED94; // MPU Control Register
+    access.accessType = "function_call_write";
+    access.dataSize = 32;
+    access.bitsModified = {"ENABLE"};
+
+    // ARM_MPU_Disable clears the ENABLE bit (sets register to 0)
+    access.valueWritten = 0x0;
+    access.hasValueWritten = true;
+
+    auto [fileName, functionName, lineNumber] = getDebugInfo(CI);
+    access.fileName = fileName;
+    access.functionName = functionName;
+    access.lineNumber = lineNumber;
+    access.purpose = "MPU disable";
+
+    assignExecutionOrder(access, CI);
+    registerAccesses.push_back(access);
+}
+
+void PeripheralAnalysisPass::analyzeARMMPUSetMemAttr(CallInst *CI) {
+    RegisterAccess access;
+    access.peripheralName = "MPU";
+    access.registerName = "MAIR0";
+    access.address = 0xE000EDC0; // MPU Memory Attribute Indirection Register 0
+    access.accessType = "function_call_write";
+    access.dataSize = 32;
+    access.bitsModified = {"ATTR0", "ATTR1", "ATTR2", "ATTR3"};
+
+    // Extract memory attribute index and value if available
+    if (CI->getNumOperands() > 2) {
+        Value *attrIndex = CI->getOperand(0);
+        Value *attrValue = CI->getOperand(1);
+
+        if (auto *indexConst = dyn_cast<ConstantInt>(attrIndex)) {
+            uint64_t index = indexConst->getZExtValue();
+            access.purpose = "MPU memory attribute " + std::to_string(index);
+
+            if (auto *valueConst = dyn_cast<ConstantInt>(attrValue)) {
+                uint64_t value = valueConst->getZExtValue();
+                access.valueWritten = value;
+                access.hasValueWritten = true;
+            }
+        }
+    } else {
+        access.purpose = "MPU memory attribute configuration";
+    }
+
+    auto [fileName, functionName, lineNumber] = getDebugInfo(CI);
+    access.fileName = fileName;
+    access.functionName = functionName;
+    access.lineNumber = lineNumber;
+
+    assignExecutionOrder(access, CI);
+    registerAccesses.push_back(access);
+}
+
+void PeripheralAnalysisPass::analyzeGPIOPinWrite(CallInst *CI) {
+    RegisterAccess access;
+    access.peripheralName = "GPIO1";  // Default to GPIO1, could be enhanced to detect instance
+    access.registerName = "PDOR";
+    access.address = 0x40100000; // GPIO1 Port Data Output Register
+    access.accessType = "function_call_write";
+    access.dataSize = 32;
+    access.bitsModified = {"PIN_DATA"};
+
+    // Extract pin number and value if available
+    if (CI->getNumOperands() > 2) {
+        Value *pinValue = CI->getOperand(1);
+
+        if (auto *valueConst = dyn_cast<ConstantInt>(pinValue)) {
+            uint64_t value = valueConst->getZExtValue();
+            access.valueWritten = value;
+            access.hasValueWritten = true;
+            access.purpose = std::string("GPIO pin write: ") + (value ? "HIGH" : "LOW");
+        } else {
+            access.purpose = "GPIO pin write";
+        }
+    } else {
+        access.purpose = "GPIO pin write";
+    }
+
+    auto [fileName, functionName, lineNumber] = getDebugInfo(CI);
+    access.fileName = fileName;
+    access.functionName = functionName;
+    access.lineNumber = lineNumber;
+
+    assignExecutionOrder(access, CI);
+    registerAccesses.push_back(access);
+}
+
+void PeripheralAnalysisPass::analyzeGPIOPinRead(CallInst *CI) {
+    RegisterAccess access;
+    access.peripheralName = "GPIO1";  // Default to GPIO1
+    access.registerName = "PDIR";
+    access.address = 0x40100010; // GPIO1 Port Data Input Register
+    access.accessType = "function_call_read";
+    access.dataSize = 32;
+    access.bitsModified = {};
+    access.purpose = "GPIO pin read";
+
+    auto [fileName, functionName, lineNumber] = getDebugInfo(CI);
+    access.fileName = fileName;
+    access.functionName = functionName;
+    access.lineNumber = lineNumber;
+
+    assignExecutionOrder(access, CI);
+    registerAccesses.push_back(access);
+}
+
+void PeripheralAnalysisPass::analyzeGPIOPinInit(CallInst *CI) {
+    RegisterAccess access;
+    access.peripheralName = "GPIO1";  // Default to GPIO1
+    access.registerName = "PDDR";
+    access.address = 0x40100014; // GPIO1 Port Data Direction Register
+    access.accessType = "function_call_write";
+    access.dataSize = 32;
+    access.bitsModified = {"PIN_DIRECTION"};
+    access.purpose = "GPIO pin initialization";
+
+    auto [fileName, functionName, lineNumber] = getDebugInfo(CI);
+    access.fileName = fileName;
+    access.functionName = functionName;
+    access.lineNumber = lineNumber;
 
     assignExecutionOrder(access, CI);
     registerAccesses.push_back(access);
