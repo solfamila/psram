@@ -1,0 +1,1806 @@
+🎯 FINAL CHRONOLOGICAL REGISTER ACCESS SEQUENCE
+======================================================================
+
+  1. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+  2. RSTCTL     PRSTCTL_CLR     (0x40000070) [0x00000000 → 0x00000000] ➖ SAME    - Clear peripheral reset
+     📁 unknown:0 in unknown()
+
+  3. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+  4. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+  5. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Initialize XSPI2 controller
+     📁 unknown:0 in unknown()
+
+  6. CLKCTL0    PSCCTL4         (0x40001020) [0x00000001 → 0x00000000] 🔄 CHANGED - Enable CLKCTL0 functionality
+     📁 unknown:0 in unknown()
+
+  7. CLKCTL0    CLKDIV          (0x40001400) [0x00000000 → 0x00000000] ➖ SAME    - Clock divider configuration
+     📁 unknown:0 in unknown()
+
+  8. IOPCTL0    PIO0_31         (0x4000407C) [0x00000041 → 0x00000000] 🔄 CHANGED - Pin mux configuration for port 0 pin 31
+     📁 unknown:0 in unknown()
+
+  9. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+ 10. CLKCTL0    CLKDIV          (0x40001400) [0x00000000 → 0x00000000] ➖ SAME    - Clock divider configuration
+     📁 unknown:0 in unknown()
+
+ 11. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Initialize XSPI2 controller
+     📁 unknown:0 in unknown()
+
+ 12. CLKCTL0    REG_0x4         (0x40001004) [0x00000000 → 0x00000000] ➖ SAME    - Enable CLKCTL0 functionality
+     📁 unknown:0 in unknown()
+
+ 13. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+ 14. IOPCTL0    PIO1_0          (0x40004080) [0x00000001 → 0x00000000] 🔄 CHANGED - Pin mux configuration for port 1 pin 0
+     📁 unknown:0 in unknown()
+
+ 15. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+ 16. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Initialize XSPI2 controller
+     📁 unknown:0 in unknown()
+
+ 17. CLKCTL0    PSCCTL5         (0x40001024) [0x0000002C → 0x00000000] 🔄 CHANGED - Enable CLKCTL0 functionality
+     📁 unknown:0 in unknown()
+
+ 18. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+ 19. RSTCTL     PRSTCTL_CLR     (0x40000070) [0x00000000 → 0x00000000] ➖ SAME    - Clear peripheral reset
+     📁 unknown:0 in unknown()
+
+ 20. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+ 21. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Initialize XSPI2 controller
+     📁 unknown:0 in unknown()
+
+ 22. CLKCTL0    REG_0x8         (0x40001008) [0x00000000 → 0x00000000] ➖ SAME    - Enable CLKCTL0 functionality
+     📁 unknown:0 in unknown()
+
+ 23. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+ 24. IOPCTL2    PIO5_0          (0x400A5080) [0x00000030 → 0x00000000] 🔄 CHANGED - Pin mux configuration for port 5 pin 0
+     📁 unknown:0 in unknown()
+
+ 25. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+ 26. RSTCTL     PRSTCTL_CLR     (0x40000070) [0x00000000 → 0x00000000] ➖ SAME    - Clear peripheral reset
+     📁 unknown:0 in unknown()
+
+ 27. CLKCTL0    REG_0x40        (0x40001028) [0x00000000 → 0x00000000] ➖ SAME    - Enable CLKCTL0 functionality
+     📁 unknown:0 in unknown()
+
+ 28. CLKCTL0    CLKDIV          (0x40001400) [0x00000000 → 0x00000000] ➖ SAME    - Clock divider configuration
+     📁 unknown:0 in unknown()
+
+ 29. IOPCTL2    PIO5_1          (0x400A5084) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 5 pin 1
+     📁 unknown:0 in unknown()
+
+ 30. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+ 31. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+ 32. CLKCTL0    REG_0x12        (0x4000100C) [0x00000000 → 0x00000000] ➖ SAME    - Enable CLKCTL0 functionality
+     📁 unknown:0 in unknown()
+
+ 33. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+ 34. IOPCTL2    PIO5_10         (0x400A50A8) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 5 pin 10
+     📁 unknown:0 in unknown()
+
+ 35. CLKCTL0    CLKDIV          (0x40001400) [0x00000000 → 0x00000000] ➖ SAME    - Clock divider configuration
+     📁 unknown:0 in unknown()
+
+ 36. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+ 37. CLKCTL0    REG_0x44        (0x4000102C) [0x00000000 → 0x00000000] ➖ SAME    - Enable CLKCTL0 functionality
+     📁 unknown:0 in unknown()
+
+ 38. CLKCTL0    CLKDIV          (0x40001400) [0x00000000 → 0x00000000] ➖ SAME    - Clock divider configuration
+     📁 unknown:0 in unknown()
+
+ 39. IOPCTL2    PIO5_11         (0x400A50AC) [0x00000030 → 0x00000000] 🔄 CHANGED - Pin mux configuration for port 5 pin 11
+     📁 unknown:0 in unknown()
+
+ 40. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+ 41. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+ 42. CLKCTL0    PSCCTL0         (0x40001010) [0x0000F026 → 0x00000000] 🔄 CHANGED - Enable CLKCTL0 functionality
+     📁 unknown:0 in unknown()
+
+ 43. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+ 44. IOPCTL2    PIO5_12         (0x400A50B0) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 5 pin 12
+     📁 unknown:0 in unknown()
+
+ 45. CLKCTL0    CLKDIV          (0x40001400) [0x00000000 → 0x00000000] ➖ SAME    - Clock divider configuration
+     📁 unknown:0 in unknown()
+
+ 46. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+ 47. CLKCTL0    REG_0x48        (0x40001030) [0x00000000 → 0x00000000] ➖ SAME    - Enable CLKCTL0 functionality
+     📁 unknown:0 in unknown()
+
+ 48. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+ 49. IOPCTL2    PIO5_13         (0x400A50B4) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 5 pin 13
+     📁 unknown:0 in unknown()
+
+ 50. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+ 51. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+ 52. CLKCTL0    PSCCTL1         (0x40001014) [0x40033F81 → 0x00000000] 🔄 CHANGED - Enable CLKCTL0 functionality
+     📁 unknown:0 in unknown()
+
+ 53. CLKCTL0    CLKDIV          (0x40001400) [0x00000000 → 0x00000000] ➖ SAME    - Clock divider configuration
+     📁 unknown:0 in unknown()
+
+ 54. IOPCTL2    PIO5_14         (0x400A50B8) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 5 pin 14
+     📁 unknown:0 in unknown()
+
+ 55. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+ 56. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+ 57. CLKCTL0    REG_0x52        (0x40001034) [0x00000000 → 0x00000000] ➖ SAME    - Enable CLKCTL0 functionality
+     📁 unknown:0 in unknown()
+
+ 58. CLKCTL0    REG_0x184       (0x400010B8) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x184 register
+     📁 unknown:0 in unknown()
+
+ 59. IOPCTL2    PIO5_15         (0x400A50BC) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 5 pin 15
+     📁 unknown:0 in unknown()
+
+ 60. CLKCTL0    CLKDIV          (0x40001400) [0x00000000 → 0x00000000] ➖ SAME    - Clock divider configuration
+     📁 unknown:0 in unknown()
+
+ 61. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+ 62. CLKCTL0    PSCCTL2         (0x40001018) [0x00000000 → 0x00000000] ➖ SAME    - Enable CLKCTL0 functionality
+     📁 unknown:0 in unknown()
+
+ 63. CLKCTL0    REG_0x188       (0x400010BC) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x188 register
+     📁 unknown:0 in unknown()
+
+ 64. IOPCTL2    PIO5_16         (0x400A50C0) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 5 pin 16
+     📁 unknown:0 in unknown()
+
+ 65. CLKCTL0    CLKDIV          (0x40001400) [0x00000000 → 0x00000000] ➖ SAME    - Clock divider configuration
+     📁 unknown:0 in unknown()
+
+ 66. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+ 67. RSTCTL1    REG_0x12        (0x4006100C) [0x00000000 → 0x00000000] ➖ SAME    - Enable RSTCTL1 functionality
+     📁 unknown:0 in unknown()
+
+ 68. CLKCTL0    PSCCTL0_SET     (0x40001040) [0x00000000 → 0x00000000] ➖ SAME    - Access PSCCTL0_SET register
+     📁 unknown:0 in unknown()
+
+ 69. IOPCTL2    PIO5_17         (0x400A50C4) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 5 pin 17
+     📁 unknown:0 in unknown()
+
+ 70. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+ 71. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+ 72. RSTCTL1    REG_0x4         (0x40061004) [0x00000000 → 0x00000000] ➖ SAME    - Enable RSTCTL1 functionality
+     📁 unknown:0 in unknown()
+
+ 73. CLKCTL0    REG_0x184       (0x400010B8) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x184 register
+     📁 unknown:0 in unknown()
+
+ 74. IOPCTL2    PIO5_18         (0x400A50C8) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 5 pin 18
+     📁 unknown:0 in unknown()
+
+ 75. CLKCTL0    CLKDIV          (0x40001400) [0x00000000 → 0x00000000] ➖ SAME    - Clock divider configuration
+     📁 unknown:0 in unknown()
+
+ 76. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+ 77. SYSCON0    REG_0x4         (0x40002004) [0x00000000 → 0x00000000] ➖ SAME    - Enable SYSCON0 functionality
+     📁 unknown:0 in unknown()
+
+ 78. CLKCTL0    REG_0x188       (0x400010BC) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x188 register
+     📁 unknown:0 in unknown()
+
+ 79. IOPCTL2    PIO5_19         (0x400A50CC) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 5 pin 19
+     📁 unknown:0 in unknown()
+
+ 80. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+ 81. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+ 82. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Enable SYSCON0 functionality
+     📁 unknown:0 in unknown()
+
+ 83. CLKCTL0    REG_0x188       (0x400010BC) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x188 register
+     📁 unknown:0 in unknown()
+
+ 84. IOPCTL2    PIO5_2          (0x400A5088) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 5 pin 2
+     📁 unknown:0 in unknown()
+
+ 85. CLKCTL0    CLKDIV          (0x40001400) [0x00000000 → 0x00000000] ➖ SAME    - Clock divider configuration
+     📁 unknown:0 in unknown()
+
+ 86. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+ 87. CLKCTL0    REG_0x88        (0x40001058) [0x00000000 → 0x00000000] ➖ SAME    - Enable CLKCTL0 functionality
+     📁 unknown:0 in unknown()
+
+ 88. CLKCTL0    PSCCTL5         (0x40001024) [0x0000002C → 0x00000000] 🔄 CHANGED - Access PSCCTL5 register
+     📁 unknown:0 in unknown()
+
+ 89. IOPCTL2    PIO5_20         (0x400A50D0) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 5 pin 20
+     📁 unknown:0 in unknown()
+
+ 90. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+ 91. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+ 92. CLKCTL0    REG_0x88        (0x40001058) [0x00000000 → 0x00000000] ➖ SAME    - Enable CLKCTL0 functionality
+     📁 unknown:0 in unknown()
+
+ 93. CLKCTL0    REG_0x196       (0x400010C4) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x196 register
+     📁 unknown:0 in unknown()
+
+ 94. IOPCTL2    PIO5_3          (0x400A508C) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 5 pin 3
+     📁 unknown:0 in unknown()
+
+ 95. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+ 96. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+ 97. CLKCTL0    REG_0x88        (0x40001058) [0x00000000 → 0x00000000] ➖ SAME    - Enable CLKCTL0 functionality
+     📁 unknown:0 in unknown()
+
+ 98. CLKCTL0    REG_0x200       (0x400010C8) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x200 register
+     📁 unknown:0 in unknown()
+
+ 99. IOPCTL2    PIO5_4          (0x400A5090) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 5 pin 4
+     📁 unknown:0 in unknown()
+
+100. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+101. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+102. RSTCTL1    REG_0x28        (0x4006101C) [0x00000000 → 0x00000000] ➖ SAME    - Enable RSTCTL1 functionality
+     📁 unknown:0 in unknown()
+
+103. CLKCTL0    PSCCTL0_SET     (0x40001040) [0x00000000 → 0x00000000] ➖ SAME    - Access PSCCTL0_SET register
+     📁 unknown:0 in unknown()
+
+104. IOPCTL2    PIO5_5          (0x400A5094) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 5 pin 5
+     📁 unknown:0 in unknown()
+
+105. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+106. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+107. RSTCTL1    REG_0x28        (0x4006101C) [0x00000000 → 0x00000000] ➖ SAME    - Enable RSTCTL1 functionality
+     📁 unknown:0 in unknown()
+
+108. CLKCTL0    REG_0x196       (0x400010C4) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x196 register
+     📁 unknown:0 in unknown()
+
+109. IOPCTL2    PIO5_6          (0x400A5098) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 5 pin 6
+     📁 unknown:0 in unknown()
+
+110. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+111. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+112. RSTCTL1    REG_0x28        (0x4006101C) [0x00000000 → 0x00000000] ➖ SAME    - Enable RSTCTL1 functionality
+     📁 unknown:0 in unknown()
+
+113. CLKCTL0    REG_0x200       (0x400010C8) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x200 register
+     📁 unknown:0 in unknown()
+
+114. IOPCTL2    PIO5_7          (0x400A509C) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 5 pin 7
+     📁 unknown:0 in unknown()
+
+115. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+116. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+117. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Access AHBMATPRIO register
+     📁 unknown:0 in unknown()
+
+118. CLKCTL0    REG_0x200       (0x400010C8) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x200 register
+     📁 unknown:0 in unknown()
+
+119. IOPCTL2    PIO5_8          (0x400A50A0) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 5 pin 8
+     📁 unknown:0 in unknown()
+
+120. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+121. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Enable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+122. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Access AHBMATPRIO register
+     📁 unknown:0 in unknown()
+
+123. CLKCTL0    PSCCTL5         (0x40001024) [0x0000002C → 0x00000000] 🔄 CHANGED - Access PSCCTL5 register
+     📁 unknown:0 in unknown()
+
+124. IOPCTL2    PIO5_9          (0x400A50A4) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 5 pin 9
+     📁 unknown:0 in unknown()
+
+125. CLKCTL0    CLKDIV          (0x40001400) [0x00000000 → 0x00000000] ➖ SAME    - Clock divider configuration
+     📁 unknown:0 in unknown()
+
+126. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Enable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+127. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Access AHBMATPRIO register
+     📁 unknown:0 in unknown()
+
+128. MPU        RBAR            (0xE000ED9C) [0x00000000 → 0x00000000] ➖ SAME    - MPU region configuration
+     📁 unknown:0 in unknown()
+
+129. RSTCTL     PRSTCTL_CLR     (0x40000070) [0x00000000 → 0x00000000] ➖ SAME    - Clear peripheral reset
+     📁 unknown:0 in unknown()
+
+130. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+131. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Enable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+132. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Access AHBMATPRIO register
+     📁 unknown:0 in unknown()
+
+133. MPU        RBAR            (0xE000ED9C) [0x00000000 → 0x00000000] ➖ SAME    - MPU region configuration
+     📁 unknown:0 in unknown()
+
+134. IOPCTL2    PIO4_0          (0x400A5000) [0x00000041 → 0x00000000] 🔄 CHANGED - Pin mux configuration for port 4 pin 0
+     📁 unknown:0 in unknown()
+
+135. CLKCTL0    CLKDIV          (0x40001400) [0x00000000 → 0x00000000] ➖ SAME    - Clock divider configuration
+     📁 unknown:0 in unknown()
+
+136. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Enable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+137. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Access AHBMATPRIO register
+     📁 unknown:0 in unknown()
+
+138. MPU        RBAR            (0xE000ED9C) [0x00000000 → 0x00000000] ➖ SAME    - MPU region configuration
+     📁 unknown:0 in unknown()
+
+139. IOPCTL2    PIO4_1          (0x400A5004) [0x00000041 → 0x00000000] 🔄 CHANGED - Pin mux configuration for port 4 pin 1
+     📁 unknown:0 in unknown()
+
+140. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+141. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+142. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Access AHBMATPRIO register
+     📁 unknown:0 in unknown()
+
+143. MPU        CTRL            (0xE000ED94) [0x00000007 → 0x00000000] 🔄 CHANGED - MPU enable
+     📁 unknown:0 in unknown()
+
+144. IOPCTL2    PIO4_10         (0x400A5028) [0x00000041 → 0x00000000] 🔄 CHANGED - Pin mux configuration for port 4 pin 10
+     📁 unknown:0 in unknown()
+
+145. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+146. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+147. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Access AHBMATPRIO register
+     📁 unknown:0 in unknown()
+
+148. XCACHE0    CCR             (0x40180000) [0x00000000 → 0x00000000] ➖ SAME    - Cache enable
+     📁 unknown:0 in unknown()
+
+149. IOPCTL2    PIO4_11         (0x400A502C) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 4 pin 11
+     📁 unknown:0 in unknown()
+
+150. CLKCTL0    CLKDIV          (0x40001400) [0x00000000 → 0x00000000] ➖ SAME    - Clock divider configuration
+     📁 unknown:0 in unknown()
+
+151. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+152. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Access AHBMATPRIO register
+     📁 unknown:0 in unknown()
+
+153. XCACHE0    CCR             (0x40180000) [0x00000000 → 0x00000000] ➖ SAME    - Cache enable
+     📁 unknown:0 in unknown()
+
+154. IOPCTL2    PIO4_12         (0x400A5030) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 4 pin 12
+     📁 unknown:0 in unknown()
+
+155. CLKCTL0    CLKDIV          (0x40001400) [0x00000000 → 0x00000000] ➖ SAME    - Clock divider configuration
+     📁 unknown:0 in unknown()
+
+156. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+157. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Access AHBMATPRIO register
+     📁 unknown:0 in unknown()
+
+158. CLKCTL0    PSCCTL5         (0x40001024) [0x0000002C → 0x00000000] 🔄 CHANGED - Initialize CLKCTL0 controller
+     📁 unknown:0 in unknown()
+
+159. IOPCTL2    PIO4_13         (0x400A5034) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 4 pin 13
+     📁 unknown:0 in unknown()
+
+160. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+161. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+162. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Access AHBMATPRIO register
+     📁 unknown:0 in unknown()
+
+163. CLKCTL0    PSCCTL5         (0x40001024) [0x0000002C → 0x00000000] 🔄 CHANGED - Initialize CLKCTL0 controller
+     📁 unknown:0 in unknown()
+
+164. IOPCTL2    PIO4_14         (0x400A5038) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 4 pin 14
+     📁 unknown:0 in unknown()
+
+165. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+166. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+167. RSTCTL1    REG_0x48        (0x40061030) [0x00000000 → 0x00000000] ➖ SAME    - Enable RSTCTL1 functionality
+     📁 unknown:0 in unknown()
+
+168. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+169. IOPCTL2    PIO4_15         (0x400A503C) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 4 pin 15
+     📁 unknown:0 in unknown()
+
+170. CLKCTL0    CLKDIV          (0x40001400) [0x00000000 → 0x00000000] ➖ SAME    - Clock divider configuration
+     📁 unknown:0 in unknown()
+
+171. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+172. CLKCTL0    REG_0x96        (0x40001060) [0x00000000 → 0x00000000] ➖ SAME    - Enable CLKCTL0 functionality
+     📁 unknown:0 in unknown()
+
+173. CLKCTL0    CLKDIV          (0x40001400) [0x00000000 → 0x00000000] ➖ SAME    - Clock divider configuration
+     📁 unknown:0 in unknown()
+
+174. IOPCTL2    PIO4_16         (0x400A5040) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 4 pin 16
+     📁 unknown:0 in unknown()
+
+175. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+176. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Enable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+177. CLKCTL0    REG_0x96        (0x40001060) [0x00000000 → 0x00000000] ➖ SAME    - Enable CLKCTL0 functionality
+     📁 unknown:0 in unknown()
+
+178. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+179. IOPCTL2    PIO4_17         (0x400A5044) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 4 pin 17
+     📁 unknown:0 in unknown()
+
+180. CLKCTL0    CLKDIV          (0x40001400) [0x00000000 → 0x00000000] ➖ SAME    - Clock divider configuration
+     📁 unknown:0 in unknown()
+
+181. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Enable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+182. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Enable SYSCON0 functionality
+     📁 unknown:0 in unknown()
+
+183. CLKCTL0    CLKDIV          (0x40001400) [0x00000000 → 0x00000000] ➖ SAME    - Clock divider configuration
+     📁 unknown:0 in unknown()
+
+184. IOPCTL2    PIO4_18         (0x400A5048) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 4 pin 18
+     📁 unknown:0 in unknown()
+
+185. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+186. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Enable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+187. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Enable SYSCON0 functionality
+     📁 unknown:0 in unknown()
+
+188. RSTCTL     PRSTCTL_CLR     (0x40000070) [0x00000000 → 0x00000000] ➖ SAME    - Clear peripheral reset
+     📁 unknown:0 in unknown()
+
+189. IOPCTL2    PIO4_19         (0x400A504C) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 4 pin 19
+     📁 unknown:0 in unknown()
+
+190. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Access AHBMATPRIO register
+     📁 unknown:0 in unknown()
+
+191. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Enable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+192. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Enable SYSCON0 functionality
+     📁 unknown:0 in unknown()
+
+193. IOPCTL0    PIO0_12         (0x40004030) [0x00000000 → 0x00000000] ➖ SAME    - Initialize IOPCTL0 controller
+     📁 unknown:0 in unknown()
+
+194. IOPCTL2    PIO4_2          (0x400A5008) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 4 pin 2
+     📁 unknown:0 in unknown()
+
+195. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Access AHBMATPRIO register
+     📁 unknown:0 in unknown()
+
+196. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+197. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Enable SYSCON0 functionality
+     📁 unknown:0 in unknown()
+
+198. IOPCTL0    PIO0_12         (0x40004030) [0x00000000 → 0x00000000] ➖ SAME    - Initialize IOPCTL0 controller
+     📁 unknown:0 in unknown()
+
+199. IOPCTL2    PIO4_20         (0x400A5050) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 4 pin 20
+     📁 unknown:0 in unknown()
+
+200. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+201. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Enable SYSCON0 functionality
+     📁 unknown:0 in unknown()
+
+202. IOPCTL0    PIO0_13         (0x40004034) [0x00000000 → 0x00000000] ➖ SAME    - Initialize IOPCTL0 controller
+     📁 unknown:0 in unknown()
+
+203. IOPCTL2    PIO4_3          (0x400A500C) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 4 pin 3
+     📁 unknown:0 in unknown()
+
+204. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+205. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Enable SYSCON0 functionality
+     📁 unknown:0 in unknown()
+
+206. IOPCTL0    PIO0_13         (0x40004034) [0x00000000 → 0x00000000] ➖ SAME    - Initialize IOPCTL0 controller
+     📁 unknown:0 in unknown()
+
+207. IOPCTL2    PIO4_4          (0x400A5010) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 4 pin 4
+     📁 unknown:0 in unknown()
+
+208. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+209. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Enable SYSCON0 functionality
+     📁 unknown:0 in unknown()
+
+210. IOPCTL0    PIO0_12         (0x40004030) [0x00000000 → 0x00000000] ➖ SAME    - Access PIO0_12 register
+     📁 unknown:0 in unknown()
+
+211. IOPCTL2    PIO4_5          (0x400A5014) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 4 pin 5
+     📁 unknown:0 in unknown()
+
+212. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+213. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Enable SYSCON0 functionality
+     📁 unknown:0 in unknown()
+
+214. IOPCTL0    PIO0_13         (0x40004034) [0x00000000 → 0x00000000] ➖ SAME    - Access PIO0_13 register
+     📁 unknown:0 in unknown()
+
+215. IOPCTL2    PIO4_6          (0x400A5018) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 4 pin 6
+     📁 unknown:0 in unknown()
+
+216. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+217. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Enable SYSCON0 functionality
+     📁 unknown:0 in unknown()
+
+218. GPIO0      PDOR            (0x40100000) [0x00000000 → 0x00000000] ➖ SAME    - Write data to GPIO0
+     📁 unknown:0 in unknown()
+
+219. IOPCTL2    PIO4_7          (0x400A501C) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 4 pin 7
+     📁 unknown:0 in unknown()
+
+220. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+221. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Enable SYSCON0 functionality
+     📁 unknown:0 in unknown()
+
+222. GPIO0      PDOR            (0x40100000) [0x00000000 → 0x00000000] ➖ SAME    - Write data to GPIO0
+     📁 unknown:0 in unknown()
+
+223. IOPCTL2    PIO4_8          (0x400A5020) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 4 pin 8
+     📁 unknown:0 in unknown()
+
+224. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+225. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Enable SYSCON0 functionality
+     📁 unknown:0 in unknown()
+
+226. GPIO0      PDOR            (0x40100000) [0x00000000 → 0x00000000] ➖ SAME    - Read data from GPIO0
+     📁 unknown:0 in unknown()
+
+227. IOPCTL2    PIO4_9          (0x400A5024) [0x00000000 → 0x00000000] ➖ SAME    - Pin mux configuration for port 4 pin 9
+     📁 unknown:0 in unknown()
+
+228. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+229. CLKCTL1    REG_0x24        (0x40003018) [0x00000000 → 0x00000000] ➖ SAME    - Enable CLKCTL1 functionality
+     📁 unknown:0 in unknown()
+
+230. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+231. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Enable SYSCON0 functionality
+     📁 unknown:0 in unknown()
+
+232. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+233. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Configure SYSCON0 settings
+     📁 unknown:0 in unknown()
+
+234. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Enable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+235. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Configure SYSCON0 settings
+     📁 unknown:0 in unknown()
+
+236. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+237. CLKCTL1    PSCCTL4         (0x40003010) [0x00000000 → 0x00000000] ➖ SAME    - Initialize CLKCTL1 controller
+     📁 unknown:0 in unknown()
+
+238. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+239. CLKCTL1    REG_0x24        (0x40003018) [0x00000000 → 0x00000000] ➖ SAME    - Initialize CLKCTL1 controller
+     📁 unknown:0 in unknown()
+
+240. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+241. CLKCTL1    PSCCTL4         (0x40003010) [0x00000000 → 0x00000000] ➖ SAME    - Initialize CLKCTL1 controller
+     📁 unknown:0 in unknown()
+
+242. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+243. CLKCTL1    REG_0x24        (0x40003018) [0x00000000 → 0x00000000] ➖ SAME    - Initialize CLKCTL1 controller
+     📁 unknown:0 in unknown()
+
+244. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+245. CLKCTL0    REG_0x96        (0x40001060) [0x00000000 → 0x00000000] ➖ SAME    - Enable CLKCTL0 functionality
+     📁 unknown:0 in unknown()
+
+246. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+247. CLKCTL0    REG_0x104       (0x40001068) [0x00000000 → 0x00000000] ➖ SAME    - Enable CLKCTL0 functionality
+     📁 unknown:0 in unknown()
+
+248. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+249. RSTCTL1    REG_0x48        (0x40061030) [0x00000000 → 0x00000000] ➖ SAME    - Enable RSTCTL1 functionality
+     📁 unknown:0 in unknown()
+
+250. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+251. RSTCTL1    REG_0x56        (0x40061038) [0x00000000 → 0x00000000] ➖ SAME    - Enable RSTCTL1 functionality
+     📁 unknown:0 in unknown()
+
+252. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+253. CLKCTL0    REG_0x60        (0x4000103C) [0x00000000 → 0x00000000] ➖ SAME    - Disable CLKCTL0 functionality
+     📁 unknown:0 in unknown()
+
+254. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+255. CLKCTL0    PSCCTL0_SET     (0x40001040) [0x00000000 → 0x00000000] ➖ SAME    - Disable CLKCTL0 functionality
+     📁 unknown:0 in unknown()
+
+256. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+257. CLKCTL0    PSCCTL1_SET     (0x40001044) [0x00000000 → 0x00000000] ➖ SAME    - Disable CLKCTL0 functionality
+     📁 unknown:0 in unknown()
+
+258. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+259. CLKCTL0    PSCCTL2_SET     (0x40001048) [0x00000000 → 0x00000000] ➖ SAME    - Disable CLKCTL0 functionality
+     📁 unknown:0 in unknown()
+
+260. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+261. CLKCTL0    PSCCTL3_SET     (0x4000104C) [0x00000000 → 0x00000000] ➖ SAME    - Disable CLKCTL0 functionality
+     📁 unknown:0 in unknown()
+
+262. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+263. CLKCTL0    PSCCTL4_SET     (0x40001050) [0x00000000 → 0x00000000] ➖ SAME    - Disable CLKCTL0 functionality
+     📁 unknown:0 in unknown()
+
+264. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+265. RSTCTL1    REG_0x20        (0x40061014) [0x00000000 → 0x00000000] ➖ SAME    - Disable RSTCTL1 functionality
+     📁 unknown:0 in unknown()
+
+266. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+267. SYSCON0    REG_0x8         (0x40002008) [0x00000000 → 0x00000000] ➖ SAME    - Disable SYSCON0 functionality
+     📁 unknown:0 in unknown()
+
+268. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+269. CLKCTL0    REG_0x88        (0x40001058) [0x00000000 → 0x00000000] ➖ SAME    - Disable CLKCTL0 functionality
+     📁 unknown:0 in unknown()
+
+270. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+271. CLKCTL0    REG_0x88        (0x40001058) [0x00000000 → 0x00000000] ➖ SAME    - Disable CLKCTL0 functionality
+     📁 unknown:0 in unknown()
+
+272. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+273. RSTCTL1    REG_0x28        (0x4006101C) [0x00000000 → 0x00000000] ➖ SAME    - Disable RSTCTL1 functionality
+     📁 unknown:0 in unknown()
+
+274. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+275. RSTCTL1    REG_0x28        (0x4006101C) [0x00000000 → 0x00000000] ➖ SAME    - Disable RSTCTL1 functionality
+     📁 unknown:0 in unknown()
+
+276. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+277. CLKCTL0    REG_0x136       (0x40001088) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x136 register
+     📁 unknown:0 in unknown()
+
+278. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+279. CLKCTL0    PSCCTL0_CLR     (0x40001070) [0x00000000 → 0x00000000] ➖ SAME    - Access PSCCTL0_CLR register
+     📁 unknown:0 in unknown()
+
+280. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+281. CLKCTL0    REG_0x332       (0x4000114C) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x332 register
+     📁 unknown:0 in unknown()
+
+282. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+283. CLKCTL0    REG_0x332       (0x4000114C) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x332 register
+     📁 unknown:0 in unknown()
+
+284. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+285. CLKCTL0    REG_0x336       (0x40001150) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x336 register
+     📁 unknown:0 in unknown()
+
+286. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+287. CLKCTL0    REG_0x232       (0x400010E8) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x232 register
+     📁 unknown:0 in unknown()
+
+288. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+289. CLKCTL0    REG_0x232       (0x400010E8) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x232 register
+     📁 unknown:0 in unknown()
+
+290. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+291. CLKCTL0    REG_0x240       (0x400010F0) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x240 register
+     📁 unknown:0 in unknown()
+
+292. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+293. CLKCTL0    REG_0x240       (0x400010F0) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x240 register
+     📁 unknown:0 in unknown()
+
+294. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+295. CLKCTL0    REG_0x184       (0x400010B8) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x184 register
+     📁 unknown:0 in unknown()
+
+296. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+297. CLKCTL0    REG_0x184       (0x400010B8) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x184 register
+     📁 unknown:0 in unknown()
+
+298. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+299. CLKCTL0    REG_0x188       (0x400010BC) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x188 register
+     📁 unknown:0 in unknown()
+
+300. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+301. CLKCTL0    REG_0x196       (0x400010C4) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x196 register
+     📁 unknown:0 in unknown()
+
+302. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Read data from XSPI2
+     📁 unknown:0 in unknown()
+
+303. CLKCTL0    REG_0x196       (0x400010C4) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x196 register
+     📁 unknown:0 in unknown()
+
+304. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+305. CLKCTL0    REG_0x200       (0x400010C8) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x200 register
+     📁 unknown:0 in unknown()
+
+306. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Write data to XSPI2
+     📁 unknown:0 in unknown()
+
+307. CLKCTL0    REG_0x208       (0x400010D0) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x208 register
+     📁 unknown:0 in unknown()
+
+308. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+309. CLKCTL0    REG_0x208       (0x400010D0) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x208 register
+     📁 unknown:0 in unknown()
+
+310. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+311. CLKCTL0    REG_0x212       (0x400010D4) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x212 register
+     📁 unknown:0 in unknown()
+
+312. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+313. CLKCTL0    REG_0x148       (0x40001094) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x148 register
+     📁 unknown:0 in unknown()
+
+314. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+315. CLKCTL0    REG_0x148       (0x40001094) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x148 register
+     📁 unknown:0 in unknown()
+
+316. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+317. CLKCTL0    REG_0x144       (0x40001090) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x144 register
+     📁 unknown:0 in unknown()
+
+318. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+319. CLKCTL0    REG_0x262       (0x40001106) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x262 register
+     📁 unknown:0 in unknown()
+
+320. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+321. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Access AHBMATPRIO register
+     📁 unknown:0 in unknown()
+
+322. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+323. RSTCTL1    REG_0x164       (0x400610A4) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x164 register
+     📁 unknown:0 in unknown()
+
+324. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+325. RSTCTL1    REG_0x164       (0x400610A4) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x164 register
+     📁 unknown:0 in unknown()
+
+326. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+327. RSTCTL1    REG_0x168       (0x400610A8) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x168 register
+     📁 unknown:0 in unknown()
+
+328. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+329. RSTCTL1    REG_0x120       (0x40061078) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x120 register
+     📁 unknown:0 in unknown()
+
+330. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+331. RSTCTL1    REG_0x120       (0x40061078) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x120 register
+     📁 unknown:0 in unknown()
+
+332. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+333. RSTCTL1    REG_0x124       (0x4006107C) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x124 register
+     📁 unknown:0 in unknown()
+
+334. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+335. CLKCTL0    REG_0x248       (0x400010F8) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x248 register
+     📁 unknown:0 in unknown()
+
+336. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+337. CLKCTL0    REG_0x248       (0x400010F8) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x248 register
+     📁 unknown:0 in unknown()
+
+338. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+339. CLKCTL0    REG_0x252       (0x400010FC) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x252 register
+     📁 unknown:0 in unknown()
+
+340. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+341. CLKCTL0    REG_0x308       (0x40001134) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x308 register
+     📁 unknown:0 in unknown()
+
+342. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+343. CLKCTL0    REG_0x308       (0x40001134) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x308 register
+     📁 unknown:0 in unknown()
+
+344. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+345. CLKCTL0    REG_0x324       (0x40001144) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x324 register
+     📁 unknown:0 in unknown()
+
+346. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+347. RSTCTL1    REG_0x144       (0x40061090) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x144 register
+     📁 unknown:0 in unknown()
+
+348. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+349. RSTCTL1    REG_0x144       (0x40061090) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x144 register
+     📁 unknown:0 in unknown()
+
+350. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+351. RSTCTL1    REG_0x148       (0x40061094) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x148 register
+     📁 unknown:0 in unknown()
+
+352. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+353. RSTCTL1    REG_0x152       (0x40061098) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x152 register
+     📁 unknown:0 in unknown()
+
+354. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+355. RSTCTL1    REG_0x152       (0x40061098) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x152 register
+     📁 unknown:0 in unknown()
+
+356. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+357. RSTCTL1    REG_0x156       (0x4006109C) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x156 register
+     📁 unknown:0 in unknown()
+
+358. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+359. CLKCTL1    PSCCTL2         (0x40003008) [0x00000000 → 0x00000000] ➖ SAME    - Access PSCCTL2 register
+     📁 unknown:0 in unknown()
+
+360. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+361. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Access AHBMATPRIO register
+     📁 unknown:0 in unknown()
+
+362. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+363. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Access AHBMATPRIO register
+     📁 unknown:0 in unknown()
+
+364. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+365. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Access AHBMATPRIO register
+     📁 unknown:0 in unknown()
+
+366. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+367. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Access AHBMATPRIO register
+     📁 unknown:0 in unknown()
+
+368. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+369. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Access AHBMATPRIO register
+     📁 unknown:0 in unknown()
+
+370. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+371. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Access AHBMATPRIO register
+     📁 unknown:0 in unknown()
+
+372. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+373. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Access AHBMATPRIO register
+     📁 unknown:0 in unknown()
+
+374. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+375. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Access AHBMATPRIO register
+     📁 unknown:0 in unknown()
+
+376. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+377. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Disable SYSCON0 functionality
+     📁 unknown:0 in unknown()
+
+378. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+379. CLKCTL1    PSCCTL4         (0x40003010) [0x00000000 → 0x00000000] ➖ SAME    - Disable CLKCTL1 functionality
+     📁 unknown:0 in unknown()
+
+380. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+381. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Access AHBMATPRIO register
+     📁 unknown:0 in unknown()
+
+382. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+383. CLKCTL0    PSCCTL2_CLR     (0x40001078) [0x00000000 → 0x00000000] ➖ SAME    - Access PSCCTL2_CLR register
+     📁 unknown:0 in unknown()
+
+384. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+385. CLKCTL0    PSCCTL3_CLR     (0x4000107C) [0x00000000 → 0x00000000] ➖ SAME    - Access PSCCTL3_CLR register
+     📁 unknown:0 in unknown()
+
+386. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+387. CLKCTL0    PSCCTL4_CLR     (0x40001080) [0x00000000 → 0x00000000] ➖ SAME    - Access PSCCTL4_CLR register
+     📁 unknown:0 in unknown()
+
+388. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+389. CLKCTL0    REG_0x344       (0x40001158) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x344 register
+     📁 unknown:0 in unknown()
+
+390. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+391. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Access AHBMATPRIO register
+     📁 unknown:0 in unknown()
+
+392. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+393. CLKCTL0    REG_0x260       (0x40001104) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x260 register
+     📁 unknown:0 in unknown()
+
+394. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+395. CLKCTL0    REG_0x260       (0x40001104) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x260 register
+     📁 unknown:0 in unknown()
+
+396. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+397. CLKCTL0    REG_0x261       (0x40001105) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x261 register
+     📁 unknown:0 in unknown()
+
+398. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+399. SYSCON0    AHBMATPRIO      (0x40002000) [0x0000001C → 0x00000000] 🔄 CHANGED - Access AHBMATPRIO register
+     📁 unknown:0 in unknown()
+
+400. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Enable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+401. RSTCTL1    REG_0x40        (0x40061028) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x40 register
+     📁 unknown:0 in unknown()
+
+402. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Enable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+403. RSTCTL1    REG_0x40        (0x40061028) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x40 register
+     📁 unknown:0 in unknown()
+
+404. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Enable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+405. RSTCTL1    REG_0x72        (0x40061048) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x72 register
+     📁 unknown:0 in unknown()
+
+406. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Enable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+407. RSTCTL1    PRSTCTL0_SET    (0x40061040) [0x00000000 → 0x00000000] ➖ SAME    - Access PRSTCTL0_SET register
+     📁 unknown:0 in unknown()
+
+408. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+409. RSTCTL1    REG_0x132       (0x40061084) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x132 register
+     📁 unknown:0 in unknown()
+
+410. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+411. RSTCTL1    REG_0x136       (0x40061088) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x136 register
+     📁 unknown:0 in unknown()
+
+412. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+413. CLKCTL0    REG_0x220       (0x400010DC) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x220 register
+     📁 unknown:0 in unknown()
+
+414. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+415. CLKCTL0    REG_0x220       (0x400010DC) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x220 register
+     📁 unknown:0 in unknown()
+
+416. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+417. CLKCTL0    REG_0x224       (0x400010E0) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x224 register
+     📁 unknown:0 in unknown()
+
+418. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+419. CLKCTL0    REG_0x288       (0x40001120) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x288 register
+     📁 unknown:0 in unknown()
+
+420. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+421. CLKCTL0    REG_0x288       (0x40001120) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x288 register
+     📁 unknown:0 in unknown()
+
+422. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+423. CLKCTL0    REG_0x280       (0x40001118) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x280 register
+     📁 unknown:0 in unknown()
+
+424. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+425. CLKCTL0    REG_0x296       (0x40001128) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x296 register
+     📁 unknown:0 in unknown()
+
+426. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+427. CLKCTL0    REG_0x296       (0x40001128) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x296 register
+     📁 unknown:0 in unknown()
+
+428. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+429. CLKCTL0    REG_0x300       (0x4000112C) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x300 register
+     📁 unknown:0 in unknown()
+
+430. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+431. CLKCTL0    REG_0x172       (0x400010AC) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x172 register
+     📁 unknown:0 in unknown()
+
+432. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+433. CLKCTL0    REG_0x172       (0x400010AC) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x172 register
+     📁 unknown:0 in unknown()
+
+434. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+435. CLKCTL0    REG_0x176       (0x400010B0) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x176 register
+     📁 unknown:0 in unknown()
+
+436. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+437. CLKCTL0    REG_0x268       (0x4000110C) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x268 register
+     📁 unknown:0 in unknown()
+
+438. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+439. CLKCTL0    REG_0x268       (0x4000110C) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x268 register
+     📁 unknown:0 in unknown()
+
+440. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+441. CLKCTL0    REG_0x272       (0x40001110) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x272 register
+     📁 unknown:0 in unknown()
+
+442. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+443. RSTCTL1    REG_0x108       (0x4006106C) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x108 register
+     📁 unknown:0 in unknown()
+
+444. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+445. RSTCTL1    REG_0x108       (0x4006106C) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x108 register
+     📁 unknown:0 in unknown()
+
+446. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+447. RSTCTL1    PRSTCTL0_CLR    (0x40061070) [0x00000000 → 0x00000000] ➖ SAME    - Access PRSTCTL0_CLR register
+     📁 unknown:0 in unknown()
+
+448. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+449. RSTCTL1    REG_0x96        (0x40061060) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x96 register
+     📁 unknown:0 in unknown()
+
+450. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+451. RSTCTL1    REG_0x96        (0x40061060) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x96 register
+     📁 unknown:0 in unknown()
+
+452. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+453. RSTCTL1    REG_0x100       (0x40061064) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x100 register
+     📁 unknown:0 in unknown()
+
+454. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+455. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+456. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+457. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Enable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+458. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Enable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+459. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Enable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+460. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Enable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+461. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Disable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+462. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Disable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+463. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Disable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+464. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Disable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+465. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+466. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+467. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Write data to XSPI2
+     📁 unknown:0 in unknown()
+
+468. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Write data to XSPI2
+     📁 unknown:0 in unknown()
+
+469. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Write data to XSPI2
+     📁 unknown:0 in unknown()
+
+470. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Write data to XSPI2
+     📁 unknown:0 in unknown()
+
+471. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Write data to XSPI2
+     📁 unknown:0 in unknown()
+
+472. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Write data to XSPI2
+     📁 unknown:0 in unknown()
+
+473. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Write data to XSPI2
+     📁 unknown:0 in unknown()
+
+474. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+475. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Read data from XSPI2
+     📁 unknown:0 in unknown()
+
+476. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Read data from XSPI2
+     📁 unknown:0 in unknown()
+
+477. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Read data from XSPI2
+     📁 unknown:0 in unknown()
+
+478. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Read data from XSPI2
+     📁 unknown:0 in unknown()
+
+479. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Read data from XSPI2
+     📁 unknown:0 in unknown()
+
+480. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Read data from XSPI2
+     📁 unknown:0 in unknown()
+
+481. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Read data from XSPI2
+     📁 unknown:0 in unknown()
+
+482. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Read data from XSPI2
+     📁 unknown:0 in unknown()
+
+483. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Read data from XSPI2
+     📁 unknown:0 in unknown()
+
+484. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Read data from XSPI2
+     📁 unknown:0 in unknown()
+
+485. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+486. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+487. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+488. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+489. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Transfer data via XSPI2
+     📁 unknown:0 in unknown()
+
+490. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Transfer data via XSPI2
+     📁 unknown:0 in unknown()
+
+491. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Transfer data via XSPI2
+     📁 unknown:0 in unknown()
+
+492. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+493. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+494. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+495. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+496. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Read data from XSPI2
+     📁 unknown:0 in unknown()
+
+497. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Read data from XSPI2
+     📁 unknown:0 in unknown()
+
+498. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Write data to XSPI2
+     📁 unknown:0 in unknown()
+
+499. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Write data to XSPI2
+     📁 unknown:0 in unknown()
+
+500. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+501. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+502. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+503. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+504. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+505. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+506. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+507. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+508. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+509. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+510. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+511. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+512. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+513. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Enable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+514. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Enable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+515. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+516. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+517. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+518. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+519. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+520. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+521. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Read data from XSPI2
+     📁 unknown:0 in unknown()
+
+522. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+523. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+524. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Read data from XSPI2
+     📁 unknown:0 in unknown()
+
+525. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Read data from XSPI2
+     📁 unknown:0 in unknown()
+
+526. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+527. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+528. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Enable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+529. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Enable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+530. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Enable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+531. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Enable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+532. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Write data to XSPI2
+     📁 unknown:0 in unknown()
+
+533. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Write data to XSPI2
+     📁 unknown:0 in unknown()
+
+534. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+535. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+536. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+537. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+538. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+539. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+540. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Read data from XSPI2
+     📁 unknown:0 in unknown()
+
+541. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Read data from XSPI2
+     📁 unknown:0 in unknown()
+
+542. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+543. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Enable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+544. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Enable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+545. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Enable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+546. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Enable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+547. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+548. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+549. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+550. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+551. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+552. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+553. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+554. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+555. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+556. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Enable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+557. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Enable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+558. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Enable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+559. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+560. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+561. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+562. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+563. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+564. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Disable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+565. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Disable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+566. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Disable XSPI2 functionality
+     📁 unknown:0 in unknown()
+
+567. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+568. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+569. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+570. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+571. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+572. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+573. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+574. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+575. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+576. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+577. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+578. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+579. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+580. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+581. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+582. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+583. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+584. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+585. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+586. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+587. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+588. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+589. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Read data from XSPI2
+     📁 unknown:0 in unknown()
+
+590. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Read data from XSPI2
+     📁 unknown:0 in unknown()
+
+591. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Read data from XSPI2
+     📁 unknown:0 in unknown()
+
+592. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Read data from XSPI2
+     📁 unknown:0 in unknown()
+
+593. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Read data from XSPI2
+     📁 unknown:0 in unknown()
+
+594. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Read data from XSPI2
+     📁 unknown:0 in unknown()
+
+595. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Read data from XSPI2
+     📁 unknown:0 in unknown()
+
+596. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+597. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+598. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Configure XSPI2 settings
+     📁 unknown:0 in unknown()
+
+599. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+600. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
+601. XSPI2      MCR             (0x40411000) [0x072F01DC → 0x00000000] 🔄 CHANGED - Module configuration
+     📁 unknown:0 in unknown()
+
