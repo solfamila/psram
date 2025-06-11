@@ -22,8 +22,8 @@ class ComprehensiveChronologicalAnalyzer:
         
         # Module analysis files in execution order
         self.module_files = [
-            # 1. BOARD_ConfigMPU (first in BOARD_InitHardware)
-            ("../../llvm_analysis_pass/build/board_chronological.json", "BOARD_ConfigMPU", 1),
+            # 1. Board functions (contains BOARD_ConfigMPU, BOARD_InitDebugConsole, etc.)
+            ("../../llvm_analysis_pass/build/board_functions_analysis.json", "board_functions", 1),
 
             # 2. BOARD_InitPins (second in BOARD_InitHardware)
             ("../../llvm_analysis_pass/tests/pin_mux_analysis.json", "BOARD_InitPins", 2),
@@ -31,49 +31,121 @@ class ComprehensiveChronologicalAnalyzer:
             # 3. BOARD_BootClockRUN (third in BOARD_InitHardware)
             ("../../llvm_analysis_pass/tests/clock_config_analysis.json", "BOARD_BootClockRUN", 3),
 
-            # 4. BOARD_InitDebugConsole (fourth in BOARD_InitHardware) - included in board.ll
-            # 5. CLOCK_AttachClk/SetClkDiv (called from BOARD_InitHardware)
+            # 4. CLOCK_AttachClk/SetClkDiv (called from BOARD_InitHardware)
             ("../../llvm_analysis_pass/tests/fsl_clock_analysis.json", "CLOCK_Functions", 4),
         ]
     
     def load_all_module_analyses(self):
         """Load and combine all module analyses in execution order"""
         print("📊 Loading all module analyses in execution order...")
-        
+
+        # Define correct function-to-execution-order mapping
+        function_execution_order = {
+            'BOARD_ConfigMPU': 1,           # Line 136: BOARD_ConfigMPU();
+            'BOARD_InitPins': 2,            # Line 137: BOARD_InitPins();
+            'BOARD_BootClockRUN': 3,        # Line 138: BOARD_BootClockRUN();
+            'BOARD_InitDebugConsole': 4,    # Line 139: BOARD_InitDebugConsole();
+            'BOARD_InitPsRamPins_Xspi2': 5, # Line 141: BOARD_InitPsRamPins_Xspi2();
+            'CLOCK_AttachClk': 6,           # Line 142: CLOCK_AttachClk();
+            'CLOCK_SetClkDiv': 7,           # Line 143: CLOCK_SetClkDiv();
+        }
+
         total_loaded = 0
         sequence_offset = 0
-        
-        for file_path, module_name, execution_order in self.module_files:
+
+        for file_path, expected_module_name, expected_execution_order in self.module_files:
             try:
                 with open(file_path, 'r') as f:
                     data = json.load(f)
-                
+
                 module_accesses = []
-                
+
                 # Handle different JSON formats
                 if 'peripheral_accesses' in data:
                     # Standard format
                     for peripheral in data['peripheral_accesses']:
                         for access in peripheral['accesses']:
-                            # Add execution order information
-                            access['module_name'] = module_name
-                            access['execution_order'] = execution_order
+                            # FIXED: Use actual call_stack to determine correct module and order
+                            call_stack = access.get('call_stack', 'UNKNOWN')
+
+                            if call_stack in function_execution_order:
+                                # Use the actual function name as module name
+                                actual_module_name = call_stack
+                                actual_execution_order = function_execution_order[call_stack]
+                            elif 'CLOCK_' in call_stack:
+                                actual_module_name = 'CLOCK_Functions'
+                                actual_execution_order = 6
+                            elif call_stack == 'UNKNOWN' or not call_stack:
+                                # For files without call_stack info, use expected values based on file type
+                                if 'pin_mux' in file_path.lower():
+                                    actual_module_name = 'BOARD_InitPins'
+                                    actual_execution_order = 2
+                                elif 'clock_config' in file_path.lower():
+                                    actual_module_name = 'BOARD_BootClockRUN'
+                                    actual_execution_order = 3
+                                elif 'fsl_clock' in file_path.lower():
+                                    actual_module_name = 'CLOCK_Functions'
+                                    actual_execution_order = 6
+                                else:
+                                    actual_module_name = expected_module_name
+                                    actual_execution_order = expected_execution_order
+                            else:
+                                # For other functions not in main sequence, use function name as module
+                                # but assign a later execution order
+                                actual_module_name = call_stack
+                                actual_execution_order = 8  # Other functions execute later
+
+                            # Add corrected execution order information
+                            access['module_name'] = actual_module_name
+                            access['execution_order'] = actual_execution_order
                             access['global_sequence'] = sequence_offset + len(module_accesses)
+                            access['original_call_stack'] = call_stack
                             module_accesses.append(access)
-                            
+
                             # Track unique registers
                             addr = access.get('address', '')
                             if addr:
                                 self.unique_registers.add(addr)
-                
+
                 elif 'chronological_sequence' in data:
                     # Chronological format
                     for access in data['chronological_sequence']:
-                        access['module_name'] = module_name
-                        access['execution_order'] = execution_order
+                        # FIXED: Use actual call_stack to determine correct module and order
+                        call_stack = access.get('call_stack', 'UNKNOWN')
+
+                        if call_stack in function_execution_order:
+                            # Use the actual function name as module name
+                            actual_module_name = call_stack
+                            actual_execution_order = function_execution_order[call_stack]
+                        elif 'CLOCK_' in call_stack:
+                            actual_module_name = 'CLOCK_Functions'
+                            actual_execution_order = 6
+                        elif call_stack == 'UNKNOWN' or not call_stack:
+                            # For files without call_stack info, use expected values based on file type
+                            if 'pin_mux' in file_path.lower():
+                                actual_module_name = 'BOARD_InitPins'
+                                actual_execution_order = 2
+                            elif 'clock_config' in file_path.lower():
+                                actual_module_name = 'BOARD_BootClockRUN'
+                                actual_execution_order = 3
+                            elif 'fsl_clock' in file_path.lower():
+                                actual_module_name = 'CLOCK_Functions'
+                                actual_execution_order = 6
+                            else:
+                                actual_module_name = expected_module_name
+                                actual_execution_order = expected_execution_order
+                        else:
+                            # For other functions not in main sequence, use function name as module
+                            # but assign a later execution order
+                            actual_module_name = call_stack
+                            actual_execution_order = 8  # Other functions execute later
+
+                        access['module_name'] = actual_module_name
+                        access['execution_order'] = actual_execution_order
                         access['global_sequence'] = sequence_offset + len(module_accesses)
+                        access['original_call_stack'] = call_stack
                         module_accesses.append(access)
-                        
+
                         # Track unique registers
                         addr = access.get('address', '')
                         if addr:
@@ -82,15 +154,27 @@ class ComprehensiveChronologicalAnalyzer:
                 self.all_accesses.extend(module_accesses)
                 sequence_offset += len(module_accesses)
                 total_loaded += len(module_accesses)
-                
-                print(f"   ✅ {module_name:20s}: {len(module_accesses):3d} accesses")
-                
+
+                # Report functions found in this file
+                functions_in_file = {}
+                for access in module_accesses:
+                    func = access.get('original_call_stack', 'UNKNOWN')
+                    if func not in functions_in_file:
+                        functions_in_file[func] = 0
+                    functions_in_file[func] += 1
+
+                print(f"   ✅ {expected_module_name:20s}: {len(module_accesses):3d} accesses")
+                for func, count in functions_in_file.items():
+                    actual_order = function_execution_order.get(func, 'N/A')
+                    print(f"      └─ {func:20s}: {count:3d} accesses (order: {actual_order})")
+
             except Exception as e:
                 print(f"   ❌ Failed to load {file_path}: {e}")
-        
+
         print(f"\n📊 Total accesses loaded: {total_loaded}")
         print(f"📊 Unique registers: {len(self.unique_registers)}")
-        
+        print(f"📊 Functions properly separated: {len(set(a.get('original_call_stack', '') for a in self.all_accesses))}")
+
         return total_loaded > 0
     
     def setup_hardware_connection(self):
