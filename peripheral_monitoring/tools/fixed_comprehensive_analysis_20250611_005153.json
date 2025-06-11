@@ -1,0 +1,2491 @@
+{
+  "analysis_metadata": {
+    "timestamp": "20250611_005153",
+    "probe_serial": "1065679149",
+    "device_name": "MIMXRT798S_M33_CORE0",
+    "llvm_analyzer": "/home/smw016108/Downloads/ex/llvm_analysis_pass/build/lib/libPeripheralAnalysisPass.so",
+    "total_llvm_accesses": 150,
+    "hardware_changes_detected": 0,
+    "validation_status": "FAIL"
+  },
+  "llvm_analysis_results": {
+    "total_accesses": 150,
+    "accesses_with_values": 0,
+    "chronological_sequence": [
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/hardware_init.c",
+          "function": "BOARD_InitHardware",
+          "line": 142
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001400",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock divider configuration",
+        "register_name": "CLKDIV",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/hardware_init.c",
+          "function": "BOARD_InitHardware",
+          "line": 143
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x4000407C",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 0 pin 31",
+        "register_name": "PIO0_31",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPins",
+          "line": 81
+        },
+        "peripheral_name": "IOPCTL0",
+        "base_address": "0x40004000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40004080",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 1 pin 0",
+        "register_name": "PIO1_0",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPins",
+          "line": 98
+        },
+        "peripheral_name": "IOPCTL0",
+        "base_address": "0x40004000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A5080",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 5 pin 0",
+        "register_name": "PIO5_0",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi1",
+          "line": 560
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A5084",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 5 pin 1",
+        "register_name": "PIO5_1",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi1",
+          "line": 577
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A50A8",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 5 pin 10",
+        "register_name": "PIO5_10",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi1",
+          "line": 594
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A50AC",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 5 pin 11",
+        "register_name": "PIO5_11",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi1",
+          "line": 611
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A50B0",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 5 pin 12",
+        "register_name": "PIO5_12",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi1",
+          "line": 628
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A50B4",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 5 pin 13",
+        "register_name": "PIO5_13",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi1",
+          "line": 645
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A50B8",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 5 pin 14",
+        "register_name": "PIO5_14",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi1",
+          "line": 662
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A50BC",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 5 pin 15",
+        "register_name": "PIO5_15",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi1",
+          "line": 679
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A50C0",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 5 pin 16",
+        "register_name": "PIO5_16",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi1",
+          "line": 696
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A50C4",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 5 pin 17",
+        "register_name": "PIO5_17",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi1",
+          "line": 713
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A50C8",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 5 pin 18",
+        "register_name": "PIO5_18",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi1",
+          "line": 730
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A50CC",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 5 pin 19",
+        "register_name": "PIO5_19",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi1",
+          "line": 747
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A5088",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 5 pin 2",
+        "register_name": "PIO5_2",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi1",
+          "line": 764
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A50D0",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 5 pin 20",
+        "register_name": "PIO5_20",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi1",
+          "line": 781
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A508C",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 5 pin 3",
+        "register_name": "PIO5_3",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi1",
+          "line": 798
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A5090",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 5 pin 4",
+        "register_name": "PIO5_4",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi1",
+          "line": 815
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A5094",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 5 pin 5",
+        "register_name": "PIO5_5",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi1",
+          "line": 832
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A5098",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 5 pin 6",
+        "register_name": "PIO5_6",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi1",
+          "line": 849
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A509C",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 5 pin 7",
+        "register_name": "PIO5_7",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi1",
+          "line": 866
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A50A0",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 5 pin 8",
+        "register_name": "PIO5_8",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi1",
+          "line": 883
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A50A4",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 5 pin 9",
+        "register_name": "PIO5_9",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi1",
+          "line": 900
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A5000",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 4 pin 0",
+        "register_name": "PIO4_0",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi2",
+          "line": 159
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A5004",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 4 pin 1",
+        "register_name": "PIO4_1",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi2",
+          "line": 176
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A5028",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 4 pin 10",
+        "register_name": "PIO4_10",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi2",
+          "line": 193
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A502C",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 4 pin 11",
+        "register_name": "PIO4_11",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi2",
+          "line": 210
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A5030",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 4 pin 12",
+        "register_name": "PIO4_12",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi2",
+          "line": 227
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A5034",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 4 pin 13",
+        "register_name": "PIO4_13",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi2",
+          "line": 244
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A5038",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 4 pin 14",
+        "register_name": "PIO4_14",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi2",
+          "line": 261
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A503C",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 4 pin 15",
+        "register_name": "PIO4_15",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi2",
+          "line": 278
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A5040",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 4 pin 16",
+        "register_name": "PIO4_16",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi2",
+          "line": 295
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A5044",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 4 pin 17",
+        "register_name": "PIO4_17",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi2",
+          "line": 312
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A5048",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 4 pin 18",
+        "register_name": "PIO4_18",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi2",
+          "line": 329
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A504C",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 4 pin 19",
+        "register_name": "PIO4_19",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi2",
+          "line": 346
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A5008",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 4 pin 2",
+        "register_name": "PIO4_2",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi2",
+          "line": 363
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A5050",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 4 pin 20",
+        "register_name": "PIO4_20",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi2",
+          "line": 380
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A500C",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 4 pin 3",
+        "register_name": "PIO4_3",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi2",
+          "line": 397
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A5010",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 4 pin 4",
+        "register_name": "PIO4_4",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi2",
+          "line": 414
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A5014",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 4 pin 5",
+        "register_name": "PIO4_5",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi2",
+          "line": 431
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A5018",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 4 pin 6",
+        "register_name": "PIO4_6",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi2",
+          "line": 448
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A501C",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 4 pin 7",
+        "register_name": "PIO4_7",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi2",
+          "line": 465
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A5020",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 4 pin 8",
+        "register_name": "PIO4_8",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi2",
+          "line": 482
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x400A5024",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Pin mux configuration for port 4 pin 9",
+        "register_name": "PIO4_9",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi2",
+          "line": 499
+        },
+        "peripheral_name": "IOPCTL2",
+        "base_address": "0x400A5000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40000070",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clear peripheral reset",
+        "register_name": "PRSTCTL_CLR",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPins",
+          "line": 64
+        },
+        "peripheral_name": "RSTCTL",
+        "base_address": "0x00000000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40000070",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clear peripheral reset",
+        "register_name": "PRSTCTL_CLR",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi1",
+          "line": 543
+        },
+        "peripheral_name": "RSTCTL",
+        "base_address": "0x00000000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40000070",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clear peripheral reset",
+        "register_name": "PRSTCTL_CLR",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/pin_mux.c",
+          "function": "BOARD_InitPsRamPins_Xspi2",
+          "line": 142
+        },
+        "peripheral_name": "RSTCTL",
+        "base_address": "0x00000000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_InitDebugConsole",
+          "line": 53
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001400",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock divider configuration",
+        "register_name": "CLKDIV",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_InitDebugConsole",
+          "line": 54
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_InitDebugConsole",
+          "line": 57
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_ClockPreConfig",
+          "line": 119
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_ClockPreConfig",
+          "line": 120
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001400",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock divider configuration",
+        "register_name": "CLKDIV",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_ClockPreConfig",
+          "line": 121
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_ClockPreConfig",
+          "line": 122
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001400",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock divider configuration",
+        "register_name": "CLKDIV",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_ClockPreConfig",
+          "line": 123
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_ClockPreConfig",
+          "line": 124
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_ClockPreConfig",
+          "line": 125
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001400",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock divider configuration",
+        "register_name": "CLKDIV",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_ClockPreConfig",
+          "line": 126
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "volatile_read",
+        "address": "0x400010B8",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Access REG_0x184 register",
+        "register_name": "REG_0x184",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_SetXspiClock",
+          "line": 374
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "volatile_read",
+        "address": "0x400010BC",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Access REG_0x188 register",
+        "register_name": "REG_0x188",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_SetXspiClock",
+          "line": 375
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "volatile_write",
+        "address": "0x40001040",
+        "bits_modified": [
+          "bit_0-31"
+        ],
+        "data_size": 32,
+        "purpose": "Access PSCCTL0_SET register",
+        "register_name": "PSCCTL0_SET",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_SetXspiClock",
+          "line": 383
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "volatile_write",
+        "address": "0x400010B8",
+        "bits_modified": [
+          "bit_2"
+        ],
+        "data_size": 32,
+        "purpose": "Access REG_0x184 register",
+        "register_name": "REG_0x184",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_SetXspiClock",
+          "line": 385
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "volatile_write",
+        "address": "0x400010BC",
+        "bits_modified": [
+          "bit_8",
+          "bit_9",
+          "bit_10",
+          "bit_11",
+          "bit_12",
+          "bit_13",
+          "bit_14",
+          "bit_15",
+          "bit_16",
+          "bit_17",
+          "bit_18",
+          "bit_19",
+          "bit_20",
+          "bit_21",
+          "bit_22",
+          "bit_23",
+          "bit_24",
+          "bit_25",
+          "bit_26",
+          "bit_27",
+          "bit_28",
+          "bit_29",
+          "bit_30",
+          "bit_31"
+        ],
+        "data_size": 32,
+        "purpose": "Access REG_0x188 register",
+        "register_name": "REG_0x188",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_SetXspiClock",
+          "line": 386
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "volatile_read",
+        "address": "0x400010BC",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Access REG_0x188 register",
+        "register_name": "REG_0x188",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_SetXspiClock",
+          "line": 387
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "volatile_write",
+        "address": "0x40001024",
+        "bits_modified": [
+          "bit_0-31"
+        ],
+        "data_size": 32,
+        "purpose": "Access PSCCTL5 register",
+        "register_name": "PSCCTL5",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_SetXspiClock",
+          "line": 391
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "volatile_read",
+        "address": "0x400010C4",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Access REG_0x196 register",
+        "register_name": "REG_0x196",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_SetXspiClock",
+          "line": 398
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "volatile_read",
+        "address": "0x400010C8",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Access REG_0x200 register",
+        "register_name": "REG_0x200",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_SetXspiClock",
+          "line": 399
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "volatile_write",
+        "address": "0x40001040",
+        "bits_modified": [
+          "bit_0-31"
+        ],
+        "data_size": 32,
+        "purpose": "Access PSCCTL0_SET register",
+        "register_name": "PSCCTL0_SET",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_SetXspiClock",
+          "line": 407
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "volatile_write",
+        "address": "0x400010C4",
+        "bits_modified": [
+          "bit_2"
+        ],
+        "data_size": 32,
+        "purpose": "Access REG_0x196 register",
+        "register_name": "REG_0x196",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_SetXspiClock",
+          "line": 409
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "volatile_write",
+        "address": "0x400010C8",
+        "bits_modified": [
+          "bit_8",
+          "bit_9",
+          "bit_10",
+          "bit_11",
+          "bit_12",
+          "bit_13",
+          "bit_14",
+          "bit_15",
+          "bit_16",
+          "bit_17",
+          "bit_18",
+          "bit_19",
+          "bit_20",
+          "bit_21",
+          "bit_22",
+          "bit_23",
+          "bit_24",
+          "bit_25",
+          "bit_26",
+          "bit_27",
+          "bit_28",
+          "bit_29",
+          "bit_30",
+          "bit_31"
+        ],
+        "data_size": 32,
+        "purpose": "Access REG_0x200 register",
+        "register_name": "REG_0x200",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_SetXspiClock",
+          "line": 410
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "volatile_read",
+        "address": "0x400010C8",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Access REG_0x200 register",
+        "register_name": "REG_0x200",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_SetXspiClock",
+          "line": 411
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "volatile_write",
+        "address": "0x40001024",
+        "bits_modified": [
+          "bit_0-31"
+        ],
+        "data_size": 32,
+        "purpose": "Access PSCCTL5 register",
+        "register_name": "PSCCTL5",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_SetXspiClock",
+          "line": 415
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "volatile_write",
+        "address": "0x40001024",
+        "bits_modified": [
+          "bit_0-31"
+        ],
+        "data_size": 32,
+        "purpose": "Initialize CLKCTL0 controller",
+        "register_name": "PSCCTL5",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_DeinitXspi",
+          "line": 294
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "volatile_write",
+        "address": "0x40001024",
+        "bits_modified": [
+          "bit_0-31"
+        ],
+        "data_size": 32,
+        "purpose": "Initialize CLKCTL0 controller",
+        "register_name": "PSCCTL5",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_DeinitXspi",
+          "line": 299
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_Init16bitsPsRam",
+          "line": 613
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001400",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock divider configuration",
+        "register_name": "CLKDIV",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_Init16bitsPsRam",
+          "line": 614
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_Init16bitsPsRam",
+          "line": 626
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001400",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock divider configuration",
+        "register_name": "CLKDIV",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_Init16bitsPsRam",
+          "line": 627
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "volatile_write",
+        "address": "0x40100000",
+        "bits_modified": [
+          "bit_0-31"
+        ],
+        "data_size": 32,
+        "purpose": "Write data to GPIO0",
+        "register_name": "PDOR",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/drivers/./fsl_gpio.h",
+          "function": "GPIO_PinWrite",
+          "line": 350
+        },
+        "peripheral_name": "GPIO0",
+        "base_address": "0x40100000"
+      },
+      {
+        "access_type": "volatile_write",
+        "address": "0x40100000",
+        "bits_modified": [
+          "bit_0-31"
+        ],
+        "data_size": 32,
+        "purpose": "Write data to GPIO0",
+        "register_name": "PDOR",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/drivers/./fsl_gpio.h",
+          "function": "GPIO_PinWrite",
+          "line": 354
+        },
+        "peripheral_name": "GPIO0",
+        "base_address": "0x40100000"
+      },
+      {
+        "access_type": "volatile_read",
+        "address": "0x40100000",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Read data from GPIO0",
+        "register_name": "PDOR",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/drivers/./fsl_gpio.h",
+          "function": "GPIO_PinRead",
+          "line": 429
+        },
+        "peripheral_name": "GPIO0",
+        "base_address": "0x40100000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40100014",
+        "bits_modified": [
+          "PIN_DIRECTION"
+        ],
+        "data_size": 32,
+        "purpose": "GPIO pin initialization",
+        "register_name": "PDDR",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_I2c2RecoverBus",
+          "line": 711
+        },
+        "peripheral_name": "GPIO1",
+        "base_address": "0x40102000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40100014",
+        "bits_modified": [
+          "PIN_DIRECTION"
+        ],
+        "data_size": 32,
+        "purpose": "GPIO pin initialization",
+        "register_name": "PDDR",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_I2c2RecoverBus",
+          "line": 716
+        },
+        "peripheral_name": "GPIO1",
+        "base_address": "0x40102000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40100000",
+        "bits_modified": [
+          "PIN_DATA"
+        ],
+        "data_size": 32,
+        "purpose": "GPIO pin write: HIGH",
+        "register_name": "PDOR",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_I2c2RecoverBus",
+          "line": 722
+        },
+        "peripheral_name": "GPIO1",
+        "base_address": "0x40102000"
+      },
+      {
+        "access_type": "function_call_read",
+        "address": "0x40100010",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "GPIO pin read",
+        "register_name": "PDIR",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_I2c2RecoverBus",
+          "line": 726
+        },
+        "peripheral_name": "GPIO1",
+        "base_address": "0x40102000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40100014",
+        "bits_modified": [
+          "PIN_DIRECTION"
+        ],
+        "data_size": 32,
+        "purpose": "GPIO pin initialization",
+        "register_name": "PDDR",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_I2c2RecoverBus",
+          "line": 731
+        },
+        "peripheral_name": "GPIO1",
+        "base_address": "0x40102000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40100000",
+        "bits_modified": [
+          "PIN_DATA"
+        ],
+        "data_size": 32,
+        "purpose": "GPIO pin write: HIGH",
+        "register_name": "PDOR",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_I2c2RecoverBus",
+          "line": 734
+        },
+        "peripheral_name": "GPIO1",
+        "base_address": "0x40102000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40100000",
+        "bits_modified": [
+          "PIN_DATA"
+        ],
+        "data_size": 32,
+        "purpose": "GPIO pin write: HIGH",
+        "register_name": "PDOR",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_I2c2RecoverBus",
+          "line": 738
+        },
+        "peripheral_name": "GPIO1",
+        "base_address": "0x40102000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40100000",
+        "bits_modified": [
+          "PIN_DATA"
+        ],
+        "data_size": 32,
+        "purpose": "GPIO pin write: HIGH",
+        "register_name": "PDOR",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_I2c2RecoverBus",
+          "line": 746
+        },
+        "peripheral_name": "GPIO1",
+        "base_address": "0x40102000"
+      },
+      {
+        "access_type": "volatile_read",
+        "address": "0x4000402D",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Initialize IOPCTL0 controller",
+        "register_name": "REG_0x45",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_InitI2c2PinAsGpio",
+          "line": 691
+        },
+        "peripheral_name": "IOPCTL0",
+        "base_address": "0x40004000"
+      },
+      {
+        "access_type": "volatile_write",
+        "address": "0x4000402D",
+        "bits_modified": [
+          "bit_0-31"
+        ],
+        "data_size": 32,
+        "purpose": "Initialize IOPCTL0 controller",
+        "register_name": "REG_0x45",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_InitI2c2PinAsGpio",
+          "line": 692
+        },
+        "peripheral_name": "IOPCTL0",
+        "base_address": "0x40004000"
+      },
+      {
+        "access_type": "volatile_read",
+        "address": "0x40004031",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Initialize IOPCTL0 controller",
+        "register_name": "REG_0x49",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_InitI2c2PinAsGpio",
+          "line": 694
+        },
+        "peripheral_name": "IOPCTL0",
+        "base_address": "0x40004000"
+      },
+      {
+        "access_type": "volatile_write",
+        "address": "0x40004031",
+        "bits_modified": [
+          "bit_0-31"
+        ],
+        "data_size": 32,
+        "purpose": "Initialize IOPCTL0 controller",
+        "register_name": "REG_0x49",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_InitI2c2PinAsGpio",
+          "line": 695
+        },
+        "peripheral_name": "IOPCTL0",
+        "base_address": "0x40004000"
+      },
+      {
+        "access_type": "volatile_write",
+        "address": "0x4000402D",
+        "bits_modified": [
+          "bit_0-31"
+        ],
+        "data_size": 32,
+        "purpose": "Access REG_0x45 register",
+        "register_name": "REG_0x45",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_RestoreI2c2PinMux",
+          "line": 700
+        },
+        "peripheral_name": "IOPCTL0",
+        "base_address": "0x40004000"
+      },
+      {
+        "access_type": "volatile_write",
+        "address": "0x40004031",
+        "bits_modified": [
+          "bit_0-31"
+        ],
+        "data_size": 32,
+        "purpose": "Access REG_0x49 register",
+        "register_name": "REG_0x49",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_RestoreI2c2PinMux",
+          "line": 701
+        },
+        "peripheral_name": "IOPCTL0",
+        "base_address": "0x40004000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0xE000ED94",
+        "bits_modified": [
+          "ENABLE"
+        ],
+        "data_size": 32,
+        "purpose": "MPU disable",
+        "register_name": "CTRL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_ConfigMPU",
+          "line": 228
+        },
+        "peripheral_name": "MPU",
+        "base_address": "0xE000ED90"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0xE000EDC0",
+        "bits_modified": [
+          "ATTR0",
+          "ATTR1",
+          "ATTR2",
+          "ATTR3"
+        ],
+        "data_size": 32,
+        "purpose": "MPU memory attribute 0",
+        "register_name": "MAIR0",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_ConfigMPU",
+          "line": 231
+        },
+        "peripheral_name": "MPU",
+        "base_address": "0xE000ED90"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0xE000EDC0",
+        "bits_modified": [
+          "ATTR0",
+          "ATTR1",
+          "ATTR2",
+          "ATTR3"
+        ],
+        "data_size": 32,
+        "purpose": "MPU memory attribute 1",
+        "register_name": "MAIR0",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_ConfigMPU",
+          "line": 233
+        },
+        "peripheral_name": "MPU",
+        "base_address": "0xE000ED90"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0xE000EDC0",
+        "bits_modified": [
+          "ATTR0",
+          "ATTR1",
+          "ATTR2",
+          "ATTR3"
+        ],
+        "data_size": 32,
+        "purpose": "MPU memory attribute 2",
+        "register_name": "MAIR0",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_ConfigMPU",
+          "line": 236
+        },
+        "peripheral_name": "MPU",
+        "base_address": "0xE000ED90"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0xE000EDC0",
+        "bits_modified": [
+          "ATTR0",
+          "ATTR1",
+          "ATTR2",
+          "ATTR3"
+        ],
+        "data_size": 32,
+        "purpose": "MPU memory attribute 3",
+        "register_name": "MAIR0",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_ConfigMPU",
+          "line": 239
+        },
+        "peripheral_name": "MPU",
+        "base_address": "0xE000ED90"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0xE000ED9C",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "MPU region configuration",
+        "register_name": "RBAR",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_ConfigMPU",
+          "line": 242
+        },
+        "peripheral_name": "MPU",
+        "base_address": "0xE000ED90"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0xE000ED9C",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "MPU region configuration",
+        "register_name": "RBAR",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_ConfigMPU",
+          "line": 245
+        },
+        "peripheral_name": "MPU",
+        "base_address": "0xE000ED90"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0xE000ED9C",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "MPU region configuration",
+        "register_name": "RBAR",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_ConfigMPU",
+          "line": 253
+        },
+        "peripheral_name": "MPU",
+        "base_address": "0xE000ED90"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0xE000ED94",
+        "bits_modified": [
+          "ENABLE",
+          "HFNMIENA",
+          "PRIVDEFENA"
+        ],
+        "data_size": 32,
+        "purpose": "MPU enable with control value 0x7",
+        "register_name": "CTRL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_ConfigMPU",
+          "line": 262
+        },
+        "peripheral_name": "MPU",
+        "base_address": "0xE000ED90"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40000070",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clear peripheral reset",
+        "register_name": "PRSTCTL_CLR",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_InitI2c2PinAsGpio",
+          "line": 688
+        },
+        "peripheral_name": "RSTCTL",
+        "base_address": "0x00000000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40180000",
+        "bits_modified": [
+          "ENCACHE"
+        ],
+        "data_size": 32,
+        "purpose": "Cache disable",
+        "register_name": "CCR",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_ConfigMPU",
+          "line": 224
+        },
+        "peripheral_name": "XCACHE0",
+        "base_address": "0x40180000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40180000",
+        "bits_modified": [
+          "ENCACHE"
+        ],
+        "data_size": 32,
+        "purpose": "Cache disable",
+        "register_name": "CCR",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_ConfigMPU",
+          "line": 225
+        },
+        "peripheral_name": "XCACHE0",
+        "base_address": "0x40180000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40180000",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Cache enable",
+        "register_name": "CCR",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_ConfigMPU",
+          "line": 265
+        },
+        "peripheral_name": "XCACHE0",
+        "base_address": "0x40180000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40180000",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Cache enable",
+        "register_name": "CCR",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/board.c",
+          "function": "BOARD_ConfigMPU",
+          "line": 266
+        },
+        "peripheral_name": "XCACHE0",
+        "base_address": "0x40180000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockRUN_InitClockModule",
+          "line": 402
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockRUN_InitClockModule",
+          "line": 406
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockRUN_InitClockModule",
+          "line": 410
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockRUN_InitClockModule",
+          "line": 414
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockRUN_InitClockModule",
+          "line": 421
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockRUN_InitClockModule",
+          "line": 425
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001400",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock divider configuration",
+        "register_name": "CLKDIV",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockRUN_InitClockModule",
+          "line": 444
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockRUN_InitClockModule",
+          "line": 446
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001400",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock divider configuration",
+        "register_name": "CLKDIV",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockRUN_InitClockModule",
+          "line": 450
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockRUN_InitClockModule",
+          "line": 452
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockRUN_InitClockModule",
+          "line": 456
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001400",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock divider configuration",
+        "register_name": "CLKDIV",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockRUN_InitClockModule",
+          "line": 458
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001400",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock divider configuration",
+        "register_name": "CLKDIV",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockRUN_InitClockModule",
+          "line": 462
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockRUN_InitClockModule",
+          "line": 464
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001400",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock divider configuration",
+        "register_name": "CLKDIV",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockRUN_InitClockModule",
+          "line": 468
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockRUN_InitClockModule",
+          "line": 470
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001400",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock divider configuration",
+        "register_name": "CLKDIV",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockRUN_InitClockModule",
+          "line": 474
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockRUN_InitClockModule",
+          "line": 476
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockHSRUN_InitClockModule",
+          "line": 846
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockHSRUN_InitClockModule",
+          "line": 850
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockHSRUN_InitClockModule",
+          "line": 854
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockHSRUN_InitClockModule",
+          "line": 858
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockHSRUN_InitClockModule",
+          "line": 865
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockHSRUN_InitClockModule",
+          "line": 869
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001400",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock divider configuration",
+        "register_name": "CLKDIV",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockHSRUN_InitClockModule",
+          "line": 885
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockHSRUN_InitClockModule",
+          "line": 887
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001400",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock divider configuration",
+        "register_name": "CLKDIV",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockHSRUN_InitClockModule",
+          "line": 891
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockHSRUN_InitClockModule",
+          "line": 893
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockHSRUN_InitClockModule",
+          "line": 897
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001400",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock divider configuration",
+        "register_name": "CLKDIV",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockHSRUN_InitClockModule",
+          "line": 899
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001400",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock divider configuration",
+        "register_name": "CLKDIV",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockHSRUN_InitClockModule",
+          "line": 903
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockHSRUN_InitClockModule",
+          "line": 905
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockHSRUN_InitClockModule",
+          "line": 909
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001400",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock divider configuration",
+        "register_name": "CLKDIV",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockHSRUN_InitClockModule",
+          "line": 913
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockHSRUN_InitClockModule",
+          "line": 915
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001400",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock divider configuration",
+        "register_name": "CLKDIV",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockHSRUN_InitClockModule",
+          "line": 919
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "function_call_write",
+        "address": "0x40001434",
+        "bits_modified": [],
+        "data_size": 32,
+        "purpose": "Clock source attachment",
+        "register_name": "CLKSEL",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/boards/mimxrt700evk/driver_examples/xspi/psram/polling_transfer/cm33_core0/clock_config.c",
+          "function": "BOARD_BootClockHSRUN_InitClockModule",
+          "line": 921
+        },
+        "peripheral_name": "CLKCTL0",
+        "base_address": "0x40001000"
+      },
+      {
+        "access_type": "volatile_write",
+        "address": "0x40002000",
+        "bits_modified": [
+          "bit_0-31"
+        ],
+        "data_size": 32,
+        "purpose": "Access AHBMATPRIO register",
+        "register_name": "AHBMATPRIO",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/drivers/./fsl_clock.h",
+          "function": "CLOCK_SetXtalFreq",
+          "line": 2389
+        },
+        "peripheral_name": "SYSCON0",
+        "base_address": "0x40002000"
+      },
+      {
+        "access_type": "volatile_write",
+        "address": "0x40002000",
+        "bits_modified": [
+          "bit_0-31"
+        ],
+        "data_size": 32,
+        "purpose": "Access AHBMATPRIO register",
+        "register_name": "AHBMATPRIO",
+        "source_location": {
+          "file": "mimxrt700evk_xspi_psram_polling_transfer_cm33_core0/__repo__/devices/MIMXRT798S/drivers/./fsl_clock.h",
+          "function": "CLOCK_SetXtalFreq",
+          "line": 2390
+        },
+        "peripheral_name": "SYSCON0",
+        "base_address": "0x40002000"
+      }
+    ]
+  },
+  "hardware_monitoring_results": {
+    "initial": {
+      "timestamp": 1749628312.0766134,
+      "registers": {
+        "0xe000ed94": {
+          "name": "MPU_CTRL",
+          "peripheral": "MPU",
+          "value": "0x00000007",
+          "value_decimal": 7,
+          "critical": true
+        },
+        "0x40001434": {
+          "name": "CLKCTL0_CLKSEL",
+          "peripheral": "CLKCTL0",
+          "value": "0x00000002",
+          "value_decimal": 2,
+          "critical": false
+        },
+        "0x40411000": {
+          "name": "XSPI2_MCR",
+          "peripheral": "XSPI2",
+          "value": "0x072f01dc",
+          "value_decimal": 120521180,
+          "critical": false
+        }
+      }
+    },
+    "final": {
+      "timestamp": 1749628313.6473129,
+      "registers": {
+        "0xe000ed94": {
+          "name": "MPU_CTRL",
+          "peripheral": "MPU",
+          "value": "0x00000007",
+          "value_decimal": 7,
+          "critical": true
+        },
+        "0x40001434": {
+          "name": "CLKCTL0_CLKSEL",
+          "peripheral": "CLKCTL0",
+          "value": "0x00000002",
+          "value_decimal": 2,
+          "critical": false
+        },
+        "0x40411000": {
+          "name": "XSPI2_MCR",
+          "peripheral": "XSPI2",
+          "value": "0x072f01dc",
+          "value_decimal": 120521180,
+          "critical": false
+        }
+      }
+    },
+    "changes_detected": []
+  },
+  "validation_results": {
+    "timestamp": 1749628313.672873,
+    "overall_status": "FAIL",
+    "validations": [
+      {
+        "register": "MPU_CTRL",
+        "address": "0xE000ED94",
+        "expected_from_source": "0x00000007",
+        "llvm_captured": 7,
+        "hardware_captured": "NONE",
+        "source_llvm_match": true,
+        "source_hardware_match": false,
+        "llvm_hardware_match": false
+      }
+    ],
+    "summary": {
+      "total_validations": 1,
+      "passed_validations": 1,
+      "critical_issues": [
+        "MPU_CTRL value mismatch"
+      ]
+    }
+  },
+  "critical_findings": {
+    "value_capture_issues": [
+      {
+        "issue": "LLVM analysis not capturing actual register values",
+        "count": 150,
+        "recommendation": "Fix LLVM pass value extraction logic"
+      }
+    ],
+    "execution_order_issues": [],
+    "hardware_validation_issues": [
+      {
+        "issue": "No hardware register changes detected",
+        "recommendation": "Verify PyLink connection and target execution"
+      }
+    ],
+    "recommendations": [
+      "Priority 1: Fix LLVM value capture",
+      "Priority 3: Verify hardware monitoring setup"
+    ]
+  }
+}

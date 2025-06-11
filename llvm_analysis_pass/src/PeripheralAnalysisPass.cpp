@@ -32,6 +32,7 @@ PreservedAnalyses PeripheralAnalysisPass::run(Module &M, ModuleAnalysisManager &
     // Initialize execution order tracking (only if first module)
     if (registerAccesses.empty()) {
         initializeExecutionPhaseMapping();
+        initializeFunctionExecutionOrder();
         globalSequenceCounter = 0;
     }
 
@@ -840,11 +841,49 @@ void PeripheralAnalysisPass::analyzeStoreInstruction(StoreInst *SI) {
     access.dataSize = getDataSizeFromType(SI->getValueOperand()->getType());
     access.bitsModified = analyzeBitfieldOperations(SI);
 
+    // Enhanced value extraction for written values
+    Value *valueOperand = SI->getValueOperand();
+    if (auto *CI = dyn_cast<ConstantInt>(valueOperand)) {
+        access.valueWritten = CI->getZExtValue();
+        access.hasValueWritten = true;
+        access.valueWrittenStr = "0x" + std::to_string(access.valueWritten);
+    } else if (auto *CE = dyn_cast<ConstantExpr>(valueOperand)) {
+        // Handle constant expressions like OR, AND operations
+        if (CE->getOpcode() == Instruction::Or || CE->getOpcode() == Instruction::And) {
+            // Try to evaluate simple constant expressions
+            if (CE->getNumOperands() == 2) {
+                if (auto *Op1 = dyn_cast<ConstantInt>(CE->getOperand(0))) {
+                    if (auto *Op2 = dyn_cast<ConstantInt>(CE->getOperand(1))) {
+                        uint64_t val1 = Op1->getZExtValue();
+                        uint64_t val2 = Op2->getZExtValue();
+                        uint64_t result = 0;
+
+                        if (CE->getOpcode() == Instruction::Or) {
+                            result = val1 | val2;
+                        } else if (CE->getOpcode() == Instruction::And) {
+                            result = val1 & val2;
+                        }
+
+                        access.valueWritten = result;
+                        access.hasValueWritten = true;
+                        access.valueWrittenStr = "0x" + std::to_string(result);
+                    }
+                }
+            }
+        }
+    } else {
+        access.hasValueWritten = false;
+        access.valueWrittenStr = "RUNTIME_VALUE";
+    }
+
     auto [fileName, functionName, lineNumber] = getDebugInfo(SI);
     access.fileName = fileName;
     access.functionName = functionName;
     access.lineNumber = lineNumber;
     access.purpose = determinePurpose(SI, peripheralName, registerName);
+
+    // Enhanced call stack tracking
+    access.callStack = buildCallStackContext(SI);
 
     // Assign execution order information
     assignExecutionOrder(access, SI);
@@ -1536,8 +1575,8 @@ uint64_t PeripheralAnalysisPass::getInstructionIndex(Instruction *I) {
 }
 
 void PeripheralAnalysisPass::assignExecutionOrder(RegisterAccess &access, Instruction *I) {
-    // Assign global sequence number
-    access.sequenceNumber = globalSequenceCounter++;
+    // Assign function-based execution order instead of instruction-based
+    access.sequenceNumber = getFunctionExecutionOrder(access.functionName);
 
     // Determine execution phase
     access.executionPhase = determineExecutionPhase(access.functionName, access.fileName);
@@ -1562,6 +1601,9 @@ void PeripheralAnalysisPass::assignExecutionOrder(RegisterAccess &access, Instru
         } else if (access.functionName.find("Power") != std::string::npos ||
                    access.functionName.find("POWER") != std::string::npos) {
             access.executionContext = "power_management";
+        } else if (access.functionName.find("MPU") != std::string::npos ||
+                   access.functionName.find("BOARD_ConfigMPU") != std::string::npos) {
+            access.executionContext = "mpu_configuration";
         } else {
             access.executionContext = "hardware_initialization";
         }
@@ -2060,4 +2102,96 @@ void PeripheralAnalysisPass::analyzeGPIOPinInit(CallInst *CI) {
 
     assignExecutionOrder(access, CI);
     registerAccesses.push_back(access);
+}
+
+void PeripheralAnalysisPass::initializeFunctionExecutionOrder() {
+    // Define the correct execution order based on actual C code call sequence
+    // This matches the order in BOARD_InitHardware() and main()
+
+    functionExecutionOrder.clear();
+
+    // Phase 1: main() function - highest priority
+    functionExecutionOrder["main"] = 1000;
+
+    // Phase 2: BOARD_InitHardware() - called from main at line 44
+    functionExecutionOrder["BOARD_InitHardware"] = 2000;
+
+    // Phase 3: BOARD_ConfigMPU() - FIRST call in BOARD_InitHardware (line 136)
+    functionExecutionOrder["BOARD_ConfigMPU"] = 3000;
+    functionExecutionOrder["ARM_MPU_Disable"] = 3010;
+    functionExecutionOrder["ARM_MPU_SetMemAttr"] = 3020;
+    functionExecutionOrder["ARM_MPU_SetRegion"] = 3030;
+    functionExecutionOrder["ARM_MPU_Enable"] = 3040;
+
+    // Phase 4: BOARD_InitPins() - SECOND call in BOARD_InitHardware (line 137)
+    functionExecutionOrder["BOARD_InitPins"] = 4000;
+    functionExecutionOrder["BOARD_InitPsRamPins_Xspi1"] = 4010;
+    functionExecutionOrder["IOPCTL_PinMuxSet"] = 4020;
+
+    // Phase 5: BOARD_BootClockRUN() - THIRD call in BOARD_InitHardware (line 138)
+    functionExecutionOrder["BOARD_BootClockRUN"] = 5000;
+    functionExecutionOrder["CLOCK_AttachClk"] = 5010;
+    functionExecutionOrder["CLOCK_SetClkDiv"] = 5020;
+    functionExecutionOrder["RESET_ClearPeripheralReset"] = 5030;
+
+    // Phase 6: BOARD_InitDebugConsole() - FOURTH call in BOARD_InitHardware (line 139)
+    functionExecutionOrder["BOARD_InitDebugConsole"] = 6000;
+
+    // Phase 7: Cache operations - typically after board init
+    functionExecutionOrder["XCACHE_EnableCache"] = 7000;
+    functionExecutionOrder["XCACHE_DisableCache"] = 7010;
+
+    // Phase 8: Application-specific initialization
+    functionExecutionOrder["XSPI_Init"] = 8000;
+    functionExecutionOrder["XSPI_SetFlashConfig"] = 8010;
+
+    // Phase 9: Runtime operations
+    functionExecutionOrder["GPIO_PinWrite"] = 9000;
+    functionExecutionOrder["GPIO_PinRead"] = 9010;
+    functionExecutionOrder["GPIO_PinInit"] = 9020;
+}
+
+uint64_t PeripheralAnalysisPass::getFunctionExecutionOrder(const std::string& functionName) {
+    // Check if we have a specific order for this function
+    auto it = functionExecutionOrder.find(functionName);
+    if (it != functionExecutionOrder.end()) {
+        return it->second;
+    }
+
+    // Check for partial matches for functions with similar names
+    for (const auto& [orderFunc, order] : functionExecutionOrder) {
+        if (functionName.find(orderFunc) != std::string::npos) {
+            return order + 5; // Slightly later than the exact match
+        }
+    }
+
+    // Default ordering based on function name patterns
+    if (functionName.find("main") != std::string::npos) {
+        return 1000;
+    } else if (functionName.find("BOARD_InitHardware") != std::string::npos) {
+        return 2000;
+    } else if (functionName.find("BOARD_ConfigMPU") != std::string::npos ||
+               functionName.find("MPU") != std::string::npos) {
+        return 3000;
+    } else if (functionName.find("BOARD_InitPins") != std::string::npos ||
+               functionName.find("Pin") != std::string::npos ||
+               functionName.find("IOPCTL") != std::string::npos) {
+        return 4000;
+    } else if (functionName.find("BOARD_BootClockRUN") != std::string::npos ||
+               functionName.find("Clock") != std::string::npos ||
+               functionName.find("CLOCK") != std::string::npos) {
+        return 5000;
+    } else if (functionName.find("BOARD_InitDebugConsole") != std::string::npos) {
+        return 6000;
+    } else if (functionName.find("XCACHE") != std::string::npos ||
+               functionName.find("Cache") != std::string::npos) {
+        return 7000;
+    } else if (functionName.find("XSPI") != std::string::npos) {
+        return 8000;
+    } else if (functionName.find("GPIO") != std::string::npos) {
+        return 9000;
+    }
+
+    // Default for unknown functions - place them at the end
+    return 10000 + globalSequenceCounter++;
 }

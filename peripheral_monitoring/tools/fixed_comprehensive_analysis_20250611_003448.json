@@ -1,0 +1,107 @@
+{
+  "analysis_metadata": {
+    "timestamp": "20250611_003448",
+    "probe_serial": "1065679149",
+    "device_name": "MIMXRT798S_M33_CORE0",
+    "llvm_analyzer": "/home/smw016108/Downloads/ex/llvm_analysis_pass/build/lib/libPeripheralAnalysisPass.so",
+    "total_llvm_accesses": 0,
+    "hardware_changes_detected": 0,
+    "validation_status": "FAIL"
+  },
+  "llvm_analysis_results": {
+    "total_accesses": 0,
+    "accesses_with_values": 0,
+    "chronological_sequence": []
+  },
+  "hardware_monitoring_results": {
+    "initial": {
+      "timestamp": 1749627287.1766267,
+      "registers": {
+        "0xe000ed94": {
+          "name": "MPU_CTRL",
+          "peripheral": "MPU",
+          "value": "0x00000007",
+          "value_decimal": 7,
+          "critical": true
+        },
+        "0x40001434": {
+          "name": "CLKCTL0_CLKSEL",
+          "peripheral": "CLKCTL0",
+          "value": "0x00000002",
+          "value_decimal": 2,
+          "critical": false
+        },
+        "0x40411000": {
+          "name": "XSPI2_MCR",
+          "peripheral": "XSPI2",
+          "value": "0x072f01dc",
+          "value_decimal": 120521180,
+          "critical": false
+        }
+      }
+    },
+    "final": {
+      "timestamp": 1749627288.7471907,
+      "registers": {
+        "0xe000ed94": {
+          "name": "MPU_CTRL",
+          "peripheral": "MPU",
+          "value": "0x00000007",
+          "value_decimal": 7,
+          "critical": true
+        },
+        "0x40001434": {
+          "name": "CLKCTL0_CLKSEL",
+          "peripheral": "CLKCTL0",
+          "value": "0x00000002",
+          "value_decimal": 2,
+          "critical": false
+        },
+        "0x40411000": {
+          "name": "XSPI2_MCR",
+          "peripheral": "XSPI2",
+          "value": "0x072f01dc",
+          "value_decimal": 120521180,
+          "critical": false
+        }
+      }
+    },
+    "changes_detected": []
+  },
+  "validation_results": {
+    "timestamp": 1749627288.770105,
+    "overall_status": "FAIL",
+    "validations": [
+      {
+        "register": "MPU_CTRL",
+        "address": "0xE000ED94",
+        "expected_from_source": "0x00000007",
+        "llvm_captured": null,
+        "hardware_captured": "NONE",
+        "source_llvm_match": false,
+        "source_hardware_match": false,
+        "llvm_hardware_match": false
+      }
+    ],
+    "summary": {
+      "total_validations": 1,
+      "passed_validations": 0,
+      "critical_issues": [
+        "MPU_CTRL value mismatch"
+      ]
+    }
+  },
+  "critical_findings": {
+    "value_capture_issues": [],
+    "execution_order_issues": [],
+    "hardware_validation_issues": [
+      {
+        "issue": "No hardware register changes detected",
+        "recommendation": "Verify PyLink connection and target execution"
+      }
+    ],
+    "recommendations": [
+      "Priority 3: Verify hardware monitoring setup"
+    ]
+  }
+}

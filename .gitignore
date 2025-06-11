@@ -46,6 +46,8 @@ build.ninja
 clang_ir_final/*.ll
 clang_ir_final/drivers/*.ll
 clang_ir_final/board_init/*.ll
+llvm_ir_files/
+test_ir_files/
 
 # Analysis directories (temporary)
 clang_ir_analysis/

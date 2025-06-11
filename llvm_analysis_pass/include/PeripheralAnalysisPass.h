@@ -49,6 +49,8 @@ struct RegisterAccess {
     uint64_t valueRead;          // The value read from the register (0 if not applicable)
     bool hasValueWritten;        // True if valueWritten is valid
     bool hasValueRead;           // True if valueRead is valid
+    std::string valueWrittenStr; // String representation of written value
+    std::string valueReadStr;    // String representation of read value
 
     // Enhanced fields for chronological execution order
     uint64_t sequenceNumber;     // Global sequence number for execution order
@@ -106,6 +108,7 @@ private:
     uint64_t globalSequenceCounter;
     std::map<std::string, std::string> functionToPhaseMap; // Map function names to execution phases
     std::set<Function*> visitedFunctions; // Track visited functions for execution order analysis
+    std::map<std::string, uint64_t> functionExecutionOrder; // Map function names to execution order
     
     /// Initialize peripheral definitions for MIMXRT700
     void initializePeripheralDefinitions();
@@ -241,6 +244,12 @@ private:
 
     /// Assign sequence number and execution context to register access
     void assignExecutionOrder(RegisterAccess &access, Instruction *I);
+
+    /// Get function-based execution order for proper chronological sequencing
+    uint64_t getFunctionExecutionOrder(const std::string& functionName);
+
+    /// Initialize function execution order mapping
+    void initializeFunctionExecutionOrder();
 };
 
 /// Legacy pass wrapper for compatibility
