@@ -1,0 +1,189 @@
+🎯 FINAL CHRONOLOGICAL REGISTER ACCESS SEQUENCE
+======================================================================
+
+  1. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+  2. CLKCTL0    CLKDIV          (0x40001400) [0x00000000 → 0x00000000] ➖ SAME    - Clock divider configuration
+     📁 unknown:0 in unknown()
+
+  3. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+  4. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+  5. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+  6. CLKCTL0    CLKDIV          (0x40001400) [0x00000000 → 0x00000000] ➖ SAME    - Clock divider configuration
+     📁 unknown:0 in unknown()
+
+  7. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+  8. CLKCTL0    CLKDIV          (0x40001400) [0x00000000 → 0x00000000] ➖ SAME    - Clock divider configuration
+     📁 unknown:0 in unknown()
+
+  9. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+ 10. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+ 11. CLKCTL0    CLKDIV          (0x40001400) [0x00000000 → 0x00000000] ➖ SAME    - Clock divider configuration
+     📁 unknown:0 in unknown()
+
+ 12. CLKCTL0    REG_0x184       (0x400010B8) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x184 register
+     📁 unknown:0 in unknown()
+
+ 13. CLKCTL0    REG_0x188       (0x400010BC) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x188 register
+     📁 unknown:0 in unknown()
+
+ 14. CLKCTL0    PSCCTL0_SET     (0x40001040) [0x00000000 → 0x00000000] ➖ SAME    - Access PSCCTL0_SET register
+     📁 unknown:0 in unknown()
+
+ 15. CLKCTL0    REG_0x184       (0x400010B8) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x184 register
+     📁 unknown:0 in unknown()
+
+ 16. CLKCTL0    REG_0x188       (0x400010BC) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x188 register
+     📁 unknown:0 in unknown()
+
+ 17. CLKCTL0    REG_0x188       (0x400010BC) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x188 register
+     📁 unknown:0 in unknown()
+
+ 18. CLKCTL0    PSCCTL5         (0x40001024) [0x0000002C → 0x00000000] 🔄 CHANGED - Access PSCCTL5 register
+     📁 unknown:0 in unknown()
+
+ 19. CLKCTL0    REG_0x196       (0x400010C4) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x196 register
+     📁 unknown:0 in unknown()
+
+ 20. CLKCTL0    REG_0x200       (0x400010C8) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x200 register
+     📁 unknown:0 in unknown()
+
+ 21. CLKCTL0    PSCCTL0_SET     (0x40001040) [0x00000000 → 0x00000000] ➖ SAME    - Access PSCCTL0_SET register
+     📁 unknown:0 in unknown()
+
+ 22. CLKCTL0    REG_0x196       (0x400010C4) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x196 register
+     📁 unknown:0 in unknown()
+
+ 23. CLKCTL0    REG_0x200       (0x400010C8) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x200 register
+     📁 unknown:0 in unknown()
+
+ 24. CLKCTL0    REG_0x200       (0x400010C8) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x200 register
+     📁 unknown:0 in unknown()
+
+ 25. CLKCTL0    PSCCTL5         (0x40001024) [0x0000002C → 0x00000000] 🔄 CHANGED - Access PSCCTL5 register
+     📁 unknown:0 in unknown()
+
+ 26. XCACHE0    CCR             (0x40180000) [0x00000000 → 0x00000000] ➖ SAME    - Cache disable
+     📁 unknown:0 in unknown()
+
+ 27. XCACHE0    CCR             (0x40180000) [0x00000000 → 0x00000000] ➖ SAME    - Cache disable
+     📁 unknown:0 in unknown()
+
+ 28. MPU        CTRL            (0xE000ED94) [0x00000000 → 0x00000000] ➖ SAME    - MPU disable
+     📁 unknown:0 in unknown()
+
+ 29. MPU        MAIR0           (0xE000EDC0) [0x00000000 → 0x00000000] ➖ SAME    - MPU memory attribute 0
+     📁 unknown:0 in unknown()
+
+ 30. MPU        MAIR0           (0xE000EDC0) [0x00000000 → 0x00000000] ➖ SAME    - MPU memory attribute 1
+     📁 unknown:0 in unknown()
+
+ 31. MPU        MAIR0           (0xE000EDC0) [0x00000000 → 0x00000000] ➖ SAME    - MPU memory attribute 2
+     📁 unknown:0 in unknown()
+
+ 32. MPU        MAIR0           (0xE000EDC0) [0x00000000 → 0x00000000] ➖ SAME    - MPU memory attribute 3
+     📁 unknown:0 in unknown()
+
+ 33. MPU        RBAR            (0xE000ED9C) [0x00000000 → 0x00000000] ➖ SAME    - MPU region configuration
+     📁 unknown:0 in unknown()
+
+ 34. MPU        RBAR            (0xE000ED9C) [0x00000000 → 0x00000000] ➖ SAME    - MPU region configuration
+     📁 unknown:0 in unknown()
+
+ 35. MPU        RBAR            (0xE000ED9C) [0x00000000 → 0x00000000] ➖ SAME    - MPU region configuration
+     📁 unknown:0 in unknown()
+
+ 36. MPU        CTRL            (0xE000ED94) [0x00000000 → 0x00000000] ➖ SAME    - MPU enable with control value 0x7
+     📁 unknown:0 in unknown()
+
+ 37. XCACHE0    CCR             (0x40180000) [0x00000000 → 0x00000000] ➖ SAME    - Cache enable
+     📁 unknown:0 in unknown()
+
+ 38. XCACHE0    CCR             (0x40180000) [0x00000000 → 0x00000000] ➖ SAME    - Cache enable
+     📁 unknown:0 in unknown()
+
+ 39. CLKCTL0    PSCCTL5         (0x40001024) [0x0000002C → 0x00000000] 🔄 CHANGED - Initialize CLKCTL0 controller
+     📁 unknown:0 in unknown()
+
+ 40. CLKCTL0    PSCCTL5         (0x40001024) [0x0000002C → 0x00000000] 🔄 CHANGED - Initialize CLKCTL0 controller
+     📁 unknown:0 in unknown()
+
+ 41. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+ 42. CLKCTL0    CLKDIV          (0x40001400) [0x00000000 → 0x00000000] ➖ SAME    - Clock divider configuration
+     📁 unknown:0 in unknown()
+
+ 43. CLKCTL0    CLKSEL          (0x40001434) [0x00000002 → 0x00000000] 🔄 CHANGED - Clock source attachment
+     📁 unknown:0 in unknown()
+
+ 44. CLKCTL0    CLKDIV          (0x40001400) [0x00000000 → 0x00000000] ➖ SAME    - Clock divider configuration
+     📁 unknown:0 in unknown()
+
+ 45. RSTCTL     PRSTCTL_CLR     (0x40000070) [0x00000000 → 0x00000000] ➖ SAME    - Clear peripheral reset
+     📁 unknown:0 in unknown()
+
+ 46. IOPCTL0    REG_0x45        (0x4000402D) [0x00000000 → 0x00000000] ➖ SAME    - Initialize IOPCTL0 controller
+     📁 unknown:0 in unknown()
+
+ 47. IOPCTL0    REG_0x45        (0x4000402D) [0x00000000 → 0x00000000] ➖ SAME    - Initialize IOPCTL0 controller
+     📁 unknown:0 in unknown()
+
+ 48. IOPCTL0    REG_0x49        (0x40004031) [0x00000000 → 0x00000000] ➖ SAME    - Initialize IOPCTL0 controller
+     📁 unknown:0 in unknown()
+
+ 49. IOPCTL0    REG_0x49        (0x40004031) [0x00000000 → 0x00000000] ➖ SAME    - Initialize IOPCTL0 controller
+     📁 unknown:0 in unknown()
+
+ 50. IOPCTL0    REG_0x45        (0x4000402D) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x45 register
+     📁 unknown:0 in unknown()
+
+ 51. IOPCTL0    REG_0x49        (0x40004031) [0x00000000 → 0x00000000] ➖ SAME    - Access REG_0x49 register
+     📁 unknown:0 in unknown()
+
+ 52. GPIO1      PDDR            (0x40100014) [0x00000000 → 0x00000000] ➖ SAME    - GPIO pin initialization
+     📁 unknown:0 in unknown()
+
+ 53. GPIO1      PDDR            (0x40100014) [0x00000000 → 0x00000000] ➖ SAME    - GPIO pin initialization
+     📁 unknown:0 in unknown()
+
+ 54. GPIO1      PDOR            (0x40100000) [0x00000000 → 0x00000000] ➖ SAME    - GPIO pin write: HIGH
+     📁 unknown:0 in unknown()
+
+ 55. GPIO1      PDIR            (0x40100010) [0x00000000 → 0x00000000] ➖ SAME    - GPIO pin read
+     📁 unknown:0 in unknown()
+
+ 56. GPIO1      PDDR            (0x40100014) [0x00000000 → 0x00000000] ➖ SAME    - GPIO pin initialization
+     📁 unknown:0 in unknown()
+
+ 57. GPIO1      PDOR            (0x40100000) [0x00000000 → 0x00000000] ➖ SAME    - GPIO pin write: HIGH
+     📁 unknown:0 in unknown()
+
+ 58. GPIO1      PDOR            (0x40100000) [0x00000000 → 0x00000000] ➖ SAME    - GPIO pin write: HIGH
+     📁 unknown:0 in unknown()
+
+ 59. GPIO1      PDOR            (0x40100000) [0x00000000 → 0x00000000] ➖ SAME    - GPIO pin write: HIGH
+     📁 unknown:0 in unknown()
+
+ 60. GPIO0      PDOR            (0x40100000) [0x00000000 → 0x00000000] ➖ SAME    - Write data to GPIO0
+     📁 unknown:0 in unknown()
+
+ 61. GPIO0      PDOR            (0x40100000) [0x00000000 → 0x00000000] ➖ SAME    - Write data to GPIO0
+     📁 unknown:0 in unknown()
+
+ 62. GPIO0      PDOR            (0x40100000) [0x00000000 → 0x00000000] ➖ SAME    - Read data from GPIO0
+     📁 unknown:0 in unknown()
+

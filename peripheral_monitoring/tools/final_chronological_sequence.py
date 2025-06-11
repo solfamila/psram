@@ -19,8 +19,8 @@ class FinalChronologicalSequence:
         """Load our existing comprehensive analysis results"""
         print("📊 Loading existing comprehensive analysis results...")
 
-        # Load from our enhanced LLVM analysis results
-        analysis_file = "../../llvm_analysis_pass/build/board_analysis_enhanced.json"
+        # Load from our enhanced chronological LLVM analysis results
+        analysis_file = "../../llvm_analysis_pass/build/board_chronological.json"
         
         try:
             with open(analysis_file, 'r') as f:
